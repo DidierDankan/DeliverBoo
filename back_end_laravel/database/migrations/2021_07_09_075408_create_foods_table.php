@@ -20,9 +20,10 @@ class CreateFoodsTable extends Migration
             $table->text('description')->nullable();
             $table->string('type', 50);
             $table->string('ingredients');
-            $table->boolean('visibility', true);
+            $table->boolean('visibility')->default(true);
             $table->unsignedBigInteger('restaurant_id')->nullable();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('set null');
+
         });
     }
 
