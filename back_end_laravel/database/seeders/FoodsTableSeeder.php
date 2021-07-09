@@ -17,7 +17,7 @@ class FoodsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        //
+        //populating with faker data need to delete after
 
         for ($i = 0; $i < 15; $i++){
             $new_food = new Food();
@@ -30,7 +30,7 @@ class FoodsTableSeeder extends Seeder
             $new_food->type = 'food';
             $new_food->description = $faker->text();
             $new_food->ingredients = $faker->vegetableName(). ' ' . $faker->vegetableName(). ' ' . $faker->vegetableName(). ' ' . $faker->vegetableName();
-            $new_food->restaurant_id = rand(1,4);
+            // $new_food->restaurant_id = rand(1,4);
 
             $new_food->save();
         }
