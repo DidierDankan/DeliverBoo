@@ -32,6 +32,7 @@ class RestaurantController extends Controller
 
         $types = Type::all();
         return view('admin.restaurants.create', compact('types'));
+        // return 'peppino';
     }
 
     /**
@@ -49,6 +50,10 @@ class RestaurantController extends Controller
         $new_restaurant->fill($data);
 
         $new_restaurant->save();
+
+        return redirect()->route('admin.restaurants.show', $new_restaurant->id)->with('created', $new_restaurant->name);
+
+
     }
 
     /**

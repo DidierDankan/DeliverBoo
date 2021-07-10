@@ -35,8 +35,8 @@
                     @endif
 
                     <div class="text-center mt-5 mb-5">
-                        <a href="{{/*route*/('admin.restaurants.index')}}" class="btn btn-primary text-white m-2">My Restaurants</a>
-                        <a href="{{/*route*/('admin.restaurants.create')}}" class="btn btn-success text-white m-2">Add Restaurant</a>
+                        <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary text-white m-2">My Restaurants</a>
+                        <a href="{{route('admin.restaurants.create')}}" class="btn btn-success text-white m-2">Add Restaurant</a>
                     </div>
 
                 </div>
@@ -57,7 +57,7 @@
                     @endif
 
                     <div class="text-center mt-5 mb-5">
-                        <a href="{{/*route*/('admin.orders.index')}}" class="btn btn-primary text-white m-2">My Orders</a>
+                        <a href="{{route('admin.orders.index')}}" class="btn btn-primary text-white m-2">My Orders</a>
                         <a href="{{/*route*/('admin.order.payed')}}" class="btn btn-success text-white m-2">Payed</a>
                     </div>
                 </div>
