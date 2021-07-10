@@ -26,13 +26,18 @@ Auth::routes();
 // Dashboard post login
 // Route::get('/admin', 'HomeController@index')->name('home');
 Route::prefix('admin')
-    ->namespace('Admin')
+    //->namespace('Admin')
     ->middleware('auth')
     ->name('admin.')
     ->group(function()
     {
         //rotta home admin
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+        // Rotta crud orders
+        Route::resource('orders', App\Http\Controllers\Admin\OrderController::class, ['only'=>[
+            'index', 'show',
+        ]]);
 
 
     });
