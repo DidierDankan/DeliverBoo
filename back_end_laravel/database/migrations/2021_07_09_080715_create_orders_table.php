@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->float('amount', 5,2);
-            $table->boolean('status', false);
+            $table->boolean('status')->default(false);
             $table->string('customer_name', 50);
             $table->string('customer_surname', 50);
             $table->string('customer_address');

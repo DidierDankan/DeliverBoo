@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Auth::routes();
 
@@ -28,3 +32,4 @@ Route::prefix('admin')
         
         Route::resource('/restaurants', 'RestaurantController');
     });
+

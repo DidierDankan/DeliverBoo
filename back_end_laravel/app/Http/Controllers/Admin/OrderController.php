@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
+
 use App\Models\Restaurant;
 
-use App\Models\Type;
 
-class RestaurantController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +19,10 @@ class RestaurantController extends Controller
     public function index()
     {
 
-        $restaurants = Restaurant::all();
-        return view('admin.restaurants.index', compact('restaurants'));
+        $orders = Order::all();
+
+        return view('admin.orders.index', compact('orders'));
+
     }
 
     /**
@@ -29,9 +32,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-
-        $types = Type::all();
-        return view('admin.restaurants.create', compact('types'));
+        //
     }
 
     /**
@@ -42,13 +43,7 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $new_restaurant = new Restaurant();
-
-        $new_restaurant->fill($data);
-
-        $new_restaurant->save();
+        //
     }
 
     /**
@@ -59,13 +54,12 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        $restaurant = Restaurant::find($id);
 
-        if (!$restaurant) {
-            abort(404);
-        }
+        $order = Order::find($id);
+        $restaurants = Restaurant::all();
 
-        return view('admin.restaurants.show', compact('restaurant'));
+        return view('admin.orders.show', compact('order', 'restaurants'));
+
     }
 
     /**
@@ -76,13 +70,7 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        $restaurant = Restaurant::find($id);
-        $types = Type::all();
-
-        if (!$restaurant) {
-            abort(404);
-        }
-        return view('admin.restaurants.edit', compact('restaurant', 'types'));
+        //
     }
 
     /**
@@ -105,11 +93,6 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        $restaurant = Restaurant::find($id);
-
-        $restaurant->delete();
-
-        return redirect()->route('admin.restaurants.index')->with('deleted', $restaurant->name);
-
+        //
     }
 }
