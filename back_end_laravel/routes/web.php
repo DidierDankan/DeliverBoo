@@ -35,11 +35,13 @@ Route::prefix('admin')
         //rotta home admin
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-        Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class, ['only'=>[
+
+
+        // Rotta crud orders
+        Route::resource('orders', App\Http\Controllers\Admin\OrderController::class, ['only'=>[
             'index', 'show',
         ]]);
-        
-        Route::get('restaurants', App\Http\Controllers\RestaurantController::class);
+
 
 
     });
