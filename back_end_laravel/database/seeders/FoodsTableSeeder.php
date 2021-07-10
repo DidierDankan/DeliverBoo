@@ -30,7 +30,7 @@ class FoodsTableSeeder extends Seeder
             $new_food->type = 'food';
             $new_food->description = $faker->text();
             $new_food->ingredients = $faker->vegetableName(). ' ' . $faker->vegetableName(). ' ' . $faker->vegetableName(). ' ' . $faker->vegetableName();
-            // $new_food->restaurant_id = rand(1,4);
+            $new_food->restaurant_id = rand(1,2);
 
             $new_food->save();
         }

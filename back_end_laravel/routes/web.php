@@ -1,9 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
+
+
+
 use App\Http\Controllers\Admin\FoodController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,23 +25,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Rotte autenticazione
+
 Auth::routes();
 
-// Rotte amministrazione 
-// Dashboard post login
-// Route::get('/admin', 'HomeController@index')->name('home');
 Route::prefix('admin')
     ->middleware('auth')
     ->name('admin.')
-    ->group(function()
-    {
-        //rotta home admin
+    ->group(function () {
+       
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
         //rotta resource food
 
         Route::resource('foods', FoodController::class);
-    });
 
+        
+        Route::resource('/restaurants', 'RestaurantController');
+
+        Route::resource('/orders', 'OrderController');
+
+    });
 
