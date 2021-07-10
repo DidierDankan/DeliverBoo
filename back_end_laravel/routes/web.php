@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ Auth::routes();
 // Dashboard post login
 // Route::get('/admin', 'HomeController@index')->name('home');
 Route::prefix('admin')
-    ->namespace('Admin')
     ->middleware('auth')
     ->name('admin.')
     ->group(function()
@@ -34,7 +34,9 @@ Route::prefix('admin')
         //rotta home admin
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+        //rotta resource food
 
+        Route::resource('foods', FoodController::class);
     });
 
 
