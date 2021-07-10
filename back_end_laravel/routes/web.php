@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Rotte autenticazione
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Rotte amministrazione 
+// Dashboard post login
+// Route::get('/admin', 'HomeController@index')->name('home');
+Route::prefix('admin')
+    ->namespace('Admin')
+    ->middleware('auth')
+    ->name('admin.')
+    ->group(function()
+    {
+        //rotta home admin
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+    });
+
+
