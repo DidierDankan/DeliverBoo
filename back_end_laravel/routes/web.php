@@ -7,6 +7,9 @@ use App\Http\Controllers\OrderController;
 
 
 
+use App\Http\Controllers\Admin\FoodController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,16 +29,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::prefix('admin')
-    ->namespace('Admin')
     ->middleware('auth')
     ->name('admin.')
     ->group(function () {
        
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+        //rotta resource food
+
+        Route::resource('foods', FoodController::class);
+
         
         Route::resource('/restaurants', 'RestaurantController');
 
         Route::resource('/orders', 'OrderController');
+
     });
 
