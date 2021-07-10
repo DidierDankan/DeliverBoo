@@ -65,7 +65,7 @@
                             <label for="cf" class="col-md-4 col-form-label text-md-right">{{ __('C.F.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cf" type="text" class="form-control @error('cf') is-invalid @enderror" name="cf" required autocomplete="new-cf">
+                                <input id="cf" type="text" class="form-control @error('cf') is-invalid @enderror" name="cf" autocomplete="new-cf">
 
                                 @error('cf')
                                     <span class="invalid-feedback" role="alert">
