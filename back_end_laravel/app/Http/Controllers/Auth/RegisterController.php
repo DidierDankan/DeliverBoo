@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cf' => ['codice_fiscale', 'unique:users'],
+            'cf' => ['codice_fiscale', 'unique:users', 'nullable'],
             'vat' => ['required', 'unique:users', 'numeric', 'min:100000000', 'max:12199999999']
         ],
             
