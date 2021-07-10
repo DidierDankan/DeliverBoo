@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Food;
-// use App\Models\Restaurant;
+use App\Models\Restaurant;
 
 class FoodController extends Controller
 {
@@ -14,12 +14,17 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($restaurant_id)
+    public function index()
     {
         $foods = Food::all();
+        
+        
+        
         // $restaurant = Restaurant::find($restaurant_id);
         return view('admin.foods.index', compact('foods'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.

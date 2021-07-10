@@ -73,6 +73,29 @@
             @enderror
         </div>
 
+
+        <h4>Types</h4>
+        <div class="mb-5 mt-3">
+            @foreach ($types as $type)
+
+                <span class="d-inline-block mr-4">
+                    <input type="checkbox" name="types[]" id="type{{ $loop->iteration }}" value="{{ $type->id }}" 
+                    @if (in_array($type->id, old('types', []))) checked
+                        
+                    @endif
+                    
+                    >
+                    <label for="type{{ $loop->iteration }}">
+                        {{ $type->type }}
+                    </label>
+                </span>
+                
+            @endforeach
+            @error('tags')
+                <div>{{$message}}</div>
+            @enderror
+        </div>
+
         <button class="btn btn-primary">Create Post</button>
     </form>
 </div>    

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use App\Models\Food;
 
 use App\Models\Type;
 
@@ -51,6 +52,11 @@ class RestaurantController extends Controller
 
         $new_restaurant->save();
 
+        if(array_key_exists('types', $data)){
+            $new_restaurant->types()->attach($data['types']);
+        }
+
+
         return redirect()->route('admin.restaurants.show', $new_restaurant->id)->with('created', $new_restaurant->name);
 
 
@@ -66,11 +72,15 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
 
+        $foods = Food::where('restaurant_id', '=', $id)->get();
+
+        $types = Type::all();
+
         if (!$restaurant) {
             abort(404);
         }
 
-        return view('admin.restaurants.show', compact('restaurant'));
+        return view('admin.restaurants.show', compact('restaurant', 'foods', 'types'));
     }
 
     /**

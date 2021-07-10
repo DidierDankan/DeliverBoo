@@ -26,19 +26,24 @@ Route::get('/', function () {
 });
 
 
+
+
 Auth::routes();
 
 Route::prefix('admin')
-    ->middleware('auth')
-    ->name('admin.')
-    ->group(function () {
-       
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+->namespace('Admin')
+->middleware('auth')
+->name('admin.')
+->group(function () {
+    
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::get('/menu', 'ThisMenuController@menu');
 
         //rotta resource food
 
-        Route::resource('foods', FoodController::class);
+        Route::resource('/foods', 'FoodController');
+
 
         
         Route::resource('/restaurants', 'RestaurantController');
