@@ -20,7 +20,7 @@ class RestaurantsTableSeeder extends Seeder
                 'address' => 'Alzaia Naviglio Grande, 62',
                 'city' => 'Milano',
                 'zip_code' => '20144',
-                'user_id' => rand(1, 4),
+                'user_id' => rand(1, 2),
 
             ],
             [
@@ -28,7 +28,7 @@ class RestaurantsTableSeeder extends Seeder
                 'address' => 'Corso di Porta Romana, 83',
                 'city' => 'Milano',
                 'zip_code' => '20122',
-                'user_id' => rand(1, 4),
+                'user_id' => rand(1, 2),
 
             ],
             [
@@ -36,7 +36,7 @@ class RestaurantsTableSeeder extends Seeder
                 'address' => 'Via Silvio Pellico, 3',
                 'city' => 'Milano',
                 'zip_code' => '20121',
-                'user_id' => rand(1, 4),
+                'user_id' => rand(1, 2),
 
             ],
             [
@@ -44,7 +44,7 @@ class RestaurantsTableSeeder extends Seeder
                 'address' => 'Viale Francesco Crispi, 2',
                 'city' => 'Milano',
                 'zip_code' => '20121',
-                'user_id' => rand(1, 4),
+                'user_id' => rand(1, 2),
 
             ],
         ];

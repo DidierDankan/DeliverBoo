@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -34,10 +35,13 @@ Route::prefix('admin')
         //rotta home admin
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
         // Rotta crud orders
         Route::resource('orders', App\Http\Controllers\Admin\OrderController::class, ['only'=>[
             'index', 'show',
         ]]);
+
 
 
     });
