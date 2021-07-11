@@ -8,6 +8,12 @@
         <div class="card shadow bg-white rounded">
             <h1 class="card-header">Our Restaurants</h1>
             
+            @if (session('deleted'))
+        <div class="alert alert-success">
+            {{ session('deleted') }} is now deleted!
+        </div>
+    @endif
+            
             
                 <table class="table p-4">
                     <thead class="thead-light">

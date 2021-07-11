@@ -56,15 +56,15 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //validazione
+        
         // $request->validate([
         //     'title' => 'required|max:100',
-        //     // 'price' => 'required',
+        //     'price' => 'numeric',
         //     'description' => 'required',
         //     'type' => 'nullable',
         //     'ingredients' => 'nullable',
-        //     'visibility' => 'boolean',
-        //     // 'restaurant_id' => 'nullable|exists:restaurants,id',
+        //     // 'visibility' => 'boolean',
+        //     'restaurant_id' => 'nullable|exists:restaurants,id',
 
         // ], [
         //     // custom message 

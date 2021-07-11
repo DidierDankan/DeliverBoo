@@ -62,7 +62,11 @@
         <div class="col-md-12">
             <div class="card">
                 <h3 class="card-header">Menu</h3>
-
+                @if (session('deleted'))
+        <div class="alert alert-success">
+            {{ session('deleted') }} is now deleted!
+        </div>
+    @endif
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -110,6 +114,7 @@
                         {{$foods->links()}}
                     </div>
                     <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
+                    <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
                     <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create') }} ">Add New</a>
     
                 </div>

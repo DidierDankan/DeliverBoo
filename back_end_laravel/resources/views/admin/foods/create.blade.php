@@ -16,7 +16,7 @@
                         @csrf
                         @method('POST')
             
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="title" class="form-label">Food Name:</label>
                             <input type="text" class="form-control @error('title') is-invalid @enderror"
                             name="title"
@@ -30,9 +30,9 @@
                         </div>
 
 
-                        <label class="mt-4 mb-4" for="content"><strong>Description: </strong></label>
+                        <label class="mb-4" for="content">Description: </label>
     
-        <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="10"></textarea>
+        <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
 
 
 
@@ -51,7 +51,7 @@
                         </div> --}}
 
 
-                        <div class="mb-5 mt-4">
+                        <div class="mb-4 mt-4">
                             <label for="restaurant_id">Restaurant</label>
                             <select class="form-control" name="restaurant_id" id="restaurant_id">
                 
@@ -67,7 +67,7 @@
 
                         <div class="address d-flex justify-content-between">
 
-                            <div class="mb-5 w-50 mr-2">
+                            <div class="mb-4 w-50 mr-2">
                                 <label for="type" class="form-label">Type: </label>
                                 <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
@@ -79,7 +79,7 @@
                                 
                             </div>
                             
-                            <div class="mb-5 w-50 ml-2">
+                            <div class="mb-4 w-50 ml-2">
                                 <label for="price">Price:</label>
                                 <input type="number" class="form-control @error('price') is-invalid @enderror"
                                 name="price"
