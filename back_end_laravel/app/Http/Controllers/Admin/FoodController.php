@@ -190,7 +190,7 @@ class FoodController extends Controller
         // rimozione
         $food->delete();
         
-        return redirect()->route('admin.foods.index')->with('deleted', $food->title);
+        return redirect()->route('admin.restaurants.show', $food->restaurant_id)->with('deleted', $food->title);
 
     }
 }
