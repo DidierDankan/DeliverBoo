@@ -19,6 +19,19 @@
     @endforeach
 
 
+
+    <div class="row">
+        @if ($restaurant->cover)
+            
+        <div class="col-md-6">
+            <img class="img-fluid" src="{{ asset('storage/' . $restaurant->cover)}}" alt="{{$restaurant->title}}">
+        </div>
+        @endif
+
+        {{-- <div class="{{}}"> </div> --}}
+    </div>
+
+
     <ul class="mt-5">
                 
         @foreach ($types as $type)

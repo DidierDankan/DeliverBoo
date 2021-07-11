@@ -68,8 +68,18 @@
             >
             @error('cover')
                 <div class="feedback">
-                    {{$message}}
+                    {{ $message}}
                 </div>
+            @enderror
+        </div>
+
+
+        <div class="mb-4">
+            <label for="cover" class="form-label">Image</label>
+            <input type="file" name="cover" id="cover">
+            @error('cover')
+                <div>{{ message }}</div>
+                
             @enderror
         </div>
 

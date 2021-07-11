@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\Food;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Type;
 
@@ -54,6 +55,12 @@ class RestaurantController extends Controller
 
         if(array_key_exists('types', $data)){
             $new_restaurant->types()->attach($data['types']);
+        }
+
+        if(array_key_exists('cover', $data)) {
+            $img_path = Storage::put('restaurants-covers', $data['cover']);
+
+            $data['cover'] = $img_path;
         }
 
 
