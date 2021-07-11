@@ -38,7 +38,7 @@ Route::prefix('admin')
     
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
-    Route::get('/menu', 'ThisMenuController@menu');
+    Route::get('/orders/payed', 'PayedController@payed')->name('payed');
 
         //rotta resource food
 
