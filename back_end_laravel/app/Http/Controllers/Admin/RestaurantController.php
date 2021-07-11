@@ -8,7 +8,10 @@ use App\Models\Restaurant;
 use App\Models\Food;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Type;
+
 
 class RestaurantController extends Controller
 {
@@ -19,9 +22,15 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        
+        $user_id = Auth::user()->id;
 
-        $restaurants = Restaurant::all();
-        return view('admin.restaurants.index', compact('restaurants'));
+        $types = Type::all();
+
+
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->paginate(6);
+
+        return view('admin.restaurants.index', compact('restaurants', 'types'));
     }
 
     /**
@@ -44,12 +53,28 @@ class RestaurantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+
+    {   
+
+
+        if ($request->hasFile('cover')) { // depends on your FormRequest validation if `file` field is required or not
+            $path = $request->cover->storePublicly('');
+        }
+    
+        // Restaurant::create(array_merge($request->except('cover'), ['cover' => $path]));
+
+
         $data = $request->all();
+
+        // dd($data);
 
         $new_restaurant = new Restaurant();
 
         $new_restaurant->fill($data);
+
+        $new_restaurant->user_id = Auth::user()->id;
+
+        $new_restaurant->cover = $path;
 
         $new_restaurant->save();
 
@@ -58,10 +83,14 @@ class RestaurantController extends Controller
         }
 
         if(array_key_exists('cover', $data)) {
-            $img_path = Storage::put('restaurants-covers', $data['cover']);
+            $img_path = Storage::put('public/restaurants-covers/', $data['cover']);
 
             $data['cover'] = $img_path;
         }
+
+
+        
+        
 
 
         return redirect()->route('admin.restaurants.show', $new_restaurant->id)->with('created', $new_restaurant->name);
@@ -79,7 +108,7 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::find($id);
 
-        $foods = Food::where('restaurant_id', '=', $id)->get();
+        $foods = Food::where('restaurant_id', '=', $id)->paginate(4);
 
         $types = Type::all();
 

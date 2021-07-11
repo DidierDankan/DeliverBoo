@@ -17,7 +17,8 @@ class Food extends Model
         'description',
         'type',
         'ingredients',
-        'visibility'
+        'visibility',
+        'restaurant_id'
     ];
 
     public function restaurant(){

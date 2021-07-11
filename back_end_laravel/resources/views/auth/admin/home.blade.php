@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="mt-5 row justify-content-center">
+    <div class="mt-4 row justify-content-center">
         <div class="col-md-12">
             <div class="card shadow bg-white rounded">
                 <div class="font-weight-bold card-header">{{ __('Dashboard') }}</div>
@@ -24,7 +24,7 @@
 
     <div class="row mt-5 justify-content-center">
         <div class="col-md-6">
-            <div class="card shadow bg-white rounded">
+            <div class="card shadow bg-white rounded mb-5">
                 <div class="font-weight-bold card-header">{{ __('Restaurant manager') }}</div>
 
                 <div class="card-body">

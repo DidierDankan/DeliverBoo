@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
+
 
 class FoodController extends Controller
 {
@@ -33,7 +35,17 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('admin.foods.create');
+
+        $user_id = Auth::user()->id;
+
+        // $types = Type::all();
+
+
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
+
+        // return view('admin.restaurants.index', compact('restaurants', 'types'));
+
+        return view('admin.foods.create', compact('restaurants'));
     }
 
     /**
@@ -45,33 +57,41 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         //validazione
-        $request->validate([
-            'title' => 'required|max:100',
-            'price' => 'required',
-            'description' => 'required',
-            'type' => 'nullable',
-            'ingredients' => 'nullable',
-            'visibility' => 'boolean',
-            'restaurant_id' => 'nullable|exists:restaurants,id',
+        // $request->validate([
+        //     'title' => 'required|max:100',
+        //     // 'price' => 'required',
+        //     'description' => 'required',
+        //     'type' => 'nullable',
+        //     'ingredients' => 'nullable',
+        //     'visibility' => 'boolean',
+        //     // 'restaurant_id' => 'nullable|exists:restaurants,id',
 
-        ], [
-            // custom message 
-            'required'=>'The :attribute is required',
-            'max'=> 'Max :max characters allowed for the :attribute',
-        ]);
+        // ], [
+        //     // custom message 
+        //     'required'=>'The :attribute is required',
+        //     'max'=> 'Max :max characters allowed for the :attribute',
+        // ]);
 
         $data = $request->all();
 
+        // dd($data);
+
         //create and save record on db 
         $new_food = new Food();
+
+
+        
+
+
+
         $new_food->fill($data); // FILLABLE
         $new_food->save();
 
         //salva relazione con tags in poivot 
-        if (array_key_exists('orders', $data)) {
+        // if (array_key_exists('orders', $data)) {
 
-            $new_food->tags()->attach($data['orders']); //aggiunge nuvi records nella tabella pivot
-        }
+        //     $new_food->tags()->attach($data['orders']); //aggiunge nuvi records nella tabella pivot
+        // }
 
         return redirect()->route('admin.foods.show', $new_food->id);
     }
