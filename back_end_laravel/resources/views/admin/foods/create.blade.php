@@ -31,6 +31,8 @@
 
                         
 
+
+
                         <div class="mb-4 text-center">
                             <div class="bg-danger rounded w-25 d-inline-block pt-2">
                                 <label for="visibility" class="form-label"><strong>Not available </strong></label>
@@ -48,6 +50,7 @@
                             </div>
                         
                             @error('visibility')
+
                                 <div class="feedback">
                                     {{$message}}
                                 </div>

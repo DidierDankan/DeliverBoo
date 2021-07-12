@@ -151,7 +151,17 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $restaurant = Restaurant::find($id);
+        $restaurant->update($data);
+        if (array_key_exists('types', $data)) {
+            //aggiungere record tabella pivot
+            $restaurant->types()->sync($data['types']);
+
+        } else {
+            $restaurant->types()->detach(); //rimuove tutte le records nella pivot
+        }
+        return redirect()->route('admin.restaurants.show', $restaurant->id);
     }
 
     /**
