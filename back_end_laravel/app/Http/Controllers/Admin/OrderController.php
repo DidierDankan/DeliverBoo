@@ -26,11 +26,13 @@ class OrderController extends Controller
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
-        $restaurant_ids = [];
+        // dd($restaurants);
 
-        foreach ($restaurants as $restaurant){
-            array_push($restaurant_ids, $restaurant->id);
-        }
+        // $restaurant_ids = [];
+
+        // foreach ($restaurants as $restaurant){
+        //     array_push($restaurant_ids, $restaurant->id);
+        // }
 
         // dd($restaurant_ids);
 
@@ -42,6 +44,10 @@ class OrderController extends Controller
         // }
 
         $orders = Order::join('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')->where('restaurants.user_id', '=', $user_id)->paginate(6);
+
+        // $orders = Order::select('restaurant_id', $restaurants['id'])
+        
+        // ->where('restaurant_id', '=', $restaurants)->paginate(6);
 
         // dd($orders);
 
@@ -81,7 +87,10 @@ class OrderController extends Controller
     {
 
         $order = Order::find($id);
+
         $restaurants = Restaurant::all();
+
+        dd($order);
 
         return view('admin.orders.show', compact('order', 'restaurants'));
 

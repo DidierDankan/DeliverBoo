@@ -105,12 +105,18 @@ class RestaurantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        $restaurant = Restaurant::find($id);
+    {   
+        $user_id = Auth::user()->id;
+
+        $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
+
+        // dd($restaurant);
 
         $foods = Food::where('restaurant_id', '=', $id)->paginate(4);
 
         $types = Type::all();
+
+
 
         if (!$restaurant) {
             abort(404);
