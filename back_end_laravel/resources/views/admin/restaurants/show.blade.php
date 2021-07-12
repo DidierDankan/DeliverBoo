@@ -92,7 +92,7 @@
 
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary text-white" href="{{route('admin.foods.show', $food->id)}}">Edit</a>
+                                    <a class="btn btn-warning" href="{{route('admin.foods.edit', $food->id)}}">Edit</a>
                                 </td>
                                 <td>
                                     <form class="delete-post-form" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
