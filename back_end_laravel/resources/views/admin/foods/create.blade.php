@@ -9,7 +9,7 @@
         <div class="card shadow bg-white rounded mt-4">
             
             
-                <h2 class="mb-3 card-header">Create a new Food</h2>
+                <h2 class="mb-3 card-header">Create a new Food in: {{' ' . $restaurant->name}}</h2>
             
                 <div class="card-body">
                     <form action=" {{ route('admin.foods.store') }}" method="POST" enctype="multipart/form-data">
@@ -29,10 +29,31 @@
                             @enderror
                         </div>
 
+                        <div class="mb-4">
+                            <label for="visibility" class="form-label">Visibility: </label>
+                            <input type="checkbox" class="form-control @error('visibility') is-invalid @enderror"
+                            name="visibility"
+                            id="visibility"
 
-                        <label class="mb-4" for="content">Description: </label>
-    
-        <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
+                            
+                            value=" {{ old('visibility'), false }}" 
+                            
+                            
+                            >
+                            @error('visibility')
+                                <div class="feedback">
+                                    {{$message}}
+                                </div>
+                            @enderror
+
+                            
+
+
+                        <div class="mb-4">
+                            <label class="mb-4" for="content">Description: </label>
+                                
+                                    <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
+                        </div>
 
 
 
@@ -51,16 +72,25 @@
                         </div> --}}
 
 
-                        <div class="mb-4 mt-4">
-                            <label for="restaurant_id">Restaurant</label>
-                            <select class="form-control" name="restaurant_id" id="restaurant_id">
+                        <div style="display: none;" class="mb-4 mt-4">
+                            <label for="restaurant_id"></label>
+                            {{-- <select class="form-control" name="restaurant_id" id="restaurant_id">
                 
                                 <option value="">-- Select restaurant --</option>
                                 @foreach ($restaurants as $restaurant)
                                     <option value="{{ $restaurant->id }}" @if(old('restaurant_id') == $restaurant->id)selected @endif>{{ $restaurant->name }}</option>
                                 @endforeach
                 
-                            </select>
+                            </select> --}}
+                            <input  type="text" name="restaurant_id" id="restaurant_id" value="{{$restaurant->id }}" class="form-control @error('restaurant_id') is-invalid @enderror">
+                                @error('restaurant_id')
+                                <div class="feedback">
+                                    {{$message}}
+                                </div>
+                
+                                @enderror
+                            
+
                         </div>
 
 

@@ -104,7 +104,13 @@ class FoodController extends Controller
      */
     public function show($id)
     {
-        $food = Food::find($id);
+
+        $user_id = Auth::user()->id;
+
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
+
+
+        $food = Food::where('restaurants_id', '=', $restaurants->id)->find($id);
 
         if (! $food) {
             abort(404);
