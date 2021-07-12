@@ -106,14 +106,16 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        $restaurant = Restaurant::find($id);
+        $user_id = Auth::user()->id;
+
+        $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
 
         $foods = Food::where('restaurant_id', '=', $id)->paginate(4);
 
         $types = Type::all();
 
         if (!$restaurant) {
-            abort(404);
+            return view('admin.errors.404error');
         }
 
         return view('admin.restaurants.show', compact('restaurant', 'foods', 'types'));

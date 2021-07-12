@@ -26,11 +26,11 @@ class OrderController extends Controller
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
-        $restaurant_ids = [];
+        // $restaurant_ids = [];
 
-        foreach ($restaurants as $restaurant){
-            array_push($restaurant_ids, $restaurant->id);
-        }
+        // foreach ($restaurants as $restaurant){
+        //     array_push($restaurant_ids, $restaurant->id);
+        // }
 
         // dd($restaurant_ids);
 
@@ -80,8 +80,8 @@ class OrderController extends Controller
     public function show($id)
     {
 
-        $order = Order::find($id);
         $restaurants = Restaurant::all();
+        $order = Order::find($id);
 
         return view('admin.orders.show', compact('order', 'restaurants'));
 
