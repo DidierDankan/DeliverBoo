@@ -26,7 +26,9 @@ class OrderController extends Controller
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
+
         // $restaurant_ids = [];
+
 
         // foreach ($restaurants as $restaurant){
         //     array_push($restaurant_ids, $restaurant->id);
@@ -42,6 +44,10 @@ class OrderController extends Controller
         // }
 
         $orders = Order::join('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')->where('restaurants.user_id', '=', $user_id)->paginate(6);
+
+        // $orders = Order::select('restaurant_id', $restaurants['id'])
+        
+        // ->where('restaurant_id', '=', $restaurants)->paginate(6);
 
         // dd($orders);
 
@@ -82,6 +88,8 @@ class OrderController extends Controller
 
         $restaurants = Restaurant::all();
         $order = Order::find($id);
+
+        dd($order);
 
         return view('admin.orders.show', compact('order', 'restaurants'));
 
