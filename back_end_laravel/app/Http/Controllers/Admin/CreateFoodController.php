@@ -15,19 +15,12 @@ class CreateFoodController extends Controller
     public function create($id)
     {   
 
-        
-        // dd($test);
-        
         $user_id = Auth::user()->id;
         
         $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
-        // $types = Type::all();
-        
-        // $restaurant = Restaurant::find($id);
 
+        $types = ['Food','Drink','Souce'];
 
-        // return view('admin.restaurants.index', compact('restaurants', 'types'));
-
-        return view('admin.foods.create', compact('restaurant'));
+        return view('admin.foods.create', compact('restaurant', 'types'));
     }
 }

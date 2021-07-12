@@ -38,12 +38,7 @@ class FoodController extends Controller
 
         $user_id = Auth::user()->id;
 
-        // $types = Type::all();
-
-
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
-
-        // return view('admin.restaurants.index', compact('restaurants', 'types'));
 
         return view('admin.foods.create', compact('restaurants'));
     }

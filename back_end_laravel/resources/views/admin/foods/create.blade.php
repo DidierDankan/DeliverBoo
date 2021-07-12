@@ -29,30 +29,30 @@
                             @enderror
                         </div>
 
-                        <div class="mb-4">
-                            <label for="visibility" class="form-label">Visibility: </label>
-                            <input type="checkbox" class="form-control @error('visibility') is-invalid @enderror"
-                            name="visibility"
-                            id="visibility"
+                        
 
-                            checked
-                            {{-- value=" {{ old('visibility'), false }}"  --}}
-                            @if (checked)
-
-                            value="{{ 1 }}" 
-
-                            @elseif (!checked)
-
-                            value="{{ 0 }}"
-                            
-                            @endif
-
-                            >
+                        <div class="mb-4 text-center">
+                            <div class="bg-danger rounded w-25 d-inline-block pt-2">
+                                <label for="visibility" class="form-label"><strong>Not available </strong></label>
+                                <input style="vertical-align: middle;" type="radio" class=" ml-2 @error('visibility') is-invalid @enderror"
+                                name="visibility"
+                                id="visibility"
+                                value ="0">
+                            </div>
+                            <div class="bg-success rounded w-25 d-inline-block pt-2">
+                                <label for="visibility" class="form-label ml-3"><strong>Available </strong></label>
+                                <input style="vertical-align: middle;" type="radio" class="ml-2 @error('visibility') is-invalid @enderror"
+                                name="visibility"
+                                id="visibility"
+                                value ="1">
+                            </div>
+                        
                             @error('visibility')
                                 <div class="feedback">
                                     {{$message}}
                                 </div>
                             @enderror
+                        </div>
 
                             
 
@@ -64,32 +64,9 @@
                         </div>
 
 
-
-                        {{-- <div class="mb-3">
-                            <label for="address" class="form-label">Type:</label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror"
-                            name="address"
-                            id="type"
-                            value="{{ old('type') }}"
-                            >
-                            @error('type')
-                                <div class="feedback">
-                                    {{$message}}
-                                </div>
-                            @enderror
-                        </div> --}}
-
-
                         <div style="display: none;" class="mb-4 mt-4">
                             <label for="restaurant_id"></label>
-                            {{-- <select class="form-control" name="restaurant_id" id="restaurant_id">
-                
-                                <option value="">-- Select restaurant --</option>
-                                @foreach ($restaurants as $restaurant)
-                                    <option value="{{ $restaurant->id }}" @if(old('restaurant_id') == $restaurant->id)selected @endif>{{ $restaurant->name }}</option>
-                                @endforeach
-                
-                            </select> --}}
+                            
                             <input  type="text" name="restaurant_id" id="restaurant_id" value="{{$restaurant->id }}" class="form-control @error('restaurant_id') is-invalid @enderror">
                                 @error('restaurant_id')
                                 <div class="feedback">
@@ -97,15 +74,14 @@
                                 </div>
                 
                                 @enderror
-                            
-
+                        
                         </div>
 
 
 
                         <div class="address d-flex justify-content-between">
 
-                            <div class="mb-4 w-50 mr-2">
+                            {{-- <div class="mb-4 w-50 mr-2">
                                 <label for="type" class="form-label">Type: </label>
                                 <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
@@ -113,6 +89,26 @@
                                     {{$message}}
                                 </div>
                 
+                                @enderror
+                                
+                            </div> --}}
+
+
+                            <div class="mb-4 w-50 mr-2">
+                                <label for="type" class="form-label">Type: </label>
+                                {{-- <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror"> --}}
+                            
+                                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror">
+                                    <option value="">-- Select Type --</option>
+                                    @foreach($types as $type)
+                                        <option value="{{$type}}">{{$type}}</option>
+                                    @endforeach 
+                                </select>
+                                @error('type')
+                                <div class="feedback">
+                                    {{$message}}
+                                </div>
+                            
                                 @enderror
                                 
                             </div>
