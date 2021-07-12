@@ -56,6 +56,20 @@ class RestaurantController extends Controller
 
     {   
 
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'address' => ['required','max:255'],
+            'city' => ['required','max:50'],
+            'zip_code' => ['required', 'max:10'],
+            'cover' => ['nullable', 'max:255'],
+            'user_idIndice' => ['numeric',],
+        ], 
+        [
+            // custom message 
+            'required'=>'The :attribute is required',
+            'max'=> 'Max :max characters allowed for the :attribute',
+        ]);
+
 
         if ($request->hasFile('cover')) { // depends on your FormRequest validation if `file` field is required or not
             $path = $request->cover->storePublicly('');
@@ -151,7 +165,19 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'address' => ['required','max:255'],
+            'city' => ['required','max:50'],
+            'zip_code' => ['required', 'max:10'],
+            'cover' => ['nullable', 'max:255'],
+            'user_idIndice' => ['numeric',],
+        ], 
+        [
+            // custom message 
+            'required'=>'The :attribute is required',
+            'max'=> 'Max :max characters allowed for the :attribute',
+        ]);
     }
 
     /**

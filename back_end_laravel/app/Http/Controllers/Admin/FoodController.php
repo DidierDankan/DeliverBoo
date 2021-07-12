@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class FoodController extends Controller
@@ -57,32 +59,28 @@ class FoodController extends Controller
     public function store(Request $request)
     {
         
-        // $request->validate([
-        //     'title' => 'required|max:100',
-        //     'price' => 'numeric',
-        //     'description' => 'required',
-        //     'type' => 'nullable',
-        //     'ingredients' => 'nullable',
-        //     // 'visibility' => 'boolean',
-        //     'restaurant_id' => 'nullable|exists:restaurants,id',
+        $request->validate([
+            'title' => ['required', 'max:100'],
+            'price' => ['required','numeric'],
+            'description' => ['nullable',],
+            'type' => ['required', 'max:50'],
+            'ingredients' => ['required', 'max:255'],
+            'visibility' => ['boolean'],
+            'restaurant_id' => ['nullable','exists:restaurants,id'],
 
-        // ], [
-        //     // custom message 
-        //     'required'=>'The :attribute is required',
-        //     'max'=> 'Max :max characters allowed for the :attribute',
-        // ]);
-
-        $data = $request->all();
+        ], 
+        [
+            // custom message 
+            'required'=>'The :attribute is required',
+            'max'=> 'Max :max characters allowed for the :attribute',
+        ]);
+                
+         $data = $request->all();
 
         // dd($data);
 
         //create and save record on db 
         $new_food = new Food();
-
-
-        
-
-
 
         $new_food->fill($data); // FILLABLE
         $new_food->save();
@@ -142,15 +140,16 @@ class FoodController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|max:100',
-            'price' => 'required',
-            'description' => 'required',
-            'type' => 'nullable',
-            'ingredients' => 'nullable',
-            'visibility' => 'boolean',
-            'restaurant_id' => 'nullable|exists:restaurants,id',
+            'title' => ['required', 'max:100'],
+            'price' => ['required','numeric'],
+            'description' => ['nullable',],
+            'type' => ['required', 'max:50'],
+            'ingredients' => ['required', 'max:255'],
+            'visibility' => ['boolean'],
+            'restaurant_id' => ['nullable','exists:restaurants,id'],
 
-        ], [
+        ], 
+        [
             // custom message 
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',

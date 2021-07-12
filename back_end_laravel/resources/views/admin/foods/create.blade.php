@@ -18,7 +18,7 @@
             
                         <div class="mb-4">
                             <label for="title" class="form-label">Food Name:</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                            <input type="text" class="form-control @error ('title') is-invalid @enderror"
                             name="title"
                             id="title"
                             value=" {{ old('title') }} ">
@@ -31,27 +31,15 @@
 
 
                         <label class="mb-4" for="content">Description: </label>
-    
-        <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror"  name="description" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
+                        @error('description')
+                            <div class="feedback">
+                                {{$message}}
+                            </div>
+                        @enderror
 
 
-
-                        {{-- <div class="mb-3">
-                            <label for="address" class="form-label">Type:</label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror"
-                            name="address"
-                            id="type"
-                            value="{{ old('type') }}"
-                            >
-                            @error('type')
-                                <div class="feedback">
-                                    {{$message}}
-                                </div>
-                            @enderror
-                        </div> --}}
-
-
-                        <div class="mb-4 mt-4">
+                        {{-- <div class="mb-4 mt-4">
                             <label for="restaurant_id">Restaurant</label>
                             <select class="form-control" name="restaurant_id" id="restaurant_id">
                 
@@ -61,7 +49,7 @@
                                 @endforeach
                 
                             </select>
-                        </div>
+                        </div> --}}
 
 
 
@@ -71,10 +59,9 @@
                                 <label for="type" class="form-label">Type: </label>
                                 <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
-                                <div class="feedback">
-                                    {{$message}}
-                                </div>
-                
+                                    <div class="feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                                 
                             </div>
