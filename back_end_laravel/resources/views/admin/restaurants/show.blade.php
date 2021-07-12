@@ -115,7 +115,7 @@
                     </div>
                     <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
                     <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
-                    <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create') }} ">Add New</a>
+                    <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create', $restaurant->id) }} ">Add New</a>
     
                 </div>
             </div>
