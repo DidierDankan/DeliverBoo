@@ -109,11 +109,20 @@ class FoodController extends Controller
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
+        $restaurants_id = [];
 
-        $food = Food::where('restaurants_id', '=', $restaurants->id)->find($id);
+        
+        foreach ($restaurants as $restaurant){
+            
+            array_push($restaurants_id, $restaurant->id);
+            
+        }
+        
 
-        if (! $food) {
-            abort(404);
+        $food = Food::find($id);
+
+        if (! $food || !in_array($food->restaurant_id, $restaurants_id)) {
+            return view('admin.errors.404error');
         }
 
         return view('admin.foods.show', compact('food'));

@@ -35,10 +35,18 @@
                             name="visibility"
                             id="visibility"
 
+                            checked
+                            {{-- value=" {{ old('visibility'), false }}"  --}}
+                            @if (checked)
+
+                            value="{{ 1 }}" 
+
+                            @elseif (!checked)
+
+                            value="{{ 0 }}"
                             
-                            value=" {{ old('visibility'), false }}" 
-                            
-                            
+                            @endif
+
                             >
                             @error('visibility')
                                 <div class="feedback">
