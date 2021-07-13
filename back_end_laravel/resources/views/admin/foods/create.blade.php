@@ -18,7 +18,7 @@
             
                         <div class="mb-4">
                             <label for="title" class="form-label">Food Name:</label>
-                            <input type="text" class="form-control @error('title') is-invalid @enderror"
+                            <input type="text" class="form-control @error ('title') is-invalid @enderror"
                             name="title"
                             id="title"
                             value=" {{ old('title') }} ">
@@ -30,6 +30,7 @@
                         </div>
 
                         
+
 
 
 
@@ -82,16 +83,16 @@
 
 
 
+
                         <div class="address d-flex justify-content-between">
 
                             {{-- <div class="mb-4 w-50 mr-2">
                                 <label for="type" class="form-label">Type: </label>
                                 <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
-                                <div class="feedback">
-                                    {{$message}}
-                                </div>
-                
+                                    <div class="feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                                 
                             </div> --}}
