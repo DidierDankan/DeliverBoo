@@ -40,9 +40,12 @@ Route::prefix('admin')
     
     Route::get('/orders/payed', 'PayedController@payed')->name('payed');
 
+    Route::get('/foods/create/{id}', 'CreateFoodController@create')->name('foods.create');
+
+
         //rotta resource food
 
-        Route::resource('/foods', 'FoodController');
+        Route::resource('/foods', 'FoodController', ['except' => 'create']);
 
 
         

@@ -102,13 +102,7 @@ class RestaurantController extends Controller
             $data['cover'] = $img_path;
         }
 
-
-        
-        
-
-
         return redirect()->route('admin.restaurants.show', $new_restaurant->id)->with('created', $new_restaurant->name);
-
 
     }
 
@@ -147,11 +141,19 @@ class RestaurantController extends Controller
      */
     public function edit($id)
     {
-        $restaurant = Restaurant::find($id);
+
+        $user_id = Auth::user()->id;
+
+        $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
+
+
+        
+
+        
         $types = Type::all();
 
         if (!$restaurant) {
-            abort(404);
+            return view('admin.errors.404error');
         }
         return view('admin.restaurants.edit', compact('restaurant', 'types'));
     }
@@ -165,6 +167,7 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'name' => ['required', 'max:255'],
             'address' => ['required','max:255'],
@@ -178,6 +181,50 @@ class RestaurantController extends Controller
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
         ]);
+
+
+
+        if ($request->hasFile('cover')) { 
+            $path = $request->cover->storePublicly('');
+
+        }
+
+        
+
+        
+        
+        $data = $request->all();
+        
+        $restaurant = Restaurant::find($id);
+        
+        
+        
+        if (array_key_exists('types', $data)) {
+            //aggiungere record tabella pivot
+            $restaurant->types()->sync($data['types']);
+            
+        } else {
+            $restaurant->types()->detach(); //rimuove tutte le records nella pivot
+        }
+        
+            
+            if(array_key_exists('cover', $data)){
+                
+                if($restaurant->cover){
+                    Storage::delete($restaurant->cover);
+                }
+
+                $restaurant->cover = $path;
+
+                $data['cover'] = Storage::put('public/restaurants-covers/', $data['cover']);
+                
+            }
+            
+            $restaurant->update($data);
+
+
+        return redirect()->route('admin.restaurants.show', $restaurant->id);
+
     }
 
     /**

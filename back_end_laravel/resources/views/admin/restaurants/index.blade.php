@@ -48,9 +48,11 @@
                             </td>
                 
                                 <td><a class="btn btn-success" href="{{ route('admin.restaurants.show' , $restaurant->id) }}">SHOW</a></td>
+                                <td><a class="btn btn-warning" href="{{ route('admin.restaurants.edit' , $restaurant->id) }}">EDIT</a></td>
                 
                                 <td>
                                     <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
+                                      
                                     @csrf
                                     @method('DELETE')
                 

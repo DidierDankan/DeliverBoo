@@ -92,14 +92,14 @@
 
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary text-white" href="{{route('admin.foods.show', $food->id)}}">Edit</a>
+                                    <a class="btn btn-warning" href="{{route('admin.foods.edit', $food->id)}}">Edit</a>
                                 </td>
                                 <td>
                                     <form class="delete-post-form" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                 
-                                    <input class="btn btn-danger" type="submit" value="DELETE">
+                                    <input class="btn btn-danger" type="submit" value="Delete">
                                 </form>
                                 </td>
                             </tr>
@@ -109,13 +109,22 @@
                 
             </div>
             <div class="card">
-                <div class="card-body d-flex justify-content-center align-items-md-center">
+                <div class="card-body d-flex justify-content-center align-items-md-center flex-column">
                     <div class="paginate mt-3 mr-3">
                         {{$foods->links()}}
                     </div>
-                    <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-                    <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
-                    <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create') }} ">Add New</a>
+                    
+                    <div class="actions d-flex mt-3">
+                        <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
+                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
+                        <a class="btn btn-primary text-white mr-3" href=" {{ route('admin.foods.create', $restaurant->id) }} ">New Food</a>
+                        <a class="btn btn-warning mr-3" href=" {{ route('admin.restaurants.edit', $restaurant->id) }} ">Edit Restaurant</a>
+                        <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                    </div>
     
                 </div>
             </div>
