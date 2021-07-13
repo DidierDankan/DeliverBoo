@@ -60,9 +60,9 @@ class RestaurantController extends Controller
             'name' => ['required', 'max:255', 'unique:restaurants'],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
-            'zip_code' => ['required', 'max:5', 'string', 'size:5'],
+            'zip_code' => ['required', 'max:5', 'numeric', 'size:5'],
             'cover' => ['nullable', 'max:255'],
-            'user_idIndice' => ['numeric',],
+            'user_id' => ['numeric'],
         ], 
         [
             // custom message 
@@ -187,7 +187,7 @@ class RestaurantController extends Controller
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'max:10', 'string', 'size:5'],
             'cover' => ['nullable'],
-            'user_id' => ['numeric',],
+            'user_id' => ['numeric'],
         ], 
         [
             // custom message 
