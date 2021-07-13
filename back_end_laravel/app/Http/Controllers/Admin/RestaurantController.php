@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Type;
-
+use Illuminate\Validation\Rule;
 
 class RestaurantController extends Controller
 {
@@ -57,7 +57,7 @@ class RestaurantController extends Controller
     {   
 
         $request->validate([
-            'name' => ['required', 'max:255'],
+            'name' => ['required', 'max:255', 'unique:restaurants'],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'max:10'],
@@ -169,11 +169,17 @@ class RestaurantController extends Controller
     {
 
         $request->validate([
-            'name' => ['required', 'max:255'],
+            'name' => [
+                'required', 
+                'required',
+                Rule::unique('restaurants')->ignore($id),
+                'max:255',
+                
+            ],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'max:10'],
-            'cover' => ['nullable', 'max:255'],
+            'cover' => ['nullable'],
             'user_idIndice' => ['numeric',],
         ], 
         [

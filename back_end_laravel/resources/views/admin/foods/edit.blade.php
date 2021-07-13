@@ -63,7 +63,7 @@
 
                         <label class="mb-3" for="content">Description: </label>
     
-        <textarea class="form-control mb-4"  name="content" id="description" placeholder="Write here..." cols="30" rows="5" >{{ old('description', $food->description) }}</textarea>
+        <textarea class="form-control mb-4"  name="content" id="description" placeholder="Write here..." cols="30" rows="5" >{{  $food->description }}</textarea>
         @error('description')
         <div class="feedback">{{$message}}</div>
         @enderror
