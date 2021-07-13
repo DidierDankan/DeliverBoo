@@ -88,7 +88,15 @@ class RestaurantController extends Controller
 
         $new_restaurant->user_id = Auth::user()->id;
 
-        $new_restaurant->cover = $path;
+
+
+        if ($request->hasFile('cover')){
+
+            $new_restaurant->cover = $path;
+        }
+
+
+
 
         $new_restaurant->save();
 
@@ -171,7 +179,6 @@ class RestaurantController extends Controller
         $request->validate([
             'name' => [
                 'required', 
-                'required',
                 Rule::unique('restaurants')->ignore($id),
                 'max:255',
                 

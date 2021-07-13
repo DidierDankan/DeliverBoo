@@ -13,7 +13,7 @@
                 
             
                 <div class="card-body">
-                    <form action=" {{ route('admin.restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action=" {{ route('admin.restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data" class="update-form">
                         @csrf
                         @method('PATCH')
             
@@ -48,7 +48,7 @@
                                 <input type="text" class="form-control @error('city') is-invalid @enderror" value="{{ old('city', $restaurant->city) }}"
                                 name="city"
                                 id="city"
-                                value="{{ old('city') }}">
+                                value="{{ old('city', $restaurant->city) }}">
                                 @error('city')
                                     <div class="feedback">
                                         {{$message}}
@@ -92,11 +92,10 @@
                             @foreach ($types as $type)
                             <span class="d-inline-block mr-3">
                                 <input type="checkbox" name="types[]" id="type{{ $loop->iteration }}" value="{{ $type->id }}" 
-                                @if ($errors->any() && in_array($type->id, old('types')))
-                                  checked  
-                                  @elseif (!$errors->any() && $restaurant->types->contains($type->id))
+                                @if ($errors->any() && in_array($type->id, old('types', []) )
+                                  || (!$errors->any() && $restaurant->types->contains($type->id)))
                                   checked
-                                @endif
+                                @endif 
                                 >
                                 <label for="type{{ $loop->iteration }}"></label>
                                 {{ $type->type }}
@@ -111,8 +110,9 @@
             
                         <button class="btn btn-primary mr-3">Update restaurant</button>
 
-                     
+                        <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3">Restaurants</a>
 
+                        <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white">Menu</a>
 
                     </form>
                 </div>

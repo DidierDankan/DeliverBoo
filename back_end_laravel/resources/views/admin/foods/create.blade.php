@@ -12,7 +12,7 @@
                 <h2 class="mb-3 card-header">Create a new Food in: {{' ' . $restaurant->name}}</h2>
             
                 <div class="card-body">
-                    <form action=" {{ route('admin.foods.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action=" {{ route('admin.foods.store') }}" method="POST" enctype="multipart/form-data" class="create-new">
                         @csrf
                         @method('POST')
             

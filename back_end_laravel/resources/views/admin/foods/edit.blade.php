@@ -12,7 +12,7 @@
                 <h2 class="mb-3 card-header">Edit: {{$food->title}}</h2>
             
                 <div class="card-body">
-                    <form action=" {{ route('admin.foods.update', $food->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action=" {{ route('admin.foods.update', $food->id) }}" method="POST" enctype="multipart/form-data" class="update-form">
                         @csrf
                         @method('PATCH')
             
@@ -135,7 +135,9 @@
             
                         <button class="btn btn-primary mr-3">Update</button>
 
-                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
+                        {{-- <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a> --}}
+
+                        <a class="btn btn-success text-white mr-3" href="{{ route('admin.restaurants.show' , $food->restaurant_id) }}">Menu</a>
 
                         <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a>
 
