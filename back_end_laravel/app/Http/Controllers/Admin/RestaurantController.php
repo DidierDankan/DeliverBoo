@@ -57,13 +57,16 @@ class RestaurantController extends Controller
     {   
 
 
-        if ($request->hasFile('cover')) { 
+        if ($request->hasFile('cover')) { // depends on your FormRequest validation if `file` field is required or not
             $path = $request->cover->storePublicly('');
-
         }
+    
+        // Restaurant::create(array_merge($request->except('cover'), ['cover' => $path]));
 
 
         $data = $request->all();
+
+        // dd($data);
 
         $new_restaurant = new Restaurant();
 
@@ -73,21 +76,19 @@ class RestaurantController extends Controller
 
         $new_restaurant->cover = $path;
 
-        
+        $new_restaurant->save();
+
         if(array_key_exists('types', $data)){
             $new_restaurant->types()->attach($data['types']);
         }
-        
+
         if(array_key_exists('cover', $data)) {
             $img_path = Storage::put('public/restaurants-covers/', $data['cover']);
-            
+
             $data['cover'] = $img_path;
         }
-        
-        $new_restaurant->save();
 
         return redirect()->route('admin.restaurants.show', $new_restaurant->id)->with('created', $new_restaurant->name);
-
 
     }
 
