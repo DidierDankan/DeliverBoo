@@ -26,19 +26,27 @@ Route::get('/', function () {
 });
 
 
+
+
 Auth::routes();
 
 Route::prefix('admin')
-    ->middleware('auth')
-    ->name('admin.')
-    ->group(function () {
-       
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+->namespace('Admin')
+->middleware('auth')
+->name('admin.')
+->group(function () {
+    
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::get('/orders/payed', 'PayedController@payed')->name('payed');
+
+    Route::get('/foods/create/{id}', 'CreateFoodController@create')->name('foods.create');
 
 
         //rotta resource food
 
-        Route::resource('foods', FoodController::class);
+        Route::resource('/foods', 'FoodController', ['except' => 'create']);
+
 
         
         Route::resource('/restaurants', 'RestaurantController');
@@ -46,4 +54,8 @@ Route::prefix('admin')
         Route::resource('/orders', 'OrderController');
 
     });
+
+    Route::get('{any?}', function () {
+        return view('welcome');
+    })->where("any", ".*");
 

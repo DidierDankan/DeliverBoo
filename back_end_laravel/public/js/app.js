@@ -1893,7 +1893,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
+Vue.component("example-component", __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -1901,8 +1901,54 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
-});
+  el: "#app"
+}); // this validation ask confirm before delete records
+
+var deleteButtons = document.querySelectorAll(".delete-post-form");
+
+for (var i = 0; i < deleteButtons.length; i++) {
+  var iteration = deleteButtons[i];
+  console.log("iterazione", iteration);
+  iteration.addEventListener("submit", function (event) {
+    var confirm = window.confirm("Are you sure to delete?");
+
+    if (!confirm) {
+      event.preventDefault();
+    }
+  });
+} // this validation ask confirm if save new record or not
+
+
+var confirmCreate = document.querySelectorAll(".create-new");
+
+for (var _i = 0; _i < confirmCreate.length; _i++) {
+  var _iteration = confirmCreate[_i];
+  console.log("iterazione", _iteration);
+
+  _iteration.addEventListener("submit", function (event) {
+    var confirm = window.confirm("Are you sure to save?");
+
+    if (!confirm) {
+      event.preventDefault();
+    }
+  });
+} // this validation ask confirm before update exist record
+
+
+var confirmUpdate = document.querySelectorAll(".update-form");
+
+for (var _i2 = 0; _i2 < confirmUpdate.length; _i2++) {
+  var _iteration2 = confirmUpdate[_i2];
+  console.log("iterazione", _iteration2);
+
+  _iteration2.addEventListener("submit", function (event) {
+    var confirm = window.confirm("Are you sure to update?");
+
+    if (!confirm) {
+      event.preventDefault();
+    }
+  });
+}
 
 /***/ }),
 

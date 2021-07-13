@@ -4,7 +4,7 @@
 <div class="container">
     <div class="card">
 
-        <h1 class="card-header">All Orders</h1>
+        <h1 class="card-header">Payed Orders</h1>
         
         <table class="table">
             <thead class="thead-light">
@@ -48,9 +48,8 @@
                 {{$orders->links()}}
             </div>
             <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-
-            <a class="btn btn-success text-white" href="{{route('admin.payed')}} ">Payed</a>
             
+            <a class="btn btn-success text-white" href=" {{ route('admin.orders.index') }} ">All Orders</a>
 
         </div>
     </div>

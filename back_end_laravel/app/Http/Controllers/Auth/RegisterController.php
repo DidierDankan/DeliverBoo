@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'cf' => ['codice_fiscale', 'unique:users', 'nullable'],
-            'vat' => ['required', 'unique:users', 'numeric', 'min:100000000', 'max:12199999999']
+            'vat' => ['required', 'unique:users', 'numeric', 'between:00100000000,12100000000']
         ],
             
         );
@@ -68,19 +68,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $vat = $data['vat'];
-        if(strlen($vat) == 9) {
-            $vat = '00' . $vat;
-        } else if (strlen($vat) == 10) {
-            $vat = '0' . $vat;
-        }
-
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'cf' => $data['cf'],
-            'vat' => $vat,
+            'vat' => $data['vat'],
         ]);
     }
 }

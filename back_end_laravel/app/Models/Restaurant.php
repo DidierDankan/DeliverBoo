@@ -16,7 +16,7 @@ class Restaurant extends Model
         'address',
         'city',
         'zip_code',
-        'cover'
+        // 'cover'
     ];
 
     public function user(){
