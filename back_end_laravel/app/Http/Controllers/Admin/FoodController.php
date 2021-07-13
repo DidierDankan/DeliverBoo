@@ -52,11 +52,13 @@ class FoodController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+
+        
         
         $request->validate([
             'title' => ['required', 'max:100'],
-            'price' => ['required','numeric'],
+            'price' => ['required','numeric','between:0,999'],
             'description' => ['nullable',],
             'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
@@ -69,13 +71,20 @@ class FoodController extends Controller
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
         ]);
-                
-         $data = $request->all();
+        
+        // dd($request->price);
+        
+        
+
+        $data = $request->all();
+
+        $new_food = new Food();
+         
 
         // dd($data);
 
         //create and save record on db 
-        $new_food = new Food();
+        
 
         $new_food->fill($data); // FILLABLE
         $new_food->save();

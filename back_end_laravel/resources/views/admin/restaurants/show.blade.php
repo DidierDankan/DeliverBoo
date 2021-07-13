@@ -83,7 +83,7 @@
                                 <td>{{$food->title}}</td>
                                 <td>{{$food->type}}</td>
                                 <td>{{($food->visibility) ? 'yes' : 'no'; }}</td>
-                                <td>{{$food->price}}</td>
+                                <td>{{number_format($food->price,2)}} €</td>
                                 <td>
                                     <a class="btn btn-success text-white" href="{{route('admin.foods.show', $food->id)}}">Details</a>
                                     {{-- <a class="btn btn-primary text-white" href="{{route('admin.foods.show', $food->id)}}">Piatto</a>

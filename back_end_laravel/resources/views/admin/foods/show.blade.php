@@ -20,7 +20,7 @@
                         <li>{{$food->ingredients}}</li>
                     </ul>
                 </div>
-                <div class="mb-4">Price: <span class="ml-2 d-inline-block rounded p-1 bg-success">{{$food->price}}€</span></div>
+                <div class="mb-4">Price: <span class="ml-2 d-inline-block rounded p-1 bg-success text-white fw-bold">{{number_format($food->price, 2)}} €</span></div>
                 <hr>
                 <div class="actions d-flex justify-content-center">
                     <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>

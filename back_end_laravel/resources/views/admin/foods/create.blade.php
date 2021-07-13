@@ -119,10 +119,13 @@
                             
                             <div class="mb-4 w-50 ml-2">
                                 <label for="price">Price:</label>
-                                <input type="number" class="form-control @error('price') is-invalid @enderror"
+                                <input type="text" class="form-control @error('price') is-invalid @enderror"
                                 name="price"
                                 id="price"
-                                value="{{ old('price') }}">
+                                value="{{ old('price') }}"
+                                required
+                                placeholder="Price.. es: 1.0"
+                                >
                                 @error('price')
                                     <div class="feedback">
                                         {{$message}}
