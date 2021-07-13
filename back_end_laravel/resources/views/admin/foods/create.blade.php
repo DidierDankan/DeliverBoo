@@ -5,7 +5,7 @@
 
 
     <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-10">
             <div class="card shadow bg-white rounded mt-4">
             
             
@@ -32,21 +32,18 @@
                             @enderror
                         </div>
 
-                        
-
-
-
 
                         <div class="mb-4 text-center">
+                            <h5>Available</h5>
                             <div class="bg-danger rounded w-25 d-inline-block pt-2">
-                                <label for="visibility" class="form-label"><strong>Not available </strong></label>
+                                <label for="visibility" class="form-label"><strong>NO </strong></label>
                                 <input style="vertical-align: middle;" type="radio" class=" ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
                                 value ="0">
                             </div>
                             <div class="bg-success rounded w-25 d-inline-block pt-2">
-                                <label for="visibility" class="form-label ml-3"><strong>Available </strong></label>
+                                <label for="visibility" class="form-label ml-3"><strong>YES </strong></label>
                                 <input style="vertical-align: middle;" type="radio" class="ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
@@ -61,13 +58,10 @@
                             @enderror
                         </div>
 
-                            
-
-
                         <div class="mb-4">
-                            <label class="mb-4" for="content">Description: </label>
+                            <label class="mb-4" for="description">Description: </label>
                                 
-                            <textarea class="form-control"  name="content" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
+                            <textarea class="form-control"  name="description" id="description" placeholder="Write here..." cols="30" rows="5"></textarea>
                         </div>
 
 
@@ -143,11 +137,12 @@
                             @enderror
                         </div>
             
-                        <button class="btn btn-primary mr-3">Create</button>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mr-3">Create</button>
+                            <a class="btn btn-success text-white" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
+                        </div>
 
-                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
-
-                        <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a>
+                        {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
 
                     </form>
                 </div>

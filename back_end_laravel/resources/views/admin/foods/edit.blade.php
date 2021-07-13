@@ -33,10 +33,11 @@
 
 
                         <div class="mb-4 text-center">
-                            <div class="form-label mb-3 {{$food->visibility ? 'alert-success' : 'alert-danger'}}">{{ $food->visibility ? 'This Food is currently available. Do you want change?' : 'This Food is not currently available. Do you want change?'}}</div>
+                            <h4>Available</h4>
+                            <div class="form-label mb-3 {{$food->visibility ? 'alert-success' : 'alert-danger'}}">{{ $food->visibility ? 'This Food is currently available. Is it still available?' : 'This Food is currently unavailable. Is it available now?'}}</div>
                             
                             <div class="bg-danger rounded w-25 d-inline-block pt-2">
-                                <label for="visibility" class="form-label"><strong>Not available </strong></label>
+                                <label for="visibility" class="form-label"><strong>NO </strong></label>
                                 <input style="vertical-align: middle;" type="radio" class=" ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
@@ -44,7 +45,7 @@
                             </div>
 
                             <div class="bg-success rounded w-25 d-inline-block pt-2">
-                                <label for="visibility" class="form-label ml-3"><strong>Available </strong></label>
+                                <label for="visibility" class="form-label ml-3"><strong>YES </strong></label>
                                 <input style="vertical-align: middle;" type="radio" class="ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
@@ -106,7 +107,7 @@
                         </div>
                     </div>
 
-                        <div class="mb-5 ">
+                        <div class="mb-4">
                             <label for="ingredients">Ingredients*:</label>
                             <input type="text" class="form-control @error('ingredients') is-invalid @enderror" value="{{ old('ingredients', $food->ingredients) }}"
                             name="ingredients"
@@ -120,13 +121,12 @@
                             @enderror
                         </div>
             
-                        <button class="btn btn-primary mr-3">Update</button>
-
-                        {{-- <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a> --}}
-
-                        <a class="btn btn-success text-white mr-3" href="{{ route('admin.restaurants.show' , $food->restaurant_id) }}">Menu</a>
-
-                        <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mr-3">Update</button>
+                            {{-- <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a> --}}
+                            <a class="btn btn-success text-white mr-3" href="{{ route('admin.restaurants.show' , $food->restaurant_id) }}">Menu</a>
+                            {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
+                        </div>
 
                     </form>
                 </div>

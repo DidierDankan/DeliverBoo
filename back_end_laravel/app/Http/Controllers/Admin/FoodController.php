@@ -54,12 +54,12 @@ class FoodController extends Controller
     public function store(Request $request)
     {   
 
-        
+        // dd($request->all());
         
         $request->validate([
             'title' => ['required', 'max:100'],
             'price' => ['required','numeric','between:0,999'],
-            'description' => ['nullable',],
+            'description' => ['nullable'],
             'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
             'visibility' => ['boolean'],

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\Food;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Auth;
@@ -56,18 +58,21 @@ class RestaurantController extends Controller
 
     {   
 
+        // dd($request->all());
+
         $request->validate([
             'name' => ['required', 'max:255', 'unique:restaurants'],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'numeric', 'between:10,97000'],
-            'cover' => ['nullable', 'max:255'],
+            'cover' => ['nullable','image','mimes:jpeg,bmp,png','size:20000'],
             'user_id' => ['numeric'],
         ], 
         [
             // custom message 
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
+            'mimes'=> ':attribute is of unsupported format'
         ]);
 
 
@@ -132,13 +137,15 @@ class RestaurantController extends Controller
 
         $types = Type::all();
 
+        $user = User::find($user_id);
 
+        // dd($user);
 
         if (!$restaurant) {
             return view('admin.errors.404error');
         }
 
-        return view('admin.restaurants.show', compact('restaurant', 'foods', 'types'));
+        return view('admin.restaurants.show', compact('restaurant', 'foods', 'types', 'user'));
     }
 
     /**
@@ -186,13 +193,14 @@ class RestaurantController extends Controller
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'max:10', 'string', 'size:5'],
-            'cover' => ['nullable'],
+            'cover' => ['nullable','image','mimes:jpeg,bmp,png','size:20000'],
             'user_id' => ['numeric'],
         ], 
         [
             // custom message 
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
+            'mimes'=> ':attribute is of unsupported format'
         ]);
 
 

@@ -86,9 +86,10 @@
             
                             <input type="file"  
                             name="cover" 
-                            id="cover" >
+                            id="cover"
+                            class="@error('cover') is-invalid @enderror" >
                             @error('cover')
-                                <div class="feedback">
+                                <div class="mt-2 feedback alert-danger">
                                     {{$message}}
                                 </div>
                             @enderror
@@ -115,11 +116,11 @@
                            
                         </div>
             
-                        <button class="btn btn-primary mr-3">Update restaurant</button>
-
-                        <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3">Restaurants</a>
-
-                        <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white">Menu</a>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mr-3">Update</button>
+                            <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3">Restaurants</a>
+                            <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white">Menu</a>
+                        </div>
 
                     </form>
                 </div>

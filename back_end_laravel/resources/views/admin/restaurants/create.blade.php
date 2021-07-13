@@ -5,7 +5,7 @@
 
 
     <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-8">
         <div class="card shadow bg-white rounded mt-4">
             
             
@@ -13,9 +13,10 @@
             
                 <div class="card-body">
                     <form action=" {{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data" class="create-new">
+
                         @csrf
                         @method('POST')
-            
+                        
                         <div class="mb-3">
                             <label for="name" class="form-label">Restaurant Name*:</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror"
@@ -30,6 +31,7 @@
                                 </div>
                             @enderror
                         </div>
+
                         <div class="mb-3">
                             <label for="address" class="form-label">Adress*:</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror"
@@ -80,9 +82,9 @@
             
                         <div class="mb-4">
                             <label for="cover" class="form-label">Image: </label>
-                            <input type="file" name="cover" id="cover">
+                            <input type="file" name="cover" id="cover" class="@error('cover') is-invalid @enderror">
                             @error('cover')
-                            <div class="feedback">
+                            <div class="mt-2 feedback alert-danger">
                                 {{$message}}
                             </div>
             
@@ -112,11 +114,11 @@
                             <hr>
                         </div>
             
-                        <button class="btn btn-primary mr-3">Create</button>
-
-                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
-
-                        <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a>
+                        <div class="actions d-flex justify-content-center">
+                            <button class="btn btn-primary mr-3">Create</button>
+                            <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
+                            {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
+                        </div>
 
 
                     </form>
