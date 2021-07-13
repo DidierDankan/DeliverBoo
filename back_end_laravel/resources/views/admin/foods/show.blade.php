@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container d-flex justify-content-center align-items-md-center">
+<div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="offset-md-3 col-md-6">
             <div class="card">
                 <h1 class="card-header">Food</h1>
             
