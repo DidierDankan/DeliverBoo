@@ -187,7 +187,7 @@ class RestaurantController extends Controller
             'city' => ['required','max:50'],
             'zip_code' => ['required', 'max:10', 'string', 'size:5'],
             'cover' => ['nullable'],
-            'user_idIndice' => ['numeric',],
+            'user_id' => ['numeric',],
         ], 
         [
             // custom message 
