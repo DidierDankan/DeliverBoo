@@ -13,7 +13,7 @@
                 
             
                 <div class="card-body">
-                    <form action=" {{ route('admin.restaurants.update', $restaurant->id) }}" method="POST">
+                    <form action=" {{ route('admin.restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
             
@@ -68,17 +68,23 @@
                                 @enderror
                             </div>
                         </div>
-            
-                        <div class="mb-4">
-                            <label for="cover" class="form-label">Image: </label>
-                            <input type="file" name="cover" id="cover">
-                            @error('cover')
-                            <div class="feedback">
-                                {{$message}}
+
+                        <div class="mb-3">
+                            <div>
+                                <label for="cover" class="form-label">Restaurant cover:</label>
                             </div>
+                            @if ($restaurant->cover)      
+                                <img width="200" class="mb-2" src=" {{ asset('storage/restaurants-covers/' . $restaurant->cover) }} " alt=" {{ $restaurant->title }} ">
+                            @endif
             
+                            <input type="file"  
+                            name="cover" 
+                            id="cover" >
+                            @error('cover')
+                                <div class="feedback">
+                                    {{$message}}
+                                </div>
                             @enderror
-                            <hr>
                         </div>
 
                         <h5>Types: </h5>

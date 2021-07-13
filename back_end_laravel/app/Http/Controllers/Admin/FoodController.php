@@ -132,13 +132,29 @@ class FoodController extends Controller
      */
     public function edit($id)
     {
-        $food = Food::find($id);
+        $user_id = Auth::user()->id;
+
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
+
+        $restaurants_id = [];
+
         
-        if (! $food) {
-            abort(404);
+        foreach ($restaurants as $restaurant){
+            
+            array_push($restaurants_id, $restaurant->id);
+            
+        }
+        
+
+        $food = Food::find($id);
+
+        if (! $food || !in_array($food->restaurant_id, $restaurants_id)) {
+            return view('admin.errors.404error');
         }
 
-        return view('admin.foods.edit', compact('food') );
+        $types = ['Food','Drink','Souce'];
+
+        return view('admin.foods.edit', compact('food', 'types') );
         
     }
 
@@ -151,20 +167,20 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'title' => 'required|max:100',
-            'price' => 'required',
-            'description' => 'required',
-            'type' => 'nullable',
-            'ingredients' => 'nullable',
-            'visibility' => 'boolean',
-            'restaurant_id' => 'nullable|exists:restaurants,id',
+        // $request->validate([
+        //     'title' => 'required|max:100',
+        //     'price' => 'required',
+        //     'description' => 'required',
+        //     'type' => 'nullable',
+        //     'ingredients' => 'nullable',
+        //     'visibility' => 'boolean',
+        //     'restaurant_id' => 'nullable|exists:restaurants,id',
 
-        ], [
-            // custom message 
-            'required'=>'The :attribute is required',
-            'max'=> 'Max :max characters allowed for the :attribute',
-        ]);
+        // ], [
+        //     // custom message 
+        //     'required'=>'The :attribute is required',
+        //     'max'=> 'Max :max characters allowed for the :attribute',
+        // ]);
 
         $data = $request->all();
         $food = Food::find($id);
