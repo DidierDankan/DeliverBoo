@@ -89,7 +89,7 @@ class OrderController extends Controller
         $restaurants = Restaurant::all();
         $order = Order::find($id);
 
-        dd($order);
+        //dd($order);
 
         return view('admin.orders.show', compact('order', 'restaurants'));
 
