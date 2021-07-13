@@ -18,11 +18,13 @@
                         @method('PATCH')
             
                         <div class="mb-3">
-                            <label for="name" class="form-label">Restaurant Name:</label>
+                            <label for="name" class="form-label">Restaurant Name*:</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $restaurant->name) }}"
                             name="name"
                             id="name"
-                            value=" {{ old('name') }} ">
+                            value="{{ old('name') }}"
+                            required
+                            >
                             @error('name')
                                 <div class="feedback">
                                     {{$message}}
@@ -30,11 +32,12 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Adress:</label>
+                            <label for="address" class="form-label">Adress*:</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $restaurant->address) }}"
                             name="address"
                             id="address"
                             value="{{ old('address') }}"
+                            required
                             >
                             @error('address')
                                 <div class="feedback">
@@ -44,11 +47,13 @@
                         </div>
                         <div class="address d-flex justify-content-between">
                             <div class="mb-5 w-50 mr-2">
-                                <label for="city">City:</label>
+                                <label for="city">City*:</label>
                                 <input type="text" class="form-control @error('city') is-invalid @enderror" value="{{ old('city', $restaurant->city) }}"
                                 name="city"
                                 id="city"
-                                value="{{ old('city', $restaurant->city) }}">
+                                value="{{ old('city', $restaurant->city) }}"
+                                required
+                                >
                                 @error('city')
                                     <div class="feedback">
                                         {{$message}}
@@ -56,11 +61,13 @@
                                 @enderror
                             </div>
                             <div class="mb-5 w-50 ml-2">
-                                <label for="zip_code">Zip Code:</label>
+                                <label for="zip_code">Zip Code*:</label>
                                 <input type="text" class="form-control @error('zip_code') is-invalid @enderror" value="{{ old('zip_code', $restaurant->zip_code) }}"
                                 name="zip_code"
                                 id="zip_code"
-                                value="{{ old('zip_code') }}">
+                                value="{{ old('zip_code') }}"
+                                required
+                                >
                                 @error('zip_code')
                                     <div class="feedback">
                                         {{$message}}
