@@ -26,6 +26,12 @@ const routes = [
     name: "restaurant-detail",
     component: () => import("../views/RestaurantDetail.vue"),
   },
+
+  {
+    path: "/tipi",
+    name: "Tipi",
+    component: () => import("../views/Tipi.vue"),
+  },
 ];
 
 const router = createRouter({
