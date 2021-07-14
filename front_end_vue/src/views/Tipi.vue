@@ -1,5 +1,13 @@
 <template>
-  <p>{{ types.type }}</p>
+  <div class="container">
+    <div class="card-container">
+      <a href="">
+        <div class="card" v-for="type in types">
+          <p>{{ types.type }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
