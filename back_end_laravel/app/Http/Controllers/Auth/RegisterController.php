@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'cf' => ['codice_fiscale', 'unique:users', 'nullable'],
-            'vat' => ['required', 'unique:users', 'numeric', 'between:00100000000,12100000000']
+            'vat' => ['required', 'unique:users', 'string', 'size:11', 'regex:/^(?:\d+|all)$/']
         ],
             
         );
