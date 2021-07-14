@@ -192,7 +192,7 @@ class RestaurantController extends Controller
             ],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
-            'zip_code' => ['required', 'max:10', 'string', 'size:5'],
+            'zip_code' => ['required', 'string', 'size:5', 'regex:/^(?:\d+|all)$/'],
             'cover' => ['nullable','image','mimes:jpeg,bmp,png'],
             'user_id' => ['numeric'],
         ], 
