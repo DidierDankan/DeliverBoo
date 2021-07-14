@@ -30,7 +30,7 @@ class RestaurantController extends Controller
         $types = Type::all();
 
 
-        $restaurants = Restaurant::where('user_id', '=', $user_id)->paginate(6);
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->orderBy('name', 'asc')->paginate(6);
 
         return view('admin.restaurants.index', compact('restaurants', 'types'));
     }
@@ -133,7 +133,7 @@ class RestaurantController extends Controller
         $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
 
 
-        $foods = Food::where('restaurant_id', '=', $id)->paginate(4);
+        $foods = Food::where('restaurant_id', '=', $id)->orderBy('title', 'asc')->paginate(4);
 
         $types = Type::all();
 
