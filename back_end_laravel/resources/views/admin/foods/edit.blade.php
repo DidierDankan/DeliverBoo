@@ -60,9 +60,9 @@
                             @enderror
                         </div>
 
-                        <label class="mb-3" for="content">Description: </label>
+                        <label class="mb-3" for="description">Description: </label>
     
-                        <textarea class="form-control mb-4"  name="content" id="description" placeholder="Write here..." cols="30" rows="5" >{{  $food->description }}</textarea>
+                        <textarea class="form-control mb-4"  name="description" id="description" placeholder="Write here..." cols="30" rows="5" >{{  $food->description }}</textarea>
                         @error('description')
                         <div class="feedback">{{$message}}</div>
                         @enderror
