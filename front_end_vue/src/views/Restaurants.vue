@@ -8,25 +8,24 @@
           v-for="restaurant in restaurants"
           :key="restaurant.id"
         >
-          <div class="cover">
-            <img
-              v-if="restaurant.cover"
-              :src="
-                `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
-              "
-              :alt="restaurant.name"
-            />
-          </div>
+          <img
+            v-if="restaurant.cover"
+            :src="
+              `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+            "
+            :alt="restaurant.name"
+          />
 
           <h3 class="restaurant-title">
             {{ restaurant.name }}
           </h3>
-          <p>
+          <!-- <p>
             {{ restaurant.address }}
-          </p>
+          </p> -->
 
           <div class="layer">
             <router-link
+              class="link"
               :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
             >
               Visit
@@ -101,6 +100,12 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .main-container {
   width: 100%;
   background: #ffeae4;
@@ -112,7 +117,8 @@ export default {
   .card {
     width: 100%;
     position: relative;
-    margin: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
     cursor: pointer;
     transition: all 1s;
     &:hover .layer {
@@ -120,11 +126,15 @@ export default {
       justify-content: center;
       align-items: center;
     }
-    .cover img {
-      max-width: 100%;
+    img {
+      width: 100%;
+      height: 150px;
       border-radius: 5px;
+      object-fit: cover;
+      object-position: top;
     }
     .restaurant-title {
+      text-align: left;
       color: #2e3333;
     }
     .layer {
@@ -134,13 +144,28 @@ export default {
       top: 0;
       bottom: 0;
       display: none;
-      background: rgba(209, 196, 196, 0.48);
+      padding: 5px;
+      background: rgba(252, 238, 238, 0.48);
       border: 1px solid rgb(221, 203, 203);
       border-radius: 5px;
+      router-link {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: salmon;
+      }
     }
   }
 }
+.link {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: salmon;
+}
+
 .navigation {
+  text-align: center;
   .active-page {
     background: orange;
   }
