@@ -34,9 +34,8 @@
         </div>
       </div>
 
+      <!-- Loading... -->
       <div class="loading" v-else>
-        <!-- Loading... -->
-
         <div class="loader">
           <div class="duo duo1">
             <div class="dot dot-a"></div>
@@ -64,7 +63,6 @@
         >
           <!-- {{ i }} -->
           <div :class="{ 'active-page': i == pages.current }"></div>
-          <!-- <div class="nav-pag"></div> -->
         </div>
         <!-- <button
           v-show="pages.current < pages.last"
@@ -194,6 +192,7 @@ export default {
     align-items: center;
     width: 20px;
     height: 20px;
+    margin: 5px;
     border-radius: 50%;
     border: 2px solid #00ccbc;
     .active-page {
