@@ -23,7 +23,7 @@ export default {
 .brand {
   font-size: 2rem;
 }
-.nav {
-  margin: 10px;
+#nav {
+  padding: 10px;
 }
 </style>
