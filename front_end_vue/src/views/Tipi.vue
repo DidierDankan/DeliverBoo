@@ -3,9 +3,9 @@
   <div class="container">
     <div class="card-container">
       <div class="card" v-for="(tipo, index) in listTypes" :key="index">
-        <a :href="index"
-          ><p>{{ tipo.type }}</p></a
-        >
+        <label
+          ><input type="checkbox" :name="tipo.type" />{{ tipo.type }}
+        </label>
       </div>
     </div>
   </div>
@@ -71,10 +71,12 @@ a {
   align-content: center;
   border-radius: 10px;
 }
-.card p {
-  font-size: 23px;
+
+.card label {
+  font-size: 18px;
   color: black;
   font-weight: bold;
+  cursor: pointer;
 }
 /* Media Queries */
 @media (min-width: 768px) and (max-width: 1170px) {
