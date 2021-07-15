@@ -21,7 +21,7 @@ class RestaurantController extends Controller
     public function show($id) {
         if(Restaurant::find($id)) {
 
-            $restaurant = Restaurant::find($id)->with('types')->first();
+            $restaurant = Restaurant::with('types')->find($id);
             $foods = Food::where('restaurant_id', '=', $restaurant->id)->get();
             $obj_food_restaurant = [$restaurant, $foods];
         }else {
