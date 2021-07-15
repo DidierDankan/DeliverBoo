@@ -1,5 +1,5 @@
 <template>
-  <h2>In quale tipo di ristoranrte vuoi ordinare?</h2>
+  <h2>In quale tipo di ristorante vuoi ordinare?</h2>
   <div class="container">
     <div class="card-container">
       <div class="card" v-for="(tipo, index) in listTypes" :key="index">
