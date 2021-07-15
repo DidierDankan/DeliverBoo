@@ -27,11 +27,11 @@ const routes = [
     component: () => import("../views/RestaurantDetail.vue"),
   },
 
-  {
-    path: "/tipi",
-    name: "Tipi",
-    component: () => import("../views/Tipi.vue"),
-  },
+  // {
+  //   // path: "/tipi",
+  //   // name: "Tipi",
+  //   // component: () => import("../views/Tip"),
+  // },
 ];
 
 const router = createRouter({

@@ -1,11 +1,13 @@
 <template>
-  <h2>In quale tipo di ristorante vuoi ordinare?</h2>
-  <div class="container">
-    <div class="card-container">
-      <div class="card" v-for="(tipo, index) in listTypes" :key="index">
-        <label
-          ><input type="checkbox" :name="tipo.type" />{{ tipo.type }}
-        </label>
+  <div>
+    <h1>In quale tipo di ristorante vuoi ordinare?</h1>
+    <div class="container">
+      <div class="card-container">
+        <div class="card" v-for="(tipo, index) in listTypes" :key="index">
+          <label
+            ><input type="checkbox" :name="tipo.type" />{{ tipo.type }}
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -14,7 +16,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Tipi",
+  name: "Type",
 
   data() {
     return {
@@ -42,12 +44,18 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    margin: 30px 0;
+    text-align: center;
+    color: #2e3333;
+}
+
 a {
   text-decoration: none;
 }
 .container {
   width: 355px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
 }
 .card-container {
   display: flex;

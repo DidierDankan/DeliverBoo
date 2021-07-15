@@ -1,6 +1,9 @@
 <template>
   <div class="restaurants">
     <Hero />
+
+    <Type />
+
     <div class="main-container">
       <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
       <div class="cards" v-if="restaurants">
@@ -69,12 +72,14 @@
 import axios from "axios";
 import Hero from "./components/Hero.vue";
 import Loader from './components/Loader.vue';
+import Type from './components/Type.vue';
 
 export default {
   name: "Restaurants",
   components: {
     Hero,
     Loader,
+    Type,
   },
 
   data() {
