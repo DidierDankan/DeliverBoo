@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="restaurant.name">
     <div class="detail container">
 
       <div class="image">
@@ -38,13 +38,19 @@
       </div>
     </div>
   </div>
+
+  <Loader v-else/>
 </template>
 
 <script>
 import axios from "axios";
+import Loader from './components/Loader.vue';
+
 export default {
   name: "RestaurantDetail",
-
+  components: {
+    Loader,
+  },
   data() {
     return {
       restaurant: [],
@@ -132,9 +138,16 @@ export default {
     align-content: center;
     flex-direction: row-reverse;
     
-    .image img {
-      width: 300px;
+    .image {
+      width: 480px;
+      height: 260px;
+      overflow: hidden;
       margin-right: 1rem;
+
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
     }
   }
 
