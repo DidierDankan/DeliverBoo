@@ -73,7 +73,7 @@ a {
 }
 
 .card label {
-  font-size: 18px;
+  font-size: 22px;
   color: black;
   font-weight: bold;
   cursor: pointer;
