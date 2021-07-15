@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-    <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
+  <div class="restaurants">
     <div class="main-container">
+      <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
       <div class="cards" v-if="restaurants">
         <div
           class="card"
@@ -38,27 +38,29 @@
         Loading...
       </div>
 
-      <section class="navigation">
-        <button
+      <section class="naviga">
+        <!-- <button
           v-show="pages.current > 1"
           @click="getRestaurants(pages.current - 1)"
         >
           prev
-        </button>
-        <button
+        </button> -->
+        <div
+          class="btn-navi"
           v-for="i in pages.last"
           :key="`page${i}`"
           @click="getRestaurants(i)"
-          :class="{ 'active-page': i == pages.current }"
         >
-          {{ i }}
-        </button>
-        <button
+          <!-- {{ i }} -->
+          <div :class="{ 'active-page': i == pages.current }"></div>
+          <!-- <div class="nav-pag"></div> -->
+        </div>
+        <!-- <button
           v-show="pages.current < pages.last"
           @click="getRestaurants(pages.current + 1)"
         >
           next
-        </button>
+        </button> -->
       </section>
     </div>
   </div>
@@ -73,7 +75,6 @@ export default {
     return {
       restaurants: null,
       pages: [],
-      // image: `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`,
     };
   },
   created() {
@@ -109,11 +110,16 @@ export default {
 .main-container {
   width: 100%;
   background: #ffeae4;
+  padding: 20px;
+  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2e3333;
+  }
 }
 .cards {
   display: grid;
   grid-template-columns: 6fr;
-  // margin: 5px;
   .card {
     width: 100%;
     position: relative;
@@ -136,6 +142,7 @@ export default {
     .restaurant-title {
       text-align: left;
       color: #2e3333;
+      font-weight: 600;
     }
     .layer {
       position: absolute;
@@ -145,29 +152,63 @@ export default {
       bottom: 0;
       display: none;
       padding: 5px;
-      background: rgba(252, 238, 238, 0.48);
+      background: rgba(252, 238, 238, 0.3);
       border: 1px solid rgb(221, 203, 203);
       border-radius: 5px;
-      router-link {
-        display: inline-block;
-        text-decoration: none;
-        font-size: 1.5rem;
-        color: salmon;
-      }
     }
   }
 }
 .link {
-  display: inline-block;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
   text-decoration: none;
   font-size: 1.5rem;
-  color: salmon;
+  color: #fff;
+  font-weight: 600;
 }
 
-.navigation {
+.naviga {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-  .active-page {
-    background: orange;
+  margin: 5px;
+  .btn-navi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #00ccbc;
+    .active-page {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #00ccbc;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .cards {
+    width: 90%;
+    margin: 0 auto;
+    grid-template-columns: 5fr 5fr;
+    column-gap: 10px;
+    row-gap: 15px;
+  }
+}
+@media screen and (min-width: 1170px) {
+  .cards {
+    width: 85%;
+    margin: 0 auto;
+    grid-template-columns: 5fr 5fr 5fr;
+    column-gap: 10px;
+    row-gap: 15px;
   }
 }
 </style>

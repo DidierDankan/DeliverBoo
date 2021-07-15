@@ -13,7 +13,7 @@ class RestaurantController extends Controller
     //
     public function index() {
 
-        $restaurants = Restaurant::paginate(2);
+        $restaurants = Restaurant::paginate(4);
 
         return response()->json($restaurants);
     }
