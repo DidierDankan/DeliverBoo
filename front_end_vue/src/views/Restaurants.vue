@@ -168,7 +168,7 @@ export default {
       bottom: 0;
       display: none;
       padding: 5px;
-      background: rgba(252, 238, 238, 0.3);
+      background: rgba(196, 192, 192, 0.45);
       // border: 1px solid rgb(221, 203, 203);
       border-radius: 5px;
     }
