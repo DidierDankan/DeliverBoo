@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <router-link to="/">ggggg</router-link>
+    <router-link class="links brand" to="/">DeliveBoo</router-link>
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/test">Test</router-link>
+      <router-link class="links" to="/">Home</router-link> |
+      <router-link class="links" to="/about">About</router-link> |
+      <router-link class="links" to="/restaurants">Restaurants</router-link>
     </div>
   </div>
 </template>
@@ -15,4 +15,15 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+.links {
+  text-decoration: none;
+  color: #00ccbc;
+}
+.brand {
+  font-size: 2rem;
+}
+.nav {
+  margin: 10px;
+}
+</style>
