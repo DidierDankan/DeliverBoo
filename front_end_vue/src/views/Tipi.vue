@@ -1,11 +1,12 @@
 <template>
+  <h2>In quale tipo di ristoranrte vuoi ordinare?</h2>
   <div class="container">
     <div class="card-container">
-      <a href="">
-        <div class="card" v-for="type in types">
-          <p>{{ types.type }}</p>
-        </div>
-      </a>
+      <div class="card" v-for="(tipo, index) in listTypes" :key="index">
+        <a :href="index"
+          ><p>{{ tipo.type }}</p></a
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -17,18 +18,20 @@ export default {
 
   data() {
     return {
-      types: [],
+      listTypes: [],
     };
   },
   created() {
     this.getType();
   },
+
   methods: {
     getType() {
       axios
         .get("http://127.0.0.1:8000/api/types")
         .then((res) => {
-          this.types = res.data.type;
+          console.log(res.data);
+          this.listTypes = res.data;
         })
         .catch((error) => {
           console.log("error", error);
@@ -51,6 +54,8 @@ a {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .card {
