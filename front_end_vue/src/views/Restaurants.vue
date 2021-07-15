@@ -129,6 +129,7 @@ export default {
 .cards {
   display: grid;
   grid-template-columns: 6fr;
+  row-gap: 15px;
   .card {
     width: 100%;
     position: relative;
@@ -140,6 +141,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      box-shadow: 0 10px 6px -6px #777;
     }
     img {
       width: 100%;
@@ -162,7 +164,7 @@ export default {
       display: none;
       padding: 5px;
       background: rgba(252, 238, 238, 0.3);
-      border: 1px solid rgb(221, 203, 203);
+      // border: 1px solid rgb(221, 203, 203);
       border-radius: 5px;
     }
   }
