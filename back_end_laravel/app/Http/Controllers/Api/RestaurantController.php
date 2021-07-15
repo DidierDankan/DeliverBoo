@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 
 use App\Models\Restaurant;
 use App\Models\Food;
+use App\Models\Order;
 
 class RestaurantController extends Controller
 {
     //
     public function index() {
 
+
         $restaurants = Restaurant::paginate(4);
+
 
         return response()->json($restaurants);
     }
@@ -32,4 +35,6 @@ class RestaurantController extends Controller
 
         return response()->json($obj_food_restaurant);
     }
+
+    
 }
