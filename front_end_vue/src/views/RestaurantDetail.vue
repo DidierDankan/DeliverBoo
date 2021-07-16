@@ -53,7 +53,13 @@
                 v-if="isInCart(food.id)"
                 >Rimuovi</a
               >
-              <a class="btn" @click="addToCart(food.id)" v-else>Aggiungi</a>
+              <a
+                class="btn"
+                v-show="food.visibility"
+                @click="addToCart(food.id)"
+                v-else
+                >Aggiungi</a
+              >
             </div>
           </div>
           <div class="cart">
