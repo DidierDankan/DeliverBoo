@@ -284,6 +284,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       flex-basis: 80%;
+      margin: 0;
 
       .card {
         flex-basis: calc(100% / 2 - 60px);
