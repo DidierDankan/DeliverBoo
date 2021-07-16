@@ -93,6 +93,10 @@ a {
   background: #43ccbc;
 }
 
+.card .tipologia:hover {
+  background-color: #d0eb99;
+}
+
 .tipologia p {
   font-size: 20px;
   font-weight: bold;
