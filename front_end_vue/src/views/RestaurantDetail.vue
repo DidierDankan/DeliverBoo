@@ -47,7 +47,7 @@
               <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
               <!-- <a class="btn" href="" v-show="food.visibility">Aggiungi</a> -->
 
-              <a
+              <!-- <a
                 class="btn"
                 @click="removeFromCart(food.id)"
                 v-if="isInCart(food.id)"
@@ -59,12 +59,22 @@
                 @click="addToCart(food.id)"
                 v-else
                 >Aggiungi</a
-              >
+              > -->
+
+              <AddBtn
+                v-show="food.visibility"
+                @click="forceRerender()"
+                :key="componentKey"
+                :items="items"
+                :food="food"
+              />
             </div>
           </div>
           <div class="cart">
-            <a class="btn btn-cart" href="">Vai alla cassa</a>
-            <Cart :key="componentKey" />
+            <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
+              >Vai alla cassa</a
+            >
+            <Cart @click="forceRerender()" :key="componentKey" />
             <!-- <div>Il tuo carrello è vuoto</div> -->
           </div>
         </div>
@@ -76,6 +86,9 @@
 <script>
 import axios from "axios";
 import Cart from "./components/Cart.vue";
+
+import AddBtn from "./components/AddBtn.vue";
+
 // const items = Object.freeze(
 //   axios
 //     .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
@@ -93,6 +106,7 @@ export default {
 
   components: {
     Cart,
+    AddBtn,
   },
 
   data() {
@@ -114,6 +128,7 @@ export default {
   updated() {
     console.log(this.cart);
     console.log(localStorage.getItem("cart"));
+    // this.resetBasket();
     // this.reactiveBtns();
   },
 
@@ -164,6 +179,28 @@ export default {
         localStorage.setItem("cart", JSON.stringify([]));
       }
       this.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+    resetBasket() {
+      // const restaurants_id = [];
+
+      // this.cart.forEach((element) => {
+      //   if (!restaurants_id.includes(element.restaurant_id))
+      //     restaurants_id.push(element.restaurant_id);
+      // });
+
+      // restaurants_id.sort();
+
+      if (this.cart[0]) {
+        this.cart.forEach((element) => {
+          if (this.cart[0].restaurant_id != element.restaurant_id) {
+            console.log(
+              "cazzi",
+              this.cart[0].restaurant_id,
+              element.restaurant_id
+            );
+          }
+        });
+      }
     },
   },
 };
