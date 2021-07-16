@@ -1,14 +1,23 @@
 <template>
   <div>
     <div class="detail container">
-
       <div class="image">
-        <img v-show="restaurant.cover" :src="`http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`" :alt="restaurant.name">
+        <img
+          v-show="restaurant.cover"
+          :src="
+            `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+          "
+          :alt="restaurant.name"
+        />
       </div>
 
       <div class="info">
         <h1>{{ restaurant.name }}</h1>
-        <div><span v-for="(type, index) in restaurant.types" :key="index">{{ type.type }} ° </span></div>
+        <div>
+          <span v-for="(type, index) in restaurant.types" :key="index"
+            >{{ type.type }} °
+          </span>
+        </div>
         <div>
           <span>{{ restaurant.address }}, </span>
           <span>{{ restaurant.city }}, </span>
@@ -22,17 +31,35 @@
         <h1>Cibi</h1>
         <div class="flex">
           <div class="cards">
-            <div class="card" :class="{ notAvailable: !food.visibility }" v-for="(food, index) in foods" :key="index">
+            <div
+              class="card"
+              :class="{ notAvailable: !food.visibility }"
+              v-for="(food, index) in items"
+              :key="index"
+            >
               <div class="mb">{{ food.title }}</div>
-              <div class="text-color mb" v-if="food.visibility === 0">Non Disponibile</div>
-              <div class="text-color mb overflow" v-else>{{ food.description }}</div>
+              <div class="text-color mb" v-if="food.visibility === 0">
+                Non Disponibile
+              </div>
+              <div class="text-color mb overflow" v-else>
+                {{ food.description }}
+              </div>
               <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
-              <a class="btn" href="" v-show="food.visibility">Aggiungi</a>
+              <!-- <a class="btn" href="" v-show="food.visibility">Aggiungi</a> -->
+
+              <a
+                class="btn"
+                @click="removeFromCart(food.id)"
+                v-if="isInCart(food.id)"
+                >Rimuovi</a
+              >
+              <a class="btn" @click="addToCart(food.id)" v-else>Aggiungi</a>
             </div>
           </div>
           <div class="cart">
             <a class="btn btn-cart" href="">Vai alla cassa</a>
-            <div>Il tuo carrello è vuoto</div>
+            <Cart :key="componentKey" />
+            <!-- <div>Il tuo carrello è vuoto</div> -->
           </div>
         </div>
       </div>
@@ -42,17 +69,46 @@
 
 <script>
 import axios from "axios";
+import Cart from "./components/Cart.vue";
+// const items = Object.freeze(
+//   axios
+//     .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
+//     .then((res) => {
+//       //   const restaurantDetail = Object.assign({}, res.data);
+//       return res.data[1];
+//       // this.items = res.data[1];
+//       // console.log(res.data[1]);
+//       //   console.log(this.restaurantDetail);
+//     })
+// );
+
 export default {
   name: "RestaurantDetail",
+
+  components: {
+    Cart,
+  },
 
   data() {
     return {
       restaurant: [],
-      foods: [],
+      // foods: [],
+      cart: [],
+      items: [],
+      componentKey: 0,
     };
   },
   created() {
+    // this.items;
     this.getRestaurant();
+    console.log(this.items);
+    this.reactiveBtns();
+    // console.log(this.foods);
+  },
+  updated() {
+    console.log(this.cart);
+    console.log(localStorage.getItem("cart"));
+    // this.reactiveBtns();
   },
 
   methods: {
@@ -62,10 +118,46 @@ export default {
         .then((res) => {
           //   const restaurantDetail = Object.assign({}, res.data);
           this.restaurant = res.data[0];
-          this.foods = res.data[1];
-          console.log(res.data[0]);
+          this.items = res.data[1];
+          // this.items = res.data[1];
+          // console.log(res.data[1]);
           //   console.log(this.restaurantDetail);
         });
+    },
+    isInCart(itemId) {
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+      const cartItem = this.cart.find(({ id }) => id === itemId);
+      return Boolean(cartItem);
+    },
+    addToCart(itemId) {
+      const item = this.items.find(({ id }) => id === itemId);
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      cartItems.push(item);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.forceRerender();
+    },
+    removeFromCart(itemId) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      const index = cartItems.findIndex(({ id }) => id === itemId);
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.forceRerender();
+    },
+    forceRerender() {
+      this.componentKey += 1;
+    },
+    reactiveBtns() {
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+      this.cart = JSON.parse(localStorage.getItem("cart"));
     },
   },
 };
@@ -131,7 +223,7 @@ export default {
     justify-content: space-between;
     align-content: center;
     flex-direction: row-reverse;
-    
+
     .image img {
       width: 300px;
       margin-right: 1rem;
