@@ -34,7 +34,9 @@
             <div
               class="card"
               :class="{ notAvailable: !food.visibility }"
+
               v-for="(food, index) in items"
+
               :key="index"
             >
               <div class="mb">{{ food.title }}</div>
@@ -98,11 +100,12 @@
 
   </div>
 
-  <Loader v-else/>
+  <Loader v-else />
 </template>
 
 <script>
 import axios from "axios";
+
 
 import Cart from "./components/Cart.vue";
 import Loader from './components/Loader.vue';
@@ -119,6 +122,7 @@ import AddBtn from "./components/AddBtn.vue";
 //       //   console.log(this.restaurantDetail);
 //     })
 // );
+
 
 export default {
   name: "RestaurantDetail",
@@ -230,10 +234,12 @@ export default {
 <style lang="scss" scoped>
 .image img {
   width: 100%;
+  margin-top: 20px;
 }
 
 .info {
   margin-left: 1rem;
+  margin-top: 20px;
 }
 
 .foods {
@@ -345,8 +351,6 @@ export default {
     justify-content: space-between;
     align-content: center;
     flex-direction: row-reverse;
-
-    
     .image {
       width: 480px;
       height: 260px;

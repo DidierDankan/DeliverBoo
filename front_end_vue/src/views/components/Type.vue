@@ -1,4 +1,5 @@
 <template>
+
   <h1>In quale tipo di ristorante vuoi ordinare?</h1>
   <div class="container">
     <div class="card-container">
@@ -42,7 +43,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h1 {
   margin: 30px 0;
   text-align: center;

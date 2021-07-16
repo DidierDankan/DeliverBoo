@@ -15,7 +15,7 @@ class RestaurantController extends Controller
     public function index() {
 
 
-        $restaurants = Restaurant::paginate(4);
+        $restaurants = Restaurant::paginate(6);
 
 
         return response()->json($restaurants);
