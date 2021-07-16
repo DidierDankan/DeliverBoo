@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-header">
     <router-link class="links brand" to="/">DeliveBoo</router-link>
     <div id="nav">
       <router-link class="links" to="/">Home</router-link> |
@@ -16,14 +16,21 @@ export default {
 </script>
 
 <style lang="scss">
-.links {
-  text-decoration: none;
-  color: #00ccbc;
-}
-.brand {
-  font-size: 2rem;
-}
-#nav {
+.container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
+  background-color: #00ccbc;
+  .links {
+    text-decoration: none;
+    color: #fff;
+  }
+  .brand {
+    font-size: 2rem;
+  }
+  #nav {
+    padding: 10px;
+  }
 }
 </style>

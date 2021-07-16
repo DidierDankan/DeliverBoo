@@ -3,76 +3,87 @@
     <Hero />
 
     <Type />
+    <div class="bg-container">
+      <div class="main-container">
+        <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
+        <div class="cards" v-if="restaurants">
+          <div
+            class="card"
+            v-for="restaurant in restaurants"
+            :key="restaurant.id"
+          >
+            <img
+              v-if="restaurant.cover"
+              :src="
+                `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+              "
+              :alt="restaurant.name"
+            />
+            <img
+              v-else
+              src="https://consumer-component-library.roocdn.com/23.0.0/static/images/placeholder.svg"
+              :alt="restaurant.name"
+            />
 
-    <div class="main-container">
-      <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
-      <div class="cards" v-if="restaurants">
-        <div
-          class="card"
-          v-for="restaurant in restaurants"
-          :key="restaurant.id"
-        >
-          <img
-            v-if="restaurant.cover"
-            :src="
-              `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
-            "
-            :alt="restaurant.name"
-          />
-
-          <h3 class="restaurant-title">
-            {{ restaurant.name }}
-          </h3>
-          <!-- <p>
+            <h3 class="restaurant-title">
+              {{ restaurant.name }}
+            </h3>
+            <!-- <p>
             {{ restaurant.address }}
           </p> -->
 
-          <div class="layer">
             <router-link
               class="link"
-              :to="{ name: 'restaurant-detail', params: { id: restaurant.id } }"
+              :to="{
+                name: 'restaurant-detail',
+                params: { id: restaurant.id },
+              }"
             >
-              Visit
             </router-link>
+            <div class="layer"></div>
           </div>
         </div>
-      </div>
 
-      <!-- Loading... -->
-      <Loader v-else/>
+        <!-- Loading... -->
+        <Loader v-else />
 
-      <section class="naviga">
-        <!-- <button
+        <section class="naviga">
+          <!-- <button
           v-show="pages.current > 1"
           @click="getRestaurants(pages.current - 1)"
         >
           prev
         </button> -->
-        <div
-          class="btn-navi"
-          v-for="i in pages.last"
-          :key="`page${i}`"
-          @click="getRestaurants(i)"
-        >
-          <!-- {{ i }} -->
-          <div :class="{ 'active-page': i == pages.current }"></div>
-        </div>
-        <!-- <button
+          <div
+            class="btn-navi"
+            v-for="i in pages.last"
+            :key="`page${i}`"
+            @click="getRestaurants(i)"
+          >
+            <!-- {{ i }} -->
+            <div :class="{ 'active-page': i == pages.current }"></div>
+          </div>
+          <!-- <button
           v-show="pages.current < pages.last"
           @click="getRestaurants(pages.current + 1)"
         >
           next
         </button> -->
-      </section>
+        </section>
+      </div>
     </div>
+    <Workers />
+    <Footer />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Hero from "./components/Hero.vue";
-import Loader from './components/Loader.vue';
-import Type from './components/Type.vue';
+import Loader from "./components/Loader.vue";
+import Type from "./components/Type.vue";
+import Workers from "./components/Workers.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "Restaurants",
@@ -80,6 +91,8 @@ export default {
     Hero,
     Loader,
     Type,
+    Workers,
+    Footer,
   },
 
   data() {
@@ -118,10 +131,13 @@ export default {
   box-sizing: border-box;
 }
 
-.main-container {
-  width: 100%;
+.bg-container {
   background: #ffeae4;
-  padding: 20px;
+}
+.main-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 40px 0px 40px 0px;
   h1 {
     margin-bottom: 20px;
     text-align: center;
@@ -138,12 +154,13 @@ export default {
     padding: 5px;
     margin-bottom: 5px;
     cursor: pointer;
-    transition: all 1s;
-    &:hover .layer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 10px 6px -6px #777;
+    transition: transform 0.4s;
+    box-shadow: 0 10px 6px -6px #777;
+    &:hover {
+      // display: flex;
+      // justify-content: center;
+      // align-items: center;
+      transform: scale(1.05);
     }
     img {
       width: 100%;
@@ -157,31 +174,36 @@ export default {
       color: #2e3333;
       font-weight: 600;
     }
-    .layer {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      display: none;
-      padding: 5px;
-      background: rgba(196, 192, 192, 0.45);
-      // border: 1px solid rgb(221, 203, 203);
-      border-radius: 5px;
-    }
+    // .layer {
+    //   position: absolute;
+    //   left: 0;
+    //   right: 0;
+    //   top: 0;
+    //   bottom: 0;
+    //   display: none;
+    //   padding: 5px;
+    //   background: rgba(196, 192, 192, 0.45);
+    //   border-radius: 5px;
+    // }
   }
 }
 .link {
-  display: flex;
+  // display: flex;
   width: 100%;
   height: 100%;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 
-  text-decoration: none;
-  font-size: 1.5rem;
-  color: #fff;
-  font-weight: 600;
+  // text-decoration: none;
+  // font-size: 1.5rem;
+  // color: #fff;
+  // font-weight: 600;
 }
 
 .naviga {
@@ -199,6 +221,7 @@ export default {
     margin: 5px;
     border-radius: 50%;
     border: 2px solid #00ccbc;
+    cursor: pointer;
     .active-page {
       width: 10px;
       height: 10px;
