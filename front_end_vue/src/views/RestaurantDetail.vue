@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="restaurant.name">
     <div class="detail container">
       <div class="image">
         <img
@@ -80,13 +80,32 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <!-- <div class="modal" v-for="(food, index) in foods" :key="index">
+      <div class="title">
+        <h3>{{ food.title }}</h3>
+      </div>
+      <div class="info-modal">
+        <div class="mb-2"><span><strong>Descrizione: </strong></span>{{ food.description }}</div>
+        <div><span><strong>Ingredienti: </strong></span>{{ food.ingredients }}</div>
+      </div>
+      <div class="button">
+        <a class="btn btn-cart left" href="">Cancella</a>
+        <a class="btn btn-cart right" href="">TOTALE {{ food.price }} €</a>
+      </div>
+    </div> -->
+
   </div>
+
+  <Loader v-else/>
 </template>
 
 <script>
 import axios from "axios";
-import Cart from "./components/Cart.vue";
 
+import Cart from "./components/Cart.vue";
+import Loader from './components/Loader.vue';
 import AddBtn from "./components/AddBtn.vue";
 
 // const items = Object.freeze(
@@ -107,6 +126,7 @@ export default {
   components: {
     Cart,
     AddBtn,
+    Loader,
   },
 
   data() {
@@ -261,6 +281,64 @@ export default {
   text-decoration: none;
 }
 
+// MODAL
+.modal {
+  max-width: 375px;
+  height: 420px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 5px red;
+
+  .title {
+    height: 60px;
+    padding-top: 20px;
+  }
+
+  .info-modal {
+    flex-grow: 1;
+    border-top: 1px solid #e8ebeb;
+    border-bottom: 1px solid #e8ebeb;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .button {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+
+    .left {
+      min-width: 80px;
+      border: 1px solid #e8ebeb;
+      background: #fff;
+      color: #00ccbc;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
+      margin-right: 20px;
+    }
+
+    .right {
+      min-width: 230px;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
+    }
+  }
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}
+
 @media screen and (min-width: 768px) {
   .detail {
     display: flex;
@@ -268,9 +346,18 @@ export default {
     align-content: center;
     flex-direction: row-reverse;
 
-    .image img {
-      width: 300px;
+    
+    .image {
+      width: 480px;
+      height: 260px;
+      overflow: hidden;
+
       margin-right: 1rem;
+
+      img {
+        object-fit: cover;
+        object-position: center;
+      }
     }
   }
 
@@ -322,7 +409,9 @@ export default {
         margin: 50px 0;
       }
     }
+
   }
+
   .overflow {
     height: 60px;
     overflow: hidden;

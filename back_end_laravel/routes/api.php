@@ -23,4 +23,5 @@ Route::namespace('Api')->group(function() {
     Route::get('restaurants/{id}', 'RestaurantController@show');
     // Route::get('orders/{id}', 'OrderController@store');
 
+    Route::get('/types', 'TypeController@index');
 });

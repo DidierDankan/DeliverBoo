@@ -1,6 +1,9 @@
 <template>
   <div class="restaurants">
     <Hero />
+
+    <Type />
+
     <div class="main-container">
       <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
       <div class="cards" v-if="restaurants">
@@ -36,18 +39,7 @@
       </div>
 
       <!-- Loading... -->
-      <div class="loading" v-else>
-        <div class="loader">
-          <div class="duo duo1">
-            <div class="dot dot-a"></div>
-            <div class="dot dot-b"></div>
-          </div>
-          <div class="duo duo2">
-            <div class="dot dot-a"></div>
-            <div class="dot dot-b"></div>
-          </div>
-        </div>
-      </div>
+      <Loader v-else/>
 
       <section class="naviga">
         <!-- <button
@@ -79,10 +71,15 @@
 <script>
 import axios from "axios";
 import Hero from "./components/Hero.vue";
+import Loader from './components/Loader.vue';
+import Type from './components/Type.vue';
+
 export default {
   name: "Restaurants",
   components: {
     Hero,
+    Loader,
+    Type,
   },
 
   data() {
@@ -168,7 +165,7 @@ export default {
       bottom: 0;
       display: none;
       padding: 5px;
-      background: rgba(252, 238, 238, 0.3);
+      background: rgba(196, 192, 192, 0.45);
       // border: 1px solid rgb(221, 203, 203);
       border-radius: 5px;
     }
@@ -211,102 +208,6 @@ export default {
   }
 }
 
-//loader
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-}
-.loader {
-  position: relative;
-  width: 80px;
-  margin: 100px auto;
-}
-
-.duo {
-  height: 20px;
-  width: 50px;
-  background: hsla(0, 0%, 0%, 0);
-  position: absolute;
-}
-
-.duo,
-.dot {
-  animation-duration: 0.8s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.duo1 {
-  left: 0;
-}
-
-.duo2 {
-  left: 30px;
-}
-
-.dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: #333;
-  position: absolute;
-}
-
-.dot-a {
-  left: 0px;
-}
-
-.dot-b {
-  right: 0px;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-
-@keyframes onOff {
-  0% {
-    opacity: 0;
-  }
-  49% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.duo1 {
-  animation-name: spin;
-}
-
-.duo2 {
-  animation-name: spin;
-  animation-direction: reverse;
-}
-
-.duo2 .dot-b {
-  animation-name: onOff;
-}
-
-.duo1 .dot-a {
-  opacity: 0;
-  animation-name: onOff;
-  animation-direction: reverse;
-}
 //break points
 @media screen and (min-width: 768px) {
   .cards {
