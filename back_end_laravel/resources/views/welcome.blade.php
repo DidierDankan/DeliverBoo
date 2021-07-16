@@ -35,7 +35,7 @@
                         <h1 class="mb-5 d-block text-info text-center">DeliveBoo Management System</h1>
             
                         @auth
-                            <a href="{{route('admin.home')}}" class="btn-lg btn bg-primary text-sm text-white">DASHBOARD</a>
+                            <div class="dash d-flex justify-content-center"><a href="{{route('admin.home')}}" class="btn-lg btn bg-primary text-sm text-white">DASHBOARD</a></div>
                         @else
                             <div class="access-options d-flex justify-content-center">
                                 <a href="{{ route('login') }}" class="btn bg-primary text-sm text-white mr-2 shadow-sm rounded">Log in</a>
