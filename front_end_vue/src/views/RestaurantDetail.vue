@@ -71,9 +71,9 @@
             </div>
           </div>
           <div class="cart">
-            <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
+            <!-- <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
               >Vai alla cassa</a
-            >
+            > -->
             <Cart @click="forceRerender()" :key="componentKey" />
             <!-- <div>Il tuo carrello è vuoto</div> -->
           </div>
@@ -198,6 +198,7 @@ export default {
               this.cart[0].restaurant_id,
               element.restaurant_id
             );
+            alert("attenzione non puoi ordinare da 2 ristoranti");
           }
         });
       }
