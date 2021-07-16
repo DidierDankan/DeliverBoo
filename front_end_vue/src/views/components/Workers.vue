@@ -44,7 +44,7 @@
 
             <div class="btn">
               <button>
-                <a href="http://127.0.0.1:8000/" target="_blank">
+                <a href="http://127.0.0.1:8000/register" target="_blank">
                   Diventa nostro partner
                 </a>
               </button>
