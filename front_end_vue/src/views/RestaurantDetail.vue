@@ -39,7 +39,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal" v-for="(food, index) in foods" :key="index">
+    <!-- <div class="modal" v-for="(food, index) in foods" :key="index">
       <div class="title">
         <h3>{{ food.title }}</h3>
       </div>
@@ -48,10 +48,10 @@
         <div><span><strong>Ingredienti: </strong></span>{{ food.ingredients }}</div>
       </div>
       <div class="button">
-        <div class="mr"><a class="btn btn-cart left" href="">Cancella</a></div>
-        <div><a class="btn btn-cart right" href="">TOTALE {{ food.price }} €</a></div>
+        <a class="btn btn-cart left" href="">Cancella</a>
+        <a class="btn btn-cart right" href="">TOTALE {{ food.price }} €</a>
       </div>
-    </div>
+    </div> -->
 
   </div>
 
@@ -149,8 +149,8 @@ export default {
 
 // MODAL
 .modal {
-  width: 90vw;
-  height: 90vh;
+  max-width: 375px;
+  height: 420px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -181,27 +181,24 @@ export default {
     align-items: center;
     margin: 0 20px;
 
-    .mr {
+    .left {
+      min-width: 80px;
+      border: 1px solid #e8ebeb;
+      background: #fff;
+      color: #00ccbc;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
       margin-right: 20px;
-
-      .left {
-        min-width: 28vw;
-        border: 1px solid #e8ebeb;
-        background: #fff;
-        color: #00ccbc;
-      }
     }
 
     .right {
-      min-width: 48vw;
+      min-width: 230px;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
     }
   }
-}
-
-.btn-cart {
-  display: inline-block;
-  text-align: center;
-  padding: 15px;
 }
 
 .mb-2 {
@@ -274,7 +271,9 @@ export default {
         margin: 50px 0;
       }
     }
+
   }
+
   .overflow {
     height: 60px;
     overflow: hidden;
