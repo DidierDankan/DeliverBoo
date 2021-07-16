@@ -1,6 +1,9 @@
 <template>
   <div>
     <h2>Il tuo carrello:</h2>
+    <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
+      >Vai alla cassa</a
+    >
 
     <div v-if="cart.length > 0" class="items">
       <div v-for="(c, index) of cart" :key="c.id">
@@ -34,6 +37,29 @@ export default {
         localStorage.setItem("cart", JSON.stringify([]));
       }
       this.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+    resetBasket() {
+      // const restaurants_id = [];
+
+      // this.cart.forEach((element) => {
+      //   if (!restaurants_id.includes(element.restaurant_id))
+      //     restaurants_id.push(element.restaurant_id);
+      // });
+
+      // restaurants_id.sort();
+
+      if (this.cart[0]) {
+        this.cart.forEach((element) => {
+          if (this.cart[0].restaurant_id != element.restaurant_id) {
+            console.log(
+              "cazzi",
+              this.cart[0].restaurant_id,
+              element.restaurant_id
+            );
+            alert("attenzione non puoi ordinare da 2 ristoranti");
+          }
+        });
+      }
     },
   },
   beforeMount() {
