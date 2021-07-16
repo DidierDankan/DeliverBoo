@@ -55,6 +55,7 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 
   <Loader v-else />
@@ -63,11 +64,13 @@
 <script>
 import axios from "axios";
 import Loader from "./components/Loader.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "RestaurantDetail",
   components: {
     Loader,
+    Footer,
   },
   data() {
     return {

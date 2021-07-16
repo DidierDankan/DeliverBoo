@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-container">
+  <div class="bg-container2">
     <div class="footer-container">
       <h3>Grazie per aver scelto il servizio di DeliveBoo</h3>
     </div>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.bg-container {
+.bg-container2 {
   background: #434848;
   height: 65px;
   .footer-container {
