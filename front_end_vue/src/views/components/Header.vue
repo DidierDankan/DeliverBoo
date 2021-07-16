@@ -6,7 +6,10 @@
         <router-link class="links" to="/">Home</router-link> |
         <router-link class="links" to="/about">About</router-link> |
         <router-link class="links" to="/restaurants">Restaurants</router-link>
+        <router-link class="links" to="/cart">cart</router-link>
       </div>
+
+ 
     </div>
   </div>
 </template>

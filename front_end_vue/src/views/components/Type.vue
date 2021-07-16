@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <h1>In quale tipo di ristorante vuoi ordinare?</h1>
-    <div class="container">
-      <div class="card-container">
-        <div class="card" v-for="(tipo, index) in listTypes" :key="index">
-          <label>
-            <input type="checkbox" :name="tipo.type" />{{ tipo.type }}
-          </label>
+
+  <h1>In quale tipo di ristorante vuoi ordinare?</h1>
+  <div class="container">
+    <div class="card-container">
+      <label class="card" v-for="(tipo, index) in listTypes" :key="index">
+        <input type="checkbox" class="checkbox hidden" />
+        <div class="tipologia">
+          <p>{{ tipo.type }}</p>
         </div>
-      </div>
+      </label>
     </div>
   </div>
 </template>
@@ -53,6 +53,9 @@ h1 {
 a {
   text-decoration: none;
 }
+.hidden {
+  display: none;
+}
 .container {
   width: 355px;
   margin: 0 auto 30px;
@@ -62,14 +65,13 @@ a {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  align-content: center;
+}
+.card {
+  margin: 7px;
 }
 
-.card {
-  height: 40px;
-  padding: 7px;
-  margin: 7px;
+.card .tipologia {
+  padding: 20px;
   background-color: #d2d8df;
   display: flex;
   flex-wrap: wrap;
@@ -77,7 +79,8 @@ a {
   justify-content: center;
   align-items: center;
   align-content: center;
-  border-radius: 10px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 .card label {
@@ -86,6 +89,20 @@ a {
   font-weight: bold;
   cursor: pointer;
 }
+
+.card .checkbox:checked ~ .tipologia {
+  background: #43ccbc;
+}
+
+.card .tipologia:hover {
+  background-color: #d0eb99;
+}
+
+.tipologia p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 /* Media Queries */
 @media (min-width: 768px) and (max-width: 1170px) {
   .container {
