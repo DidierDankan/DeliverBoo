@@ -1,14 +1,23 @@
 <template>
   <div v-if="restaurant.name">
     <div class="detail container">
-
       <div class="image">
-        <img v-show="restaurant.cover" :src="`http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`" :alt="restaurant.name">
+        <img
+          v-show="restaurant.cover"
+          :src="
+            `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+          "
+          :alt="restaurant.name"
+        />
       </div>
 
       <div class="info">
         <h1>{{ restaurant.name }}</h1>
-        <div><span v-for="(type, index) in restaurant.types" :key="index">{{ type.type }} ° </span></div>
+        <div>
+          <span v-for="(type, index) in restaurant.types" :key="index"
+            >{{ type.type }} °
+          </span>
+        </div>
         <div>
           <span>{{ restaurant.address }}, </span>
           <span>{{ restaurant.city }}, </span>
@@ -22,10 +31,19 @@
         <h1>Cibi</h1>
         <div class="flex">
           <div class="cards">
-            <div class="card" :class="{ notAvailable: !food.visibility }" v-for="(food, index) in foods" :key="index">
+            <div
+              class="card"
+              :class="{ notAvailable: !food.visibility }"
+              v-for="(food, index) in foods"
+              :key="index"
+            >
               <div class="mb">{{ food.title }}</div>
-              <div class="text-color mb" v-if="food.visibility === 0">Non Disponibile</div>
-              <div class="text-color mb overflow" v-else>{{ food.description }}</div>
+              <div class="text-color mb" v-if="food.visibility === 0">
+                Non Disponibile
+              </div>
+              <div class="text-color mb overflow" v-else>
+                {{ food.description }}
+              </div>
               <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
               <a class="btn" href="" v-show="food.visibility">Aggiungi</a>
             </div>
@@ -39,12 +57,12 @@
     </div>
   </div>
 
-  <Loader v-else/>
+  <Loader v-else />
 </template>
 
 <script>
 import axios from "axios";
-import Loader from './components/Loader.vue';
+import Loader from "./components/Loader.vue";
 
 export default {
   name: "RestaurantDetail",
@@ -80,10 +98,12 @@ export default {
 <style lang="scss" scoped>
 .image img {
   width: 100%;
+  margin-top: 20px;
 }
 
 .info {
   margin-left: 1rem;
+  margin-top: 20px;
 }
 
 .foods {
@@ -137,7 +157,7 @@ export default {
     justify-content: space-between;
     align-content: center;
     flex-direction: row-reverse;
-    
+
     .image {
       width: 480px;
       height: 260px;
