@@ -141,8 +141,8 @@ export default {
   .card {
     width: 100%;
     position: relative;
-    padding: 5px;
     margin-bottom: 5px;
+    background: #00ccbc;
     cursor: pointer;
     transition: transform 0.4s;
     box-shadow: 0 10px 6px -6px #777;
@@ -152,14 +152,15 @@ export default {
     img {
       width: 100%;
       height: 150px;
-      border-radius: 5px;
       object-fit: cover;
       object-position: top;
     }
     .restaurant-title {
       text-align: left;
-      color: #2e3333;
+      color: #f4ffff;
       font-weight: 600;
+      margin-left: 5px;
+      padding: 5px;
     }
   }
 }

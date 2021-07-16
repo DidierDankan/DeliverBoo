@@ -4,8 +4,8 @@
     <div class="container">
       <div class="card-container">
         <div class="card" v-for="(tipo, index) in listTypes" :key="index">
-          <label
-            ><input type="checkbox" :name="tipo.type" />{{ tipo.type }}
+          <label>
+            <input type="checkbox" :name="tipo.type" />{{ tipo.type }}
           </label>
         </div>
       </div>
@@ -43,11 +43,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h1 {
-    margin: 30px 0;
-    text-align: center;
-    color: #2e3333;
+  margin: 30px 0;
+  text-align: center;
+  color: #2e3333;
 }
 
 a {
