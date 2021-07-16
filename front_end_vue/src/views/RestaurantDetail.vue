@@ -276,8 +276,9 @@ export default {
 
   .flex {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0 1rem;
+    position: relative;
 
     .cards {
       display: flex;
@@ -305,9 +306,9 @@ export default {
       display: flex;
       flex-direction: column;
       text-align: center;
-      position: relative;
+      position: absolute;
       right: 0;
-      top: -90px;
+      top: -100px;
       border-radius: 5px;
       border: 1px solid #e8ebeb;
       height: max-content;
