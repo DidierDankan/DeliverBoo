@@ -30,8 +30,9 @@ export default {
     .links {
       text-decoration: none;
       color: #fff;
+      transition: color 0.3s;
       &:hover {
-        color: rgb(228, 222, 222);
+        color: rgb(27, 27, 27);
       }
     }
     .brand {
