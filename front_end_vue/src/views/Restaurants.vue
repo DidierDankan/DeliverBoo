@@ -28,9 +28,6 @@
             <h3 class="restaurant-title">
               {{ restaurant.name }}
             </h3>
-            <!-- <p>
-            {{ restaurant.address }}
-          </p> -->
 
             <router-link
               class="link"
@@ -40,7 +37,6 @@
               }"
             >
             </router-link>
-            <div class="layer"></div>
           </div>
         </div>
 
@@ -125,12 +121,6 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .bg-container {
   background: #ffeae4;
 }
@@ -157,9 +147,6 @@ export default {
     transition: transform 0.4s;
     box-shadow: 0 10px 6px -6px #777;
     &:hover {
-      // display: flex;
-      // justify-content: center;
-      // align-items: center;
       transform: scale(1.05);
     }
     img {
@@ -174,36 +161,17 @@ export default {
       color: #2e3333;
       font-weight: 600;
     }
-    // .layer {
-    //   position: absolute;
-    //   left: 0;
-    //   right: 0;
-    //   top: 0;
-    //   bottom: 0;
-    //   display: none;
-    //   padding: 5px;
-    //   background: rgba(196, 192, 192, 0.45);
-    //   border-radius: 5px;
-    // }
   }
 }
 .link {
-  // display: flex;
   width: 100%;
   height: 100%;
-  // justify-content: center;
-  // align-items: center;
   display: inline-block;
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-
-  // text-decoration: none;
-  // font-size: 1.5rem;
-  // color: #fff;
-  // font-weight: 600;
 }
 
 .naviga {
@@ -211,7 +179,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 5px;
+  padding: 15px;
   .btn-navi {
     display: flex;
     justify-content: center;
