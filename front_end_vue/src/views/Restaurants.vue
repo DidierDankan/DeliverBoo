@@ -145,7 +145,7 @@ export default {
     background: #00ccbc;
     cursor: pointer;
     transition: transform 0.4s;
-    box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px rgba(119, 119, 119, 0.3);
     &:hover {
       transform: scale(1.05);
     }
