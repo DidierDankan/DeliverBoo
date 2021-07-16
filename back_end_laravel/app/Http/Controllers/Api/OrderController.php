@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
+use Braintree\Gateway;
 
 class OrderController extends Controller
 {
-    //
-
-    public function store(Request $request){
-
-        $data = $request->all();
-
-        dd($data);
-
+    public function generate(Request $request, Gateway $gateway)
+    {
+        $token = $gateway->clientToken()->generate();
+        $data = [
+            'token' => $token,
+        ];
+        return response()->json($data,200);
+    }
+    public function make_payment(Request $request, Gateway $gateway)
+    {
+        // $result = $gateway->transaction()->sale()
+        // return ;
     }
 }

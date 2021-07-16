@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ Route::namespace('Api')->group(function() {
     Route::get('/restaurants', 'RestaurantController@index');
     Route::get('restaurants/{id}', 'RestaurantController@show');
     // Route::get('orders/{id}', 'OrderController@store');
+    // api for braintree
+    Route::get('orders/generate', [OrderController::class, 'generate']);
+    Route::post('orders/payment', [OrderController::class, 'make_payment']);
 
     Route::get('/types', 'TypeController@index');
 });
