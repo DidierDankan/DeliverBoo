@@ -1,9 +1,7 @@
 <template>
   <div class="container">
-    <a class="btn" @click="removeFromCart(food.id)" v-if="isInCart(food.id)"
-      >Rimuovi</a
-    >
-    <a class="btn" v-show="food.visibility" @click="addToCart(food.id)" v-else
+    <a class="btn" @click="removeFromCart(food.id)">Rimuovi</a>
+    <a class="btn" v-show="food.visibility" @click="addToCart(food)"
       >Aggiungi</a
     >
   </div>
@@ -37,8 +35,8 @@ export default {
       const cartItem = this.cart.find(({ id }) => id === itemId);
       return Boolean(cartItem);
     },
-    addToCart(itemId) {
-      const item = this.items.find(({ id }) => id === itemId);
+    addToCart(item) {
+      // const item = this.items.find(({ id }) => id === itemId);
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
