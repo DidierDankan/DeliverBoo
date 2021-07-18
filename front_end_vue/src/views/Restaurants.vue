@@ -2,70 +2,73 @@
   <div class="restaurants">
     <Hero />
 
-    <Type />
+    <Type :key="reRender" @click="getRestaurants()" />
+
     <div class="bg-container">
       <div class="main-container">
         <h1>I tuoi piatti preferiti, consegnati da noi.</h1>
-        <div class="cards" v-if="restaurants">
-          <div
-            class="card"
-            v-for="restaurant in restaurants"
-            :key="restaurant.id"
-          >
-            <img
-              v-if="restaurant.cover"
-              :src="
-                `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
-              "
-              :alt="restaurant.name"
-            />
-            <img
-              v-else
-              src="https://consumer-component-library.roocdn.com/23.0.0/static/images/placeholder.svg"
-              :alt="restaurant.name"
-            />
-
-            <h3 class="restaurant-title">
-              {{ restaurant.name }}
-            </h3>
-
-            <router-link
-              class="link"
-              :to="{
-                name: 'restaurant-detail',
-                params: { id: restaurant.id },
-              }"
+        <div v-if="restaurants.length > 0" class="results">
+          <div class="cards" v-if="restaurants">
+            <div
+              class="card"
+              v-for="restaurant in restaurants"
+              :key="restaurant.id"
             >
-            </router-link>
+              <img
+                v-if="restaurant.cover"
+                :src="
+                  `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+                "
+                :alt="restaurant.name"
+              />
+              <img
+                v-else
+                src="https://consumer-component-library.roocdn.com/23.0.0/static/images/placeholder.svg"
+                :alt="restaurant.name"
+              />
+              <h3 class="restaurant-title">
+                {{ restaurant.name }}
+              </h3>
+              <router-link
+                @click="cleanLocalTypes()"
+                class="link"
+                :to="{
+                  name: 'restaurant-detail',
+                  params: { id: restaurant.id },
+                }"
+              >
+              </router-link>
+            </div>
           </div>
-        </div>
-
-        <!-- Loading... -->
-        <Loader v-else />
-
-        <section class="naviga">
-          <!-- <button
-          v-show="pages.current > 1"
-          @click="getRestaurants(pages.current - 1)"
-        >
-          prev
-        </button> -->
-          <div
-            class="btn-navi"
-            v-for="i in pages.last"
-            :key="`page${i}`"
-            @click="getRestaurants(i)"
+          <Loader v-else />
+          <section v-show="sectionNexPrevVisibility()" class="naviga">
+            <!-- <button
+            v-show="pages.current > 1"
+            @click="getRestaurants(pages.current - 1)"
           >
-            <!-- {{ i }} -->
-            <div :class="{ 'active-page': i == pages.current }"></div>
-          </div>
-          <!-- <button
-          v-show="pages.current < pages.last"
-          @click="getRestaurants(pages.current + 1)"
-        >
-          next
-        </button> -->
-        </section>
+            prev
+          </button> -->
+            <div
+              class="btn-navi"
+              v-for="i in pages.last"
+              :key="`page${i}`"
+              @click="getRestaurants(i)"
+            >
+              <!-- {{ i }} -->
+              <div :class="{ 'active-page': i == pages.current }"></div>
+            </div>
+            <!-- <button
+            v-show="pages.current < pages.last"
+            @click="getRestaurants(pages.current + 1)"
+          >
+            next
+          </button> -->
+          </section>
+          <!-- Loading... -->
+        </div>
+        <div v-else class="message">
+          Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
+        </div>
       </div>
     </div>
     <Workers />
@@ -93,28 +96,70 @@ export default {
 
   data() {
     return {
-      restaurants: null,
+      restaurants: [],
       pages: [],
+      reRender: 0,
+      filterLocal: [],
     };
   },
   created() {
+    // this.reRenderTypes();
+    this.setFilterCache();
     this.getRestaurants();
+    console.log(localStorage.getItem("checkedTypes"));
+    console.log("vfchjasdxvfcjh", this.filterLocal);
   },
+  mounted() {
+    // this.reRenderTypes();
+  },
+
   methods: {
     getRestaurants(page = 1) {
-      axios
-        .get(`http://127.0.0.1:8000/api/restaurants?page=${page}`)
-        .then((res) => {
-          this.restaurants = res.data.data;
-          console.log(res.data.data);
-          this.pages = {
-            current: res.data.current_page,
-            last: res.data.last_page,
-          };
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (localStorage.getItem("checkedTypes") == "[]") {
+        axios
+          .get(`http://127.0.0.1:8000/api/restaurants?page=${page}`)
+          .then((res) => {
+            this.restaurants = res.data.data;
+            console.log(res.data.data);
+            this.pages = {
+              current: res.data.current_page,
+              last: res.data.last_page,
+            };
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios
+          .get(`http://127.0.0.1:8000/api/filter`, {
+            params: {
+              list: localStorage.getItem("checkedTypes"),
+            },
+          })
+          .then((res) => {
+            this.restaurants = res.data;
+            console.log(res.data);
+            // this.pages = {
+            //   current: res.data.current_page,
+            //   last: res.data.last_page,
+            // };
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
+    reRenderTypes() {
+      this.reRender += 1;
+    },
+    cleanLocalTypes() {
+      localStorage.setItem("checkedTypes", JSON.stringify([]));
+    },
+    setFilterCache() {
+      this.filterLocal = localStorage.getItem("checkedTypes");
+    },
+    sectionNexPrevVisibility() {
+      return localStorage.getItem("checkedTypes") == "[]" ? true : false;
     },
   },
 };
@@ -129,7 +174,7 @@ export default {
   margin: 0 auto;
   padding: 40px 0px 40px 0px;
   h1 {
-    margin-bottom: 20px;
+    margin-bottom: 2.5rem;
     text-align: center;
     color: #2e3333;
   }
@@ -176,6 +221,8 @@ export default {
 }
 
 .naviga {
+  margin-top: 1.5rem;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,6 +245,12 @@ export default {
       background: #00ccbc;
     }
   }
+}
+
+.message {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2rem 0 1.5rem;
 }
 
 //break points

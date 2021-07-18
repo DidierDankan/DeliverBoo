@@ -34,10 +34,9 @@
             <div
               class="card"
               :class="{ notAvailable: !food.visibility }"
-
               v-for="(food, index) in items"
-
               :key="index"
+              @click="modalVisibilityShow(food.id)"
             >
               <div class="mb">{{ food.title }}</div>
               <div class="text-color mb" v-if="food.visibility === 0">
@@ -84,20 +83,28 @@
     </div>
 
     <!-- Modal -->
-    <!-- <div class="modal" v-for="(food, index) in foods" :key="index">
+    <div
+      class="modal"
+      v-show="food.id == foodId ? true : false"
+      v-for="(food, index) in items"
+      :key="index"
+    >
       <div class="title">
         <h3>{{ food.title }}</h3>
       </div>
       <div class="info-modal">
-        <div class="mb-2"><span><strong>Descrizione: </strong></span>{{ food.description }}</div>
-        <div><span><strong>Ingredienti: </strong></span>{{ food.ingredients }}</div>
+        <div class="mb-2">
+          <span><strong>Descrizione: </strong></span>{{ food.description }}
+        </div>
+        <div>
+          <span><strong>Ingredienti: </strong></span>{{ food.ingredients }}
+        </div>
       </div>
       <div class="button">
         <a class="btn btn-cart left" href="">Cancella</a>
         <a class="btn btn-cart right" href="">TOTALE {{ food.price }} €</a>
       </div>
-    </div> -->
-
+    </div>
   </div>
 
   <Loader v-else />
@@ -106,9 +113,8 @@
 <script>
 import axios from "axios";
 
-
 import Cart from "./components/Cart.vue";
-import Loader from './components/Loader.vue';
+import Loader from "./components/Loader.vue";
 import AddBtn from "./components/AddBtn.vue";
 
 // const items = Object.freeze(
@@ -122,7 +128,6 @@ import AddBtn from "./components/AddBtn.vue";
 //       //   console.log(this.restaurantDetail);
 //     })
 // );
-
 
 export default {
   name: "RestaurantDetail",
@@ -140,6 +145,9 @@ export default {
       cart: [],
       items: [],
       componentKey: 0,
+      foodId: 0,
+
+      modalVisibility: false,
     };
   },
   created() {
@@ -226,6 +234,10 @@ export default {
           }
         });
       }
+    },
+
+    modalVisibilityShow(id) {
+      this.foodId = id;
     },
   },
 };
@@ -413,7 +425,6 @@ export default {
         margin: 50px 0;
       }
     }
-
   }
 
   .overflow {
