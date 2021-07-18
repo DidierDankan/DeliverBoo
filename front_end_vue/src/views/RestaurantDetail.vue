@@ -345,6 +345,7 @@ export default {
   }
   .cart {
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.137) 0px 3px 8px;
   }
 
   .notAvailable {
