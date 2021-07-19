@@ -249,7 +249,7 @@ export default {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
             console.log(
-              "cazzi",
+              "attenzione",
               this.cart[0].restaurant_id,
               element.restaurant_id
             );

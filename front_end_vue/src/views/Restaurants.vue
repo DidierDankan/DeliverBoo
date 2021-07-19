@@ -26,9 +26,14 @@
                 src="https://consumer-component-library.roocdn.com/23.0.0/static/images/placeholder.svg"
                 :alt="restaurant.name"
               />
-              <h3 class="restaurant-title">
-                {{ restaurant.name }}
-              </h3>
+              <div class="name-type">
+                <h3 class="restaurant-title">
+                  {{ restaurant.name }}
+                </h3>
+                <span>
+                  {{ restaurant.types }}
+                </span>
+              </div>
               <router-link
                 @click="cleanLocalTypes()"
                 class="link"

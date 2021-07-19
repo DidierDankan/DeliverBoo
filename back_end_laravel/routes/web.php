@@ -25,6 +25,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/payment', function () {
+    return view('payment_test');
+});
+
+
+
 
 
 
@@ -41,6 +47,8 @@ Route::prefix('admin')
     Route::get('/orders/payed', 'PayedController@payed')->name('payed');
 
     Route::get('/foods/create/{id}', 'CreateFoodController@create')->name('foods.create');
+
+    Route::get('/payment/make', 'PayedController@make')->name('payment.make');
 
 
         //rotta resource food
