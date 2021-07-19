@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <a class="btn" @click="removeFromCart(food.id)">Rimuovi</a>
-    <a class="btn" v-show="food.visibility" @click="addToCart(food)"
-      >Aggiungi</a
-    >
+    <a class="btn" @click="removeFromCart(food.id)">-</a>
+    <div class="count">{{ multipleItemCounts(food.id) }}</div>
+    <a class="btn" v-show="food.visibility" @click="addToCart(food)">+</a>
   </div>
 </template>
 
@@ -21,7 +20,7 @@ export default {
   },
 
   created() {
-    console.log(this.food);
+    // console.log(this.food);
     this.reactiveBtns();
   },
 
@@ -63,16 +62,51 @@ export default {
       }
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
+    multipleItemCounts(value) {
+      const array = [];
+
+      JSON.parse(localStorage.getItem("cart")).forEach((element) => {
+        array.push(element.id);
+      });
+
+      return array.filter((v) => v === value).length;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+.container {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
   color: #fff;
   background: #00ccbc;
-  padding: 10px;
-  border-radius: 5px;
+  // padding: 15px 30px;
+  border-radius: 50%;
   text-decoration: none;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 2.2rem;
+}
+
+.count {
+  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-weight: 900;
+  // cursor: pointer;
+  font-size: 1.8rem;
 }
 </style>

@@ -1,114 +1,142 @@
 <template>
-  <div v-if="restaurant.name">
-    <div class="detail container">
-      <div class="image">
-        <img
-          v-show="restaurant.cover"
-          :src="
-            `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
-          "
-          :alt="restaurant.name"
-        />
-      </div>
-
-      <div class="info">
-        <h1>{{ restaurant.name }}</h1>
-        <div>
-          <span v-for="(type, index) in restaurant.types" :key="index"
-            >{{ type.type }} °
-          </span>
+  <div class="detail-container">
+    <div v-if="restaurant.name">
+      <div class="detail container">
+        <div class="image">
+          <img
+            v-show="restaurant.cover"
+            :src="
+              `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
+            "
+            :alt="restaurant.name"
+          />
         </div>
-        <div>
-          <span>{{ restaurant.address }}, </span>
-          <span>{{ restaurant.city }}, </span>
-          <span>{{ restaurant.zip_code }}</span>
+        <div class="info">
+          <h1>{{ restaurant.name }}</h1>
+          <div>
+            <span v-for="(type, index) in restaurant.types" :key="index"
+              >{{ type.type }} °
+            </span>
+          </div>
+          <div>
+            <span>{{ restaurant.address }}, </span>
+            <span>{{ restaurant.city }}, </span>
+            <span>{{ restaurant.zip_code }}</span>
+          </div>
         </div>
       </div>
-    </div>
-
-    <div class="foods">
-      <div class="container">
-        <h1>Cibi</h1>
-        <div class="flex">
-          <div class="cards">
-            <div
-              class="card"
-              :class="{ notAvailable: !food.visibility }"
-
-              v-for="(food, index) in items"
-
-              :key="index"
-            >
-              <div class="mb">{{ food.title }}</div>
-              <div class="text-color mb" v-if="food.visibility === 0">
-                Non Disponibile
+      <div class="foods">
+        <div class="container">
+          <h1>Cibi</h1>
+          <div class="flex">
+            <div class="cards">
+              <div class="card-container cards" @click.stop>
+                <div
+                  class="card"
+                  :class="{
+                    notAvailable: !food.visibility,
+                    selectedFood: idInArray(food.id),
+                  }"
+                  v-for="(food, index) in items"
+                  :key="index"
+                  @click="modalVisibilityShow(food.id)"
+                >
+                  <div class="mb">{{ food.title }}</div>
+                  <div class="text-color mb" v-if="food.visibility === 0">
+                    Non Disponibile
+                  </div>
+                  <div class="text-color mb overflow" v-else>
+                    {{ food.description }}
+                  </div>
+                  <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
+                  <!-- <a class="btn" href="" v-show="food.visibility">Aggiungi</a> -->
+                  <!-- <a
+                    class="btn"
+                    @click="removeFromCart(food.id)"
+                    v-if="isInCart(food.id)"
+                    >Rimuovi</a
+                  >
+                  <a
+                    class="btn"
+                    v-show="food.visibility"
+                    @click="addToCart(food.id)"
+                    v-else
+                    >Aggiungi</a
+                  > -->
+                  <!-- <AddBtn
+                    v-show="food.visibility"
+                    @click="forceRerender()"
+                    :key="componentKey"
+                    :items="items"
+                    :food="food"
+                  /> -->
+                </div>
               </div>
-              <div class="text-color mb overflow" v-else>
-                {{ food.description }}
+            </div>
+            <div class="cart">
+              <div class="header">
+                <h2>Il tuo carrello:</h2>
               </div>
-              <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
-              <!-- <a class="btn" href="" v-show="food.visibility">Aggiungi</a> -->
-
-              <!-- <a
-                class="btn"
-                @click="removeFromCart(food.id)"
-                v-if="isInCart(food.id)"
-                >Rimuovi</a
-              >
-              <a
-                class="btn"
-                v-show="food.visibility"
-                @click="addToCart(food.id)"
-                v-else
-                >Aggiungi</a
+              <!-- <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
+                >Vai alla cassa</a
               > -->
-
-              <AddBtn
-                v-show="food.visibility"
-                @click="forceRerender()"
-                :key="componentKey"
-                :items="items"
-                :food="food"
-              />
+              <Cart @click="forceRerender()" :key="componentKey" />
+              <!-- <div>Il tuo carrello è vuoto</div> -->
             </div>
           </div>
-          <div class="cart">
-            <!-- <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
-              >Vai alla cassa</a
-            > -->
-            <Cart @click="forceRerender()" :key="componentKey" />
-            <!-- <div>Il tuo carrello è vuoto</div> -->
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal-container"
+        v-show="modalVisibility"
+        @click="modalVisibility = false"
+      >
+        <div
+          class="modal"
+          v-show="food.id == foodId && modalVisibility"
+          v-for="(food, index) in items"
+          :key="index"
+          @click.stop
+        >
+          <div class="title">
+            <h3>{{ food.title }}</h3>
+          </div>
+          <div class="info-modal">
+            <div class="mb-2">
+              <span><strong>Descrizione: </strong></span>{{ food.description }}
+            </div>
+            <div>
+              <span><strong>Ingredienti: </strong></span>{{ food.ingredients }}
+            </div>
+          </div>
+          <AddBtn
+            v-show="food.visibility"
+            @click="forceRerender()"
+            :key="componentKey"
+            :items="items"
+            :food="food"
+          />
+          <div class="button">
+            <div @click="modalVisibility = false" class="btn btn-cart left">
+              Cancella
+            </div>
+            <a class="btn btn-cart right" href=""
+              >TOTALE {{ food.price * multipleItemCounts(food.id) }} €</a
+            >
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Modal -->
-    <!-- <div class="modal" v-for="(food, index) in foods" :key="index">
-      <div class="title">
-        <h3>{{ food.title }}</h3>
-      </div>
-      <div class="info-modal">
-        <div class="mb-2"><span><strong>Descrizione: </strong></span>{{ food.description }}</div>
-        <div><span><strong>Ingredienti: </strong></span>{{ food.ingredients }}</div>
-      </div>
-      <div class="button">
-        <a class="btn btn-cart left" href="">Cancella</a>
-        <a class="btn btn-cart right" href="">TOTALE {{ food.price }} €</a>
-      </div>
-    </div> -->
-
+    <Loader v-else />
   </div>
-
-  <Loader v-else />
 </template>
 
 <script>
 import axios from "axios";
 
-
 import Cart from "./components/Cart.vue";
-import Loader from './components/Loader.vue';
+import Loader from "./components/Loader.vue";
 import AddBtn from "./components/AddBtn.vue";
 
 // const items = Object.freeze(
@@ -122,7 +150,6 @@ import AddBtn from "./components/AddBtn.vue";
 //       //   console.log(this.restaurantDetail);
 //     })
 // );
-
 
 export default {
   name: "RestaurantDetail",
@@ -140,18 +167,22 @@ export default {
       cart: [],
       items: [],
       componentKey: 0,
+      foodId: 0,
+
+      modalVisibility: false,
     };
   },
   created() {
     // this.items;
     this.getRestaurant();
-    console.log(this.items);
+    // console.log(this.items);
     this.reactiveBtns();
+    // console.log("jdifjdijfd", this.modalVisibility);
     // console.log(this.foods);
   },
   updated() {
-    console.log(this.cart);
-    console.log(localStorage.getItem("cart"));
+    // console.log(this.cart);
+    // console.log(localStorage.getItem("cart"));
     // this.resetBasket();
     // this.reactiveBtns();
   },
@@ -218,7 +249,7 @@ export default {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
             console.log(
-              "cazzi",
+              "attenzione",
               this.cart[0].restaurant_id,
               element.restaurant_id
             );
@@ -227,11 +258,43 @@ export default {
         });
       }
     },
+    multipleItemCounts(value) {
+      const array = [];
+
+      JSON.parse(localStorage.getItem("cart")).forEach((element) => {
+        array.push(element.id);
+      });
+
+      return array.filter((v) => v === value).length;
+    },
+    idInArray(value) {
+      const array = [];
+
+      JSON.parse(localStorage.getItem("cart")).forEach((element) => {
+        array.push(element.id);
+      });
+
+      if (array.includes(value)) {
+        return true;
+      }
+    },
+
+    modalVisibilityShow(id) {
+      this.foodId = id;
+      this.modalVisibility = true;
+    },
+    changeFoodId() {
+      this.foodId = 10000000;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.detail-container {
+  scroll-snap-type: y mandatory;
+}
+
 .image img {
   width: 100%;
   margin-top: 20px;
@@ -248,6 +311,10 @@ export default {
 
   h1 {
     padding: 1rem;
+  }
+
+  .selectedFood {
+    border-left: 5px solid #00ccbc !important;
   }
 
   .card {
@@ -269,8 +336,16 @@ export default {
     }
   }
 
+  .header {
+    color: #fff;
+    background: #00ccbc;
+    margin-top: -2px !important;
+    padding: 1rem 0;
+    margin-bottom: -50px !important;
+  }
   .cart {
-    display: none;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.137) 0px 3px 8px;
   }
 
   .notAvailable {
@@ -285,22 +360,35 @@ export default {
   padding: 10px;
   border-radius: 5px;
   text-decoration: none;
+  cursor: pointer;
 }
 
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.146);
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+}
 // MODAL
 .modal {
   max-width: 375px;
   height: 420px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 5px red;
+  box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
 
   .title {
     height: 60px;
@@ -413,7 +501,6 @@ export default {
         margin: 50px 0;
       }
     }
-
   }
 
   .overflow {

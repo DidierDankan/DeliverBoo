@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\OrderController;
 Route::namespace('Api')->group(function() {
     Route::get('/restaurants', 'RestaurantController@index');
     Route::get('restaurants/{id}', 'RestaurantController@show');
+    Route::get('/filter', 'RestaurantController@filterByType');
+    
     // Route::get('orders/{id}', 'OrderController@store');
     // api for braintree
     Route::get('orders/generate', [OrderController::class, 'generate']);
