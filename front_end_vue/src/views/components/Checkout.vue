@@ -1,6 +1,6 @@
 <template>
   <div v-if="clientToken" class="container">
-    <div class="col-6 offset-3">
+    <div class="col-12 ">
       <div class="card bg-light">
         <div class="card-header">Informazioni pagamento</div>
         <div class="card-body">
@@ -11,6 +11,75 @@
             {{ error }}
           </div>
           <form>
+            <div class="mb-3">
+              <label for="customerName" class="form-label">Nome</label>
+              <input
+                type="text"
+                v-model="name"
+                class="form-control"
+                id="customerName"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerSurname" class="form-label">Cognome</label>
+              <input
+                type="text"
+                v-model="surname"
+                class="form-control"
+                id="customerSurname"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerMail" class="form-label">Email</label>
+              <input
+                type="email"
+                v-model="email"
+                class="form-control"
+                id="customerMail"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerPhone" class="form-label">Telefono</label>
+              <input
+                type="text"
+                v-model="phone"
+                class="form-control"
+                id="customerPhone"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerAddress" class="form-label">Indirizzo</label>
+              <input
+                type="text"
+                v-model="address"
+                class="form-control"
+                id="customerAddress"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerZipCode" class="form-label">CAP</label>
+              <input
+                type="text"
+                v-model="zip_code"
+                class="form-control"
+                id="customerZipCode"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="customerCity" class="form-label">Città</label>
+              <input
+                type="text"
+                v-model="city"
+                class="form-control"
+                id="customerCity"
+              />
+            </div>
             <div class="form-group">
               <label for="amount">Totale</label>
               <div class="input-group">
@@ -78,6 +147,21 @@ export default {
       nonce: "",
       error: "",
       clientToken: "",
+
+      name: "",
+      surname: "",
+      city: "",
+      zip_code: "",
+      address: "",
+      email: "",
+      phone: "",
+      status: false,
+      foods: {},
+      // amount: 0,
+
+      orderObj: {},
+
+      cart: [],
     };
   },
   methods: {
@@ -94,6 +178,13 @@ export default {
             this.error = err.message;
           });
       }
+      // this.$emit("nonce", this.nonce);
+      if (this.nonce) {
+        this.status = true;
+      }
+
+      setTimeout(this.getOrderInfo, 1000);
+      // this.getOrderInfo();
     },
 
     braintreeSystem() {
@@ -114,11 +205,11 @@ export default {
               fields: {
                 number: {
                   selector: "#creditCardNumber",
-                  placeholder: "Enter Credit Card",
+                  placeholder: "Inserisci la carta di credito",
                 },
                 cvv: {
                   selector: "#cvv",
-                  placeholder: "Enter CVV",
+                  placeholder: "Inserisci il CVV",
                 },
                 expirationDate: {
                   selector: "#expireDate",
@@ -134,6 +225,66 @@ export default {
           });
         // .catch((err) => {});
       }
+    },
+    getOrderInfo() {
+      if (this.nonce) {
+        this.status = true;
+      }
+
+      this.orderObj = {
+        name: this.name,
+        surname: this.surname,
+        phone: this.phone,
+        email: this.email,
+        address: this.address,
+        zip_code: this.zip_code,
+        city: this.city,
+        status: this.status,
+        food: this.itemQnt(),
+        amount: this.amount(),
+      };
+
+      console.log(this.orderObj);
+
+      if (!localStorage.getItem("orderdetails")) {
+        localStorage.setItem("orderdetails", JSON.stringify({}));
+      }
+
+      localStorage.setItem("orderdetails", JSON.stringify(this.orderObj));
+    },
+    itemQnt() {
+      const items = JSON.parse(localStorage.getItem("cart"));
+
+      const itemsId = [];
+
+      let restaurantID = 0;
+
+      items.forEach((element) => {
+        itemsId.push(element.id);
+        restaurantID = element.restaurant_id;
+      });
+
+      const final = {
+        items: itemsId,
+        restaurant_id: restaurantID,
+      };
+
+      return final;
+    },
+    amount() {
+      const array = [];
+
+      JSON.parse(localStorage.getItem("cart")).forEach((element) => {
+        array.push(element.price);
+      });
+
+      let amount = 0;
+
+      array.forEach((v) => {
+        amount += v;
+      });
+
+      return amount;
     },
   },
 };

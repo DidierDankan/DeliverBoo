@@ -22,7 +22,9 @@
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
 
-    <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a>
+    <a class="cash" @click.prevent="resetBasket()" href=""
+      >Vai alla cassa reset</a
+    >
   </div>
 </template>
 

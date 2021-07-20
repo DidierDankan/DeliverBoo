@@ -85,7 +85,7 @@ class RestaurantController extends Controller
 
         $data = $request->all();
 
-        // dd($data);
+        dd($data);
 
         $new_restaurant = new Restaurant();
 
