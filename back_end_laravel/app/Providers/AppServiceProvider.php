@@ -31,14 +31,13 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
       
-        $this->app->singleton(Gateway::class, function ($app) {
+        $this->app->singleton(Gateway::class, function () {
             return new Gateway(
               [
                'environment' => ('sandbox'),
                 'merchantId' => ('9vnqq9g4srkwtrwt'),
                 'publicKey' => ('my9pn2q5wf2pbvvw'),
                 'privateKey' => ('b8bd5680d6691f8489f1c9020bbfd1b1'),
-
               ]
             );
         });

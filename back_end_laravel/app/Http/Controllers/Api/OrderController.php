@@ -10,7 +10,7 @@ use Braintree\Gateway;
 
 class OrderController extends Controller
 {
-    public function generate(Request $request, Gateway $gateway)
+    public function generate(Gateway $gateway)
     {
         $token = $gateway->clientToken()->generate();
         $data = [

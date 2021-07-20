@@ -105,10 +105,12 @@ export default {
       pages: [],
       reRender: 0,
       filterLocal: [],
+      clientToken: "",
     };
   },
   created() {
     // this.reRenderTypes();
+    this.getClientToken();
     this.setFilterCache();
     this.getRestaurants();
     console.log(localStorage.getItem("checkedTypes"));
@@ -165,6 +167,31 @@ export default {
     },
     sectionNexPrevVisibility() {
       return localStorage.getItem("checkedTypes") == "[]" ? true : false;
+    },
+    getClientToken() {
+      axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
+        console.log(res.data.token);
+        this.clientToken = res.data.token;
+      });
+
+      setTimeout(this.paymentToken, 6000);
+
+      // this.paymentToken();
+    },
+
+    paymentToken() {
+      if (!localStorage.getItem("clienttoken")) {
+        localStorage.setItem("clienttoken", JSON.stringify(""));
+      }
+      let clientToken = JSON.parse(localStorage.getItem("clienttoken"));
+
+      if (clientToken != this.clientToken) {
+        clientToken = this.clientToken;
+      }
+
+      localStorage.setItem("clienttoken", JSON.stringify(clientToken));
+      // this.cart = JSON.parse(localStorage.getItem("cart"));
+      console.log(localStorage.getItem("clienttoken"));
     },
   },
 };
