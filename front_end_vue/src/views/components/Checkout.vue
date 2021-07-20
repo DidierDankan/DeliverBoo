@@ -126,6 +126,7 @@
 
 <script>
 import braintree from "braintree-web";
+import axios from "axios";
 // import axios from "axios";
 
 export default {
@@ -136,6 +137,15 @@ export default {
 
   beforeMount() {
     // this.getClientToken();
+  },
+
+  updated() {
+    console.log("starapioco antani roktermayer");
+    if (this.orderPassed) {
+      localStorage.setItem("orderdetails", JSON.stringify({}));
+      localStorage.setItem("cart", JSON.stringify([]));
+      console.log(this.orderPassed);
+    }
   },
 
   mounted() {
@@ -158,6 +168,7 @@ export default {
       status: false,
       foods: {},
       // amount: 0,
+      orderPassed: false,
 
       orderObj: {},
 
@@ -184,6 +195,8 @@ export default {
       }
 
       setTimeout(this.getOrderInfo, 1000);
+      setTimeout(this.sendOrder, 1500);
+
       // this.getOrderInfo();
     },
 
@@ -285,6 +298,18 @@ export default {
       });
 
       return amount;
+    },
+    sendOrder() {
+      axios
+        .get("http://127.0.0.1:8000/api/orders/get", {
+          params: {
+            order: localStorage.getItem("orderdetails"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.orderPassed = res.data;
+        });
     },
   },
 };

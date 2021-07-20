@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="cart.length > 0" class="items">
-      <div v-for="(c, index) of uniqueCart" :key="c.id">
+      <div v-for="c of uniqueCart" :key="c.id">
         <div class="item">
           <div class="flex">
             <span>{{ c.title }} </span>
@@ -12,7 +12,7 @@
           </div>
           <!-- <img :src="c.imageUrl" /> -->
           <div class="flex">
-            <span class="btn" @click="removeFromCart(index)">-</span>
+            <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
             <span class="btn" @click="addToCart(c)">+</span>
           </div>

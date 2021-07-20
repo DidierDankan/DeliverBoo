@@ -29,35 +29,13 @@ class OrderController extends Controller
 
         $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
 
-        $name = $array['name'];
-
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
         
         $foods = $food['items'];
         
-        $i = 1;
-
-        $associativo = [];
-
-        foreach($foods as $food){
-            array_push($associativo, [$i++=>$food]);
-        }
-
-
-
-        
-       
-
-
-
-
         $new_order = new Order();
-
-        if(array_key_exists('food', $array)){
-            $new_order->foods()->attach($associativo);
-        }
 
         $new_order->customer_name = $array['name'];
 
@@ -81,18 +59,25 @@ class OrderController extends Controller
 
         $new_order->save();
 
+        $order_id = $new_order->id;
+
         // popolazione tabella pivot
+ 
+        $new_food_order = new FoodOrder();
 
-        
-        // $new_food_order = new FoodOrder();
+        foreach ($foods as $food){
 
+            $new_food_order->order_id = $order_id;
 
+            $new_food_order->food_id = $food;
 
-        
+        }
 
+        $new_food_order->save();
 
+        $success = true;
 
-        return response()->json($associativo);
+        return response()->json($success);
     }
 
 
