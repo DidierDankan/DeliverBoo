@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="foods">
-        <div class="container">
+        <div class="container-db">
           <h1>Cibi</h1>
           <div class="flex">
             <div class="cards">
@@ -88,7 +88,7 @@
       </div>
       <!-- Modal -->
       <div
-        class="modal-container"
+        class="modal-container-db"
         v-show="modalVisibility"
         @click="modalVisibility = false"
       >
@@ -127,6 +127,60 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal Cart -->
+      <div class="modal-container-db">
+        <div class="modal-db cart-2">
+          <div class="title-2 margin">Carrello</div>
+          <div class="amount">
+            <div>Totale</div>
+            <div>10€</div>
+          </div>
+          <div class="title-2 margin">I tuoi dati</div>
+          <form>
+            <div class="mb-3">
+              <label for="customerName" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="customerName">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerSurname" class="form-label">Cognome</label>
+              <input type="text" class="form-control" id="customerSurname">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerMail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="customerMail">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerPhone" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="customerPhone">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerAddress" class="form-label">Indirizzo</label>
+              <input type="text" class="form-control" id="customerAddress">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerZipCode" class="form-label">CAP</label>
+              <input type="text" class="form-control" id="customerZipCode">
+            </div>
+
+            <div class="mb-3">
+              <label for="customerCity" class="form-label">Città</label>
+              <input type="text" class="form-control" id="customerCity">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+          <Checkout />
+
+        </div>
+      </div>
+
     </div>
     <Loader v-else />
   </div>
@@ -138,6 +192,7 @@ import axios from "axios";
 import Cart from "./components/Cart.vue";
 import Loader from "./components/Loader.vue";
 import AddBtn from "./components/AddBtn.vue";
+import Checkout from "./components/Checkout.vue";
 
 // const items = Object.freeze(
 //   axios
@@ -158,6 +213,7 @@ export default {
     Cart,
     AddBtn,
     Loader,
+    Checkout,
   },
 
   data() {
@@ -291,6 +347,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
 .detail-container {
   scroll-snap-type: y mandatory;
 }
@@ -363,7 +421,7 @@ export default {
   cursor: pointer;
 }
 
-.modal-container {
+.modal-container-db {
   position: fixed;
   top: 0;
   left: 0;
@@ -376,9 +434,9 @@ export default {
   scroll-snap-align: start;
 }
 // MODAL
-.modal {
-  max-width: 375px;
-  height: 420px;
+.modal-db {
+  width: 50%;
+  height: 90vh;
   // position: absolute;
   // top: 50%;
   // left: 50%;
@@ -389,6 +447,7 @@ export default {
   flex-direction: column;
   align-items: center;
   box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
+  overflow-y: auto;
 
   .title {
     height: 60px;
@@ -431,6 +490,27 @@ export default {
 
 .mb-2 {
   margin-bottom: 20px;
+}
+
+// MODAL CART
+.cart-2 {
+  padding: 1rem;
+  align-items: start;
+
+  .title-2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .amount {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.margin {
+  margin: 1rem 0;
 }
 
 @media screen and (min-width: 768px) {
@@ -516,7 +596,7 @@ export default {
   }
 
   .foods {
-    .container {
+    .container-db {
       max-width: 1170px;
       margin: 0 auto;
     }
