@@ -73,6 +73,7 @@
         </div>
         <div v-else class="message">
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
+          <Loader />
         </div>
       </div>
     </div>
@@ -110,9 +111,9 @@ export default {
   },
   created() {
     // this.reRenderTypes();
-    this.getClientToken();
     this.setFilterCache();
     this.getRestaurants();
+    this.getClientToken();
     console.log(localStorage.getItem("checkedTypes"));
     console.log("vfchjasdxvfcjh", this.filterLocal);
   },
