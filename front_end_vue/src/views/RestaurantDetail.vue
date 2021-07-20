@@ -25,6 +25,9 @@
           </div>
         </div>
       </div>
+
+      <button @click="passTest()">test pass cart</button>
+
       <div class="foods">
         <div class="container">
           <h1>Cibi</h1>
@@ -285,6 +288,17 @@ export default {
     },
     changeFoodId() {
       this.foodId = 10000000;
+    },
+    passTest() {
+      axios
+        .get("http://127.0.0.1:8000/api/orders/get", {
+          params: {
+            order: localStorage.getItem("cart"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
     },
   },
 };

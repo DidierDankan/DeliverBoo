@@ -19,30 +19,41 @@ class OrderController extends Controller
         ];
         return response()->json($data,200);
     }
-    public function make_payment(OrderRequest $request, Gateway $gateway)
-    {
-        $food = Food::find($request->food);
-        $result = $gateway->transaction()->sale([
-            'amount' => $food->price,
-            'paymentMethodNonce' => $request->token,
-            'options' => [
-                'submitForSettlement' => true,
-            ],
-        ]);
 
-        if($result->success) {
-            $data = [
-                'success' => true,
-                'message' => 'Transaction was successful',
-            ];
-            return response()->json($data, 200);
-        } else{
-            $data = [
-                'success' => false,
-                'message' => 'Transaction failed',
-            ];
-            return response()->json($data, 401);
-        }
-        // return ;
+    public function store_order(Request $request){
+
+        $all = $request->get('order');
+
+        $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
+
+        return response()->json($array);
     }
+
+
+    // public function make_payment(OrderRequest $request, Gateway $gateway)
+    // {
+    //     $food = Food::find($request->food);
+    //     $result = $gateway->transaction()->sale([
+    //         'amount' => $food->price,
+    //         'paymentMethodNonce' => $request->token,
+    //         'options' => [
+    //             'submitForSettlement' => true,
+    //         ],
+    //     ]);
+
+    //     if($result->success) {
+    //         $data = [
+    //             'success' => true,
+    //             'message' => 'Transaction was successful',
+    //         ];
+    //         return response()->json($data, 200);
+    //     } else{
+    //         $data = [
+    //             'success' => false,
+    //             'message' => 'Transaction failed',
+    //         ];
+    //         return response()->json($data, 401);
+    //     }
+    //     // return ;
+    // }
 }
