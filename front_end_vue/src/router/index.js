@@ -4,6 +4,8 @@ import Cart from "../views/components/Cart";
 // import Store from "../views/components/Store";
 import Restaurants from "../views/Restaurants";
 
+import Checkout from "../views/components/Checkout";
+
 const routes = [
   {
     path: "/",
@@ -21,6 +23,11 @@ const routes = [
     path: "/cart",
     // name: "Cart",
     component: Cart,
+  },
+  {
+    path: "/demo",
+    // name: "Cart",
+    component: Checkout,
   },
 
   // {
