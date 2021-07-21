@@ -33,7 +33,9 @@ class OrderController extends Controller
 
         $orders = Order::whereIn('restaurant_id', $restaurant_ids)->paginate(6);
 
-        // $orders = Order::join('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')->where('restaurants.user_id', '=', $user_id)->paginate(6);
+        if (!$orders) {
+            return view('admin.errors.404error');
+        }
 
         return view('admin.orders.index', compact('orders', 'restaurants'));
     }
@@ -70,6 +72,10 @@ class OrderController extends Controller
         $restaurants = Restaurant::all();
 
         $order = Order::find($id);
+
+        if (!$order) {
+            return view('admin.errors.404error');
+        }
 
         return view('admin.orders.show', compact('order', 'restaurants'));
     }
