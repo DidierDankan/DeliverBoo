@@ -2,7 +2,7 @@
   <div v-if="clientToken" class="container">
     <div class="col-12 ">
       <div>
-        <div>Informazioni pagamento</div>
+        <div class="mb-2">Informazioni pagamento</div>
         <div>
           <div class="alert alert-success" v-if="nonce">
             Il pagamento è andato a buon fine.
@@ -85,13 +85,11 @@
             </div>
             <div class="form-group">
               <label for="amount">Totale</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">€</span>
-                </div>
+              <div class="">
+                <div class="input-group-prepend"></div>
                 <div
                   id="amount"
-                  class="form-control"
+                  class="mt-2 price"
                   placeholder="Totale"
                   :value="amount()"
                 >
@@ -121,9 +119,9 @@
               </div>
             </div>
             <div class="cards">
-              <i class="fab fa-cc-mastercard"></i>
-              <i class="fab fa-cc-amex"></i>
-              <i class="fab fa-cc-visa"></i>
+              <img src="../../assets/img/visa.png" alt="visa" />
+              <img src="../../assets/img/mastercard.png" alt="mastercard" />
+              <img src="../../assets/img/americanexpress.png" alt="amex" />
             </div>
 
             <button
@@ -338,6 +336,12 @@ export default {
 #expireDate,
 #cvv {
   margin: 10px 0px;
+
+  .price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $btn-color;
+  }
 }
 .form-control {
   height: 35px;
@@ -348,12 +352,8 @@ export default {
   background: $btn-color;
 }
 .cards {
-  i {
-    font-size: 4rem;
-    padding-right: -10px;
-    padding-left: -10px;
-  }
-
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 </style>
