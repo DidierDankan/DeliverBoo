@@ -4,10 +4,15 @@
       <div class="detail container">
         <div class="image">
           <img
-            v-show="restaurant.cover"
+            v-if="restaurant.cover"
             :src="
               `http://127.0.0.1:8000/storage/restaurants-covers/${restaurant.cover}`
             "
+            :alt="restaurant.name"
+          />
+          <img
+            v-else
+            src="https://consumer-component-library.roocdn.com/23.0.0/static/images/placeholder.svg"
             :alt="restaurant.name"
           />
         </div>
