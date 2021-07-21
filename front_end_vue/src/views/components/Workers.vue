@@ -224,6 +224,7 @@ export default {
       }
     }
   }
+
   @media screen and (min-width: 768px) {
     .cards {
       grid-template-columns: 5fr 5fr 5fr;
@@ -250,6 +251,7 @@ export default {
       }
     }
   }
+  
   @media screen and (min-width: 1170px) {
     .container-cards {
       .section-title {

@@ -128,30 +128,23 @@
 <script>
 import braintree from "braintree-web";
 import axios from "axios";
-// import axios from "axios";
 
 export default {
   created() {
     this.clientToken = JSON.parse(localStorage.getItem("clienttoken"));
-    // console.log(this.clientToken);
-  },
-
-  beforeMount() {
-    // this.getClientToken();
   },
 
   updated() {
-    console.log("starapioco antani roktermayer");
     if (this.orderPassed) {
       localStorage.setItem("orderdetails", JSON.stringify({}));
       localStorage.setItem("cart", JSON.stringify([]));
-      console.log(this.orderPassed);
     }
   },
 
   mounted() {
     this.braintreeSystem();
   },
+
   data() {
     return {
       hostedFieldInstance: false,
@@ -178,6 +171,7 @@ export default {
       cart: [],
     };
   },
+
   methods: {
     payWithCreditCard() {
       if (this.hostedFieldInstance) {
@@ -192,7 +186,6 @@ export default {
             this.error = err.message;
           });
       }
-      // this.$emit("nonce", this.nonce);
       if (this.nonce) {
         this.status = true;
       }
@@ -201,7 +194,6 @@ export default {
       setTimeout(this.sendOrder, 1500);
 
       this.sendRerender();
-      // this.getOrderInfo();
     },
 
     sendRerender() {
@@ -241,10 +233,8 @@ export default {
             return braintree.hostedFields.create(options);
           })
           .then((hostedFieldInstance) => {
-            // @TODO - Use hostedFieldInstance to send data to Braintree
             this.hostedFieldInstance = hostedFieldInstance;
           });
-        // .catch((err) => {});
       }
     },
     getOrderInfo() {
@@ -264,8 +254,6 @@ export default {
         food: this.itemQnt(),
         amount: this.amount(),
       };
-
-      console.log(this.orderObj);
 
       if (!localStorage.getItem("orderdetails")) {
         localStorage.setItem("orderdetails", JSON.stringify({}));
@@ -315,7 +303,6 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           this.orderPassed = res.data;
 
           if (res.data) {
@@ -330,8 +317,4 @@ export default {
 
 <style scoped lang="scss">
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-
-// body {
-//   padding: 20px;
-// }
 </style>

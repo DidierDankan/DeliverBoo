@@ -1,5 +1,6 @@
 <template>
   <div class="macro-container">
+
     <Header />
 
     <router-view />
@@ -9,7 +10,9 @@
 import Header from "./views/components/Header.vue";
 
 export default {
-  components: { Header },
+  components: { 
+    Header, 
+  },
 };
 </script>
 

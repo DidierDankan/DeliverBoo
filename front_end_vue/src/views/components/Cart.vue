@@ -10,7 +10,7 @@
               €</span
             >
           </div>
-          <!-- <img :src="c.imageUrl" /> -->
+
           <div class="flex">
             <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
@@ -24,13 +24,13 @@
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
 
     <span class="refresh" @click="emptyCart()">Svuota</span>
-    <!-- <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "Cart",
+
   data() {
     return {
       cart: [],
@@ -38,9 +38,9 @@ export default {
       amountR: 0,
     };
   },
+
   methods: {
     addToCart(item) {
-      // const item = this.items.find(({ id }) => id === itemId);
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
@@ -75,15 +75,6 @@ export default {
       this.uniqueCart = uniqueitems;
     },
     resetBasket() {
-      // const restaurants_id = [];
-
-      // this.cart.forEach((element) => {
-      //   if (!restaurants_id.includes(element.restaurant_id))
-      //     restaurants_id.push(element.restaurant_id);
-      // });
-
-      // restaurants_id.sort();
-
       if (this.cart[0]) {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
@@ -126,9 +117,6 @@ export default {
     },
     removeItem(itemid) {
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // const pos = itemid;
-      // console.log(itemid);
-      // console.log(cartItems);
       const arr = [];
 
       cartItems.forEach((e) => {
@@ -136,7 +124,6 @@ export default {
           arr.push(e);
         }
       });
-      // console.log(arr);
 
       localStorage.setItem("cart", JSON.stringify(arr));
     },
@@ -145,7 +132,6 @@ export default {
     this.getCart();
     this.removeDouble();
     this.amount();
-    // console.log("maronno", this.uniqueCart);
   },
 };
 </script>
@@ -160,7 +146,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // border-radius: 20px;
   padding: 1rem 0;
   border-bottom: 1px solid #22d5d54a;
 }

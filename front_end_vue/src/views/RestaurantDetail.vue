@@ -26,9 +26,6 @@
         </div>
       </div>
 
-      <button @click="testNonce()">test nonce</button>
-      <button @click="passTest()">test pass cart</button>
-
       <div class="foods">
         <div class="container-db">
           <h1>Cibi</h1>
@@ -53,27 +50,6 @@
                     {{ food.description }}
                   </div>
                   <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
-                  <!-- <a class="btn" href="" v-show="food.visibility">Aggiungi</a> -->
-                  <!-- <a
-                    class="btn"
-                    @click="removeFromCart(food.id)"
-                    v-if="isInCart(food.id)"
-                    >Rimuovi</a
-                  >
-                  <a
-                    class="btn"
-                    v-show="food.visibility"
-                    @click="addToCart(food.id)"
-                    v-else
-                    >Aggiungi</a
-                  > -->
-                  <!-- <AddBtn
-                    v-show="food.visibility"
-                    @click="forceRerender()"
-                    :key="componentKey"
-                    :items="items"
-                    :food="food"
-                  /> -->
                 </div>
               </div>
             </div>
@@ -81,16 +57,15 @@
               <div class="header">
                 <h2>Il tuo carrello:</h2>
               </div>
-              <!-- <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
-                >Vai alla cassa</a
-              > -->
+
               <Cart @click="forceRerender()" :key="componentKey" />
-              <!-- <div>Il tuo carrello è vuoto</div> -->
+
               <button @click="modalCheckoutOpen()">test checkout</button>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Modal -->
       <div
         class="modal-container-db"
@@ -115,6 +90,7 @@
               <span><strong>Ingredienti: </strong></span>{{ food.ingredients }}
             </div>
           </div>
+
           <AddBtn
             v-show="food.visibility"
             @click="forceRerender()"
@@ -122,6 +98,7 @@
             :items="items"
             :food="food"
           />
+
           <div class="button">
             <div @click="removeItem(food.id)" class="btn btn-cart left">
               Cancella
@@ -149,85 +126,15 @@
             <div>10€</div>
           </div>
           <div class="title-2 margin">I tuoi dati</div>
-          <!-- <form @submit.prevent="getOrderInfo()">
-            <div class="mb-3">
-              <label for="customerName" class="form-label">Nome</label>
-              <input
-                type="text"
-                v-model="name"
-                class="form-control"
-                id="customerName"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerSurname" class="form-label">Cognome</label>
-              <input
-                type="text"
-                v-model="surname"
-                class="form-control"
-                id="customerSurname"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerMail" class="form-label">Email</label>
-              <input
-                type="email"
-                v-model="email"
-                class="form-control"
-                id="customerMail"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerPhone" class="form-label">Telefono</label>
-              <input
-                type="text"
-                v-model="phone"
-                class="form-control"
-                id="customerPhone"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerAddress" class="form-label">Indirizzo</label>
-              <input
-                type="text"
-                v-model="address"
-                class="form-control"
-                id="customerAddress"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerZipCode" class="form-label">CAP</label>
-              <input
-                type="text"
-                v-model="zip_code"
-                class="form-control"
-                id="customerZipCode"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerCity" class="form-label">Città</label>
-              <input
-                type="text"
-                v-model="city"
-                class="form-control"
-                id="customerCity"
-              />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form> -->
 
           <Checkout />
+
         </div>
       </div>
     </div>
+
     <Loader v-else />
+
   </div>
 </template>
 
@@ -239,18 +146,6 @@ import Loader from "./components/Loader.vue";
 import AddBtn from "./components/AddBtn.vue";
 import Checkout from "./components/Checkout.vue";
 
-// const items = Object.freeze(
-//   axios
-//     .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
-//     .then((res) => {
-//       //   const restaurantDetail = Object.assign({}, res.data);
-//       return res.data[1];
-//       // this.items = res.data[1];
-//       // console.log(res.data[1]);
-//       //   console.log(this.restaurantDetail);
-//     })
-// );
-
 export default {
   name: "RestaurantDetail",
 
@@ -261,22 +156,15 @@ export default {
     Checkout,
   },
 
-  props: {
-    status: Boolean,
-  },
-
   data() {
     return {
       restaurant: [],
-      // foods: [],
       cart: [],
       items: [],
       componentKey: 0,
       foodId: 0,
       modalCheckout: false,
-
       modalVisibility: false,
-
       name: "",
       surname: "",
       city: "",
@@ -284,25 +172,17 @@ export default {
       address: "",
       email: "",
       phone: "",
-
       orderObj: [],
     };
   },
+
   created() {
-    // console.log("hello cazzi", this.nonce);
-    // this.items;
     this.getRestaurant();
-    // console.log(this.items);
     this.reactiveBtns();
-    // console.log("jdifjdijfd", this.modalVisibility);
-    // console.log(this.foods);
   },
+
   updated() {
-    // console.log("checker status", this.status);
-    // console.log("carrellozzo", localStorage.getItem("cart"));
     this.renderAfterOrder();
-    // this.resetBasket();
-    // this.reactiveBtns();
   },
 
   methods: {
@@ -310,12 +190,8 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
         .then((res) => {
-          //   const restaurantDetail = Object.assign({}, res.data);
           this.restaurant = res.data[0];
           this.items = res.data[1];
-          // this.items = res.data[1];
-          // console.log(res.data[1]);
-          //   console.log(this.restaurantDetail);
         });
     },
     isInCart(itemId) {
@@ -354,23 +230,9 @@ export default {
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
     resetBasket() {
-      // const restaurants_id = [];
-
-      // this.cart.forEach((element) => {
-      //   if (!restaurants_id.includes(element.restaurant_id))
-      //     restaurants_id.push(element.restaurant_id);
-      // });
-
-      // restaurants_id.sort();
-
       if (this.cart[0]) {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
-            console.log(
-              "attenzione",
-              this.cart[0].restaurant_id,
-              element.restaurant_id
-            );
             alert("attenzione non puoi ordinare da 2 ristoranti");
           }
         });
@@ -396,7 +258,6 @@ export default {
         return true;
       }
     },
-
     modalVisibilityShow(id) {
       this.foodId = id;
       this.modalVisibility = true;
@@ -432,33 +293,24 @@ export default {
         this.city
       );
 
-      console.log(this.orderObj);
-
       if (!localStorage.getItem("orderdetails")) {
         localStorage.setItem("orderdetails", JSON.stringify([]));
       }
 
       localStorage.setItem("orderdetails", JSON.stringify(this.orderObj));
     },
-    testNonce() {
-      console.log(this.status);
-    },
-
     renderAfterOrder() {
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // console.log(cartItems.length);
       if (cartItems.length == 0) {
         this.forceRerender();
       }
     },
     removeItem(itemid) {
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // const pos = itemid;
-      // console.log(itemid);
-      // console.log(cartItems);
+
       const arr = [];
 
       cartItems.forEach((e) => {
@@ -466,7 +318,6 @@ export default {
           arr.push(e);
         }
       });
-      // console.log(arr);
 
       localStorage.setItem("cart", JSON.stringify(arr));
       this.forceRerender();
@@ -566,10 +417,6 @@ export default {
 .modal-db {
   width: 50%;
   height: 90vh;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 5px;
   display: flex;
