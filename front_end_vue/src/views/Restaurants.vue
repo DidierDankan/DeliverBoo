@@ -155,7 +155,7 @@ export default {
     getClientToken() {
       axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
         this.clientToken = res.data.token;
-        console.log();
+        console.log(res.data.token);
       });
 
       setTimeout(this.paymentToken, 6000);
@@ -172,11 +172,12 @@ export default {
       }
 
       localStorage.setItem("clienttoken", JSON.stringify(clientToken));
+      console.log(localStorage.getItem("clienttoken"));
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import "@/style/restaurants.scss"
+@import "@/style/restaurants.scss";
 </style>
