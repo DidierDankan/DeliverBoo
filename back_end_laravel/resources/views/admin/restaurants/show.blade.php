@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-
-    
+<div class="container">  
  
     <div class="row mt-4">
         <div class="col-md-4 mb-3">
@@ -56,10 +54,7 @@
                 </div>
             </div>
             @endif
-
     </div>
-
-
 
     <div class="row mt-4">
         <div class="col-md-12">
@@ -73,10 +68,10 @@
                     </div>
                 </div>
                 @if (session('deleted'))
-        <div class="alert alert-success">
-            {{ session('deleted') }} is now deleted!
-        </div>
-    @endif
+                <div class="alert alert-success">
+                    {{ session('deleted') }} is now deleted!
+                </div>
+                @endif
                 <div class="table-container" style="overflow-x: scroll">
                     <table class="table">
                         <thead class="thead-light">
@@ -97,8 +92,6 @@
                                     <td>{{number_format($food->price,2)}} €</td>
                                     <td>
                                         <a class="btn btn-success text-white" href="{{route('admin.foods.show', $food->id)}}">Details</a>
-                                        {{-- <a class="btn btn-primary text-white" href="{{route('admin.foods.show', $food->id)}}">Piatto</a>
-                                        <a class="btn btn-primary text-white" href="{{route('admin.foods.show', $food->id)}}">Piatto</a> --}}
                                     </td>
                                     <td>
                                         <a class="btn btn-warning" href="{{route('admin.foods.edit', $food->id)}}">Edit</a>
@@ -116,8 +109,8 @@
                         </tbody>
                     </table>
                 </div>
-                
             </div>
+
             <div class="card">
                 <div class="card-body d-flex justify-content-center align-items-md-center flex-column">
                     <div class="paginate mt-3 mr-3">
@@ -126,10 +119,7 @@
                     <hr>
                     <h4 class="text-center">Restaurants controls:</h4>
                     <div class="actions d-flex justify-content-center mt-3">
-                        
-                        {{-- <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a> --}}
                         <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">All</a>
-                        {{-- <a class="btn btn-primary text-white mr-3" href=" {{ route('admin.foods.create', $restaurant->id) }} ">New Food</a> --}}
                         <a class="btn btn-warning mr-3" href=" {{ route('admin.restaurants.edit', $restaurant->id) }} ">Edit</a>
                         <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
                             @csrf
@@ -137,16 +127,9 @@
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
                     </div>
-    
                 </div>
             </div>
         </div>
     </div>
-
-
-
-    
-  
-
 </div>
 @endsection

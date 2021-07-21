@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <div class="card">
-
         <h1 class="card-header">All Orders</h1>
         
         <table class="table">
@@ -48,10 +47,7 @@
                 {{$orders->links()}}
             </div>
             <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-
             <a class="btn btn-success text-white" href="{{route('admin.payed')}} ">Payed</a>
-            
-
         </div>
     </div>
 </div>

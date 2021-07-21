@@ -1,9 +1,9 @@
 <template>
   <div v-if="clientToken" class="container">
     <div class="col-12 ">
-      <div class="card bg-light">
-        <div class="card-header">Informazioni pagamento</div>
-        <div class="card-body">
+      <div>
+        <div>Informazioni pagamento</div>
+        <div>
           <div class="alert alert-success" v-if="nonce">
             Il pagamento è andato a buon fine.
           </div>
@@ -11,44 +11,46 @@
             {{ error }}
           </div>
           <form>
-            <div class="mb-3">
-              <label for="customerName" class="form-label">Nome</label>
-              <input
-                type="text"
-                v-model="name"
-                class="form-control"
-                id="customerName"
-              />
+            <div class="row">
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerName" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  v-model="name"
+                  class="form-control"
+                  id="customerName"
+                />
+              </div>
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerSurname" class="form-label">Cognome</label>
+                <input
+                  type="text"
+                  v-model="surname"
+                  class="form-control"
+                  id="customerSurname"
+                />
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label for="customerSurname" class="form-label">Cognome</label>
-              <input
-                type="text"
-                v-model="surname"
-                class="form-control"
-                id="customerSurname"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerMail" class="form-label">Email</label>
-              <input
-                type="email"
-                v-model="email"
-                class="form-control"
-                id="customerMail"
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="customerPhone" class="form-label">Telefono</label>
-              <input
-                type="text"
-                v-model="phone"
-                class="form-control"
-                id="customerPhone"
-              />
+            <div class="row">
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerMail" class="form-label">Email</label>
+                <input
+                  type="email"
+                  v-model="email"
+                  class="form-control"
+                  id="customerMail"
+                />
+              </div>
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerPhone" class="form-label">Telefono</label>
+                <input
+                  type="text"
+                  v-model="phone"
+                  class="form-control"
+                  id="customerPhone"
+                />
+              </div>
             </div>
 
             <div class="mb-3">
@@ -61,44 +63,50 @@
               />
             </div>
 
-            <div class="mb-3">
-              <label for="customerZipCode" class="form-label">CAP</label>
-              <input
-                type="text"
-                v-model="zip_code"
-                class="form-control"
-                id="customerZipCode"
-              />
+            <div class="row">
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerZipCode" class="form-label">CAP</label>
+                <input
+                  type="text"
+                  v-model="zip_code"
+                  class="form-control"
+                  id="customerZipCode"
+                />
+              </div>
+              <div class="mb-3 col-md-6 col-sm-12">
+                <label for="customerCity" class="form-label">Città</label>
+                <input
+                  type="text"
+                  v-model="city"
+                  class="form-control"
+                  id="customerCity"
+                />
+              </div>
             </div>
-
-            <div class="mb-3">
-              <label for="customerCity" class="form-label">Città</label>
-              <input
-                type="text"
-                v-model="city"
-                class="form-control"
-                id="customerCity"
-              />
-            </div>
-            <div v-if="lamianonna" class="form-group">
+            <div class="form-group">
               <label for="amount">Totale</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">€</span>
                 </div>
-                <input
-                  type="number"
+                <div
                   id="amount"
                   class="form-control"
                   placeholder="Totale"
                   :value="amount()"
-                />
+                >
+                  {{ amount() }} €
+                </div>
               </div>
             </div>
             <hr />
             <div class="form-group">
-              <label>Numero carta di credito</label>
-              <div id="creditCardNumber" class="form-control"></div>
+              <label for="creditCardNumber">Numero carta di credito</label>
+              <div
+                id="creditCardNumber"
+                name="creditCardNumber"
+                class="form-control"
+              ></div>
             </div>
             <div class="form-group">
               <div class="row">
@@ -112,11 +120,17 @@
                 </div>
               </div>
             </div>
+            <div class="cards">
+              <i class="fab fa-cc-mastercard"></i>
+              <i class="fab fa-cc-amex"></i>
+              <i class="fab fa-cc-visa"></i>
+            </div>
+            
             <button
-              class="btn btn-primary btn-block"
+              class="btn btn-block text-white mt-3"
               @click.prevent="payWithCreditCard"
             >
-              Pay with Credit Card
+              Paga
             </button>
           </form>
         </div>
@@ -211,8 +225,9 @@ export default {
               client: clientInstance,
               styles: {
                 input: {
-                  "font-size": "14px",
-                  "font-family": "Open Sans",
+
+                  "font-size": "16px",
+                  "font-family": "sans-serif",
                 },
               },
               fields: {
@@ -317,4 +332,31 @@ export default {
 
 <style scoped lang="scss">
 @import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "@/style/vars.scss";
+
+
+#creditCardNumber, #expireDate, #cvv {
+  margin: 10px 0px ;
+
+}
+.form-control{
+  height: 35px;
+}
+
+.btn {
+  width: 100%;
+  background: $btn-color;
+  
+}
+.cards {
+  i{
+  font-size:4rem;
+  padding-right:-10px;
+  padding-left:-10px;
+
+  }
+  
+  text-align:center;
+}
+
 </style>

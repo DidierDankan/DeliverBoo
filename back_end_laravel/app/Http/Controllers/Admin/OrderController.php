@@ -21,39 +21,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-
         $user_id = Auth::user()->id;
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
-
-        // $restaurant_ids = [];
-
-
-        // foreach ($restaurants as $restaurant){
-        //     array_push($restaurant_ids, $restaurant->id);
-        // }
-
-        // dd($restaurant_ids);
-
-        // $orders = Order::where('restaurant_id', '=', $user_id)->paginate(6);
-
-        // foreach ($restaurant_ids as $restaurant_id){
-
-        //     $orders = Order::where('restaurant_id', '=', $restaurant_id)->paginate(6);
-        // }
-
         $orders = Order::join('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')->where('restaurants.user_id', '=', $user_id)->paginate(6);
 
-        // $orders = Order::select('restaurant_id', $restaurants['id'])
-        
-        // ->where('restaurant_id', '=', $restaurants)->paginate(6);
-
-        // dd($orders);
-
-
         return view('admin.orders.index', compact('orders', 'restaurants'));
-
     }
 
     /**
@@ -85,14 +59,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-
         $restaurants = Restaurant::all();
+
         $order = Order::find($id);
 
-        //dd($order);
-
         return view('admin.orders.show', compact('order', 'restaurants'));
-
     }
 
     /**
