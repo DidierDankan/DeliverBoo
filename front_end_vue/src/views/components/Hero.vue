@@ -1,23 +1,15 @@
 <template>
   <section class="hero">
-    <div class="container">
-        
+    <div class="container"> 
       <div class="hero-block">
         <h1>I piatti che ami, a domicilio.</h1>
-
       </div>
-    
       <div class="hero-block">
-        
         <div class="spot">
           <h2 class="text-light">#aCasaTuaConDeliveBoo</h2>
         </div>
-        
       </div>
     </div>
-    
-    
-    
   </section>
 </template>
 
@@ -65,11 +57,8 @@ section.hero {
       background-repeat: no-repeat;
       background-position-y: 40%;
     }
-
-
   }
 
-  
   .spot {
     width: 90%;
     padding: 32px;
@@ -87,11 +76,8 @@ section.hero {
       transform: rotate(-3deg);
     }
   }
-  
-
 }
 
-// MD tablet 768 >
 @media screen and (min-width: 768px) {
   section.hero {
     height: 35vh;
@@ -113,7 +99,6 @@ section.hero {
         height: 100%;
       }
 
-
       &>div:last-of-type {
         height: 100%;
       }
@@ -124,7 +109,6 @@ section.hero {
   }
 }
 
-// LG desktop 1024 >
 @media screen and (min-width: 1024px) {
   section.hero {
     .container {

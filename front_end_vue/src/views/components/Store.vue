@@ -34,12 +34,14 @@ const items = Object.freeze([
 
 export default {
   name: "Store",
+
   data() {
     return {
       items,
       cart: [],
     };
   },
+  
   methods: {
     isInCart(itemId) {
       if (!localStorage.getItem("cart")) {

@@ -57,16 +57,17 @@
               <div class="header">
                 <h2>Il tuo carrello:</h2>
               </div>
-              <!-- <a class="btn btn-cart" @click.prevent="resetBasket()" href=""
-                >Vai alla cassa</a
-              > -->
+
               <Cart @click="forceRerender()" :key="componentKey" />
-              <!-- <div>Il tuo carrello è vuoto</div> -->
-              <button @click="modalCheckoutOpen()">Vai alla cassa</button>
+
+              <button class="cassa" @click="modalCheckoutOpen()">
+                Vai alla Cassa
+              </button>
             </div>
           </div>
         </div>
       </div>
+
       <!-- Modal -->
       <div
         class="modal-container-db"
@@ -91,6 +92,7 @@
               <span><strong>Ingredienti: </strong></span>{{ food.ingredients }}
             </div>
           </div>
+
           <AddBtn
             v-show="food.visibility"
             @click="forceRerender()"
@@ -98,6 +100,7 @@
             :items="items"
             :food="food"
           />
+
           <div class="button">
             <div @click="removeItem(food.id)" class="btn btn-cart left">
               Cancella
@@ -119,10 +122,13 @@
         @click="modalCheckoutClose()"
       >
         <div class="modal-db cart-2" @click.stop v-show="modalCheckout">
+          <div class="title-2 margin">Il tuo ordine:</div>
+
           <Checkout :key="componentKey" />
         </div>
       </div>
     </div>
+
     <Loader v-else />
   </div>
 </template>
@@ -135,18 +141,6 @@ import Loader from "./components/Loader.vue";
 import AddBtn from "./components/AddBtn.vue";
 import Checkout from "./components/Checkout.vue";
 
-// const items = Object.freeze(
-//   axios
-//     .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
-//     .then((res) => {
-//       //   const restaurantDetail = Object.assign({}, res.data);
-//       return res.data[1];
-//       // this.items = res.data[1];
-//       // console.log(res.data[1]);
-//       //   console.log(this.restaurantDetail);
-//     })
-// );
-
 export default {
   name: "RestaurantDetail",
 
@@ -157,22 +151,15 @@ export default {
     Checkout,
   },
 
-  props: {
-    status: Boolean,
-  },
-
   data() {
     return {
       restaurant: [],
-      // foods: [],
       cart: [],
       items: [],
       componentKey: 0,
       foodId: 0,
       modalCheckout: false,
-
       modalVisibility: false,
-
       name: "",
       surname: "",
       city: "",
@@ -180,25 +167,17 @@ export default {
       address: "",
       email: "",
       phone: "",
-
       orderObj: [],
     };
   },
+
   created() {
-    // console.log("hello cazzi", this.nonce);
-    // this.items;
     this.getRestaurant();
-    // console.log(this.items);
     this.reactiveBtns();
-    // console.log("jdifjdijfd", this.modalVisibility);
-    // console.log(this.foods);
   },
+
   updated() {
-    // console.log("checker status", this.status);
-    // console.log("carrellozzo", localStorage.getItem("cart"));
     this.renderAfterOrder();
-    // this.resetBasket();
-    // this.reactiveBtns();
   },
 
   methods: {
@@ -206,12 +185,8 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
         .then((res) => {
-          //   const restaurantDetail = Object.assign({}, res.data);
           this.restaurant = res.data[0];
           this.items = res.data[1];
-          // this.items = res.data[1];
-          // console.log(res.data[1]);
-          //   console.log(this.restaurantDetail);
         });
     },
     isInCart(itemId) {
@@ -250,23 +225,9 @@ export default {
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
     resetBasket() {
-      // const restaurants_id = [];
-
-      // this.cart.forEach((element) => {
-      //   if (!restaurants_id.includes(element.restaurant_id))
-      //     restaurants_id.push(element.restaurant_id);
-      // });
-
-      // restaurants_id.sort();
-
       if (this.cart[0]) {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
-            console.log(
-              "attenzione",
-              this.cart[0].restaurant_id,
-              element.restaurant_id
-            );
             alert("attenzione non puoi ordinare da 2 ristoranti");
           }
         });
@@ -292,7 +253,6 @@ export default {
         return true;
       }
     },
-
     modalVisibilityShow(id) {
       this.foodId = id;
       this.modalVisibility = true;
@@ -328,33 +288,24 @@ export default {
         this.city
       );
 
-      console.log(this.orderObj);
-
       if (!localStorage.getItem("orderdetails")) {
         localStorage.setItem("orderdetails", JSON.stringify([]));
       }
 
       localStorage.setItem("orderdetails", JSON.stringify(this.orderObj));
     },
-    testNonce() {
-      console.log(this.status);
-    },
-
     renderAfterOrder() {
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // console.log(cartItems.length);
       if (cartItems.length == 0) {
         this.forceRerender();
       }
     },
     removeItem(itemid) {
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // const pos = itemid;
-      // console.log(itemid);
-      // console.log(cartItems);
+
       const arr = [];
 
       cartItems.forEach((e) => {
@@ -362,7 +313,6 @@ export default {
           arr.push(e);
         }
       });
-      // console.log(arr);
 
       localStorage.setItem("cart", JSON.stringify(arr));
       this.forceRerender();
@@ -462,10 +412,6 @@ export default {
 .modal-db {
   width: 50%;
   height: 90vh;
-  // position: absolute;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 5px;
   display: flex;
@@ -536,6 +482,17 @@ export default {
 
 .margin {
   margin: 1rem 0;
+}
+
+.cassa {
+  padding: 10px;
+  color: #fff;
+  background: #00ccbc;
+  border: transparent;
+  transition: background 1s;
+  &:hover {
+    background: #04978b;
+  }
 }
 
 @media screen and (min-width: 768px) {

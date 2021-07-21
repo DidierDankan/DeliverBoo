@@ -10,7 +10,6 @@
               €</span
             >
           </div>
-          <!-- <img :src="c.imageUrl" /> -->
           <div class="flex">
             <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
@@ -22,15 +21,14 @@
     </div>
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
-
     <span class="refresh" @click="emptyCart()">Svuota</span>
-    <!-- <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "Cart",
+
   data() {
     return {
       cart: [],
@@ -38,9 +36,9 @@ export default {
       amountR: 0,
     };
   },
+
   methods: {
     addToCart(item) {
-      // const item = this.items.find(({ id }) => id === itemId);
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
@@ -75,15 +73,6 @@ export default {
       this.uniqueCart = uniqueitems;
     },
     resetBasket() {
-      // const restaurants_id = [];
-
-      // this.cart.forEach((element) => {
-      //   if (!restaurants_id.includes(element.restaurant_id))
-      //     restaurants_id.push(element.restaurant_id);
-      // });
-
-      // restaurants_id.sort();
-
       if (this.cart[0]) {
         this.cart.forEach((element) => {
           if (this.cart[0].restaurant_id != element.restaurant_id) {
@@ -126,9 +115,6 @@ export default {
     },
     removeItem(itemid) {
       const cartItems = JSON.parse(localStorage.getItem("cart"));
-      // const pos = itemid;
-      // console.log(itemid);
-      // console.log(cartItems);
       const arr = [];
 
       cartItems.forEach((e) => {
@@ -136,8 +122,6 @@ export default {
           arr.push(e);
         }
       });
-      // console.log(arr);
-
       localStorage.setItem("cart", JSON.stringify(arr));
     },
   },
@@ -145,84 +129,10 @@ export default {
     this.getCart();
     this.removeDouble();
     this.amount();
-    // console.log("maronno", this.uniqueCart);
   },
 };
 </script>
 
 <style scoped lang="scss">
-.items {
-  margin-bottom: 3rem;
-}
-
-.item {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // border-radius: 20px;
-  padding: 1rem 0;
-  border-bottom: 1px solid #22d5d54a;
-}
-
-.flex {
-  margin: 5px 0;
-  display: flex;
-  align-items: center;
-}
-
-.num {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  font-size: 1.2rem;
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  color: #fff;
-  background: #00ccbc;
-  // padding: 15px 30px;
-  border-radius: 50%;
-  text-decoration: none;
-  font-weight: 900;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.btn.delete {
-  margin-left: 5px;
-  background: #a80d08;
-}
-
-h3 {
-  margin: 2rem 0;
-}
-
-.cash {
-  margin-top: 2rem;
-  color: #fff;
-  background: #00ccbc;
-  padding: 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.refresh {
-  margin-top: 2rem;
-  padding: 10px;
-  color: #fff;
-  font-size: 1rem;
-  background: #a80d08;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+@import "@/style/cart.scss";
 </style>

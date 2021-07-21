@@ -21,11 +21,8 @@ export default {
   },
 
   created() {
-    // console.log(this.food);
     this.reactiveBtns();
   },
-
-  updated() {},
 
   methods: {
     isInCart(itemId) {
@@ -36,7 +33,6 @@ export default {
       return Boolean(cartItem);
     },
     addToCart(item) {
-      // const item = this.items.find(({ id }) => id === itemId);
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
       }
