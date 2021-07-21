@@ -31,7 +31,7 @@ class OrderController extends Controller
             array_push($restaurant_ids, $restaurant['id']);
         }
 
-        $orders = Order::whereIn('restaurant_id', $restaurant_ids)->paginate(6);
+        $orders = Order::whereIn('restaurant_id', $restaurant_ids)->orderBy('created_at', 'DESC')->paginate(6);
 
         
 

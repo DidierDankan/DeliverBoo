@@ -14,20 +14,20 @@ class PayedController extends Controller
 {
     //
 
-    public function make(Request $request)
-{
+//     public function make(Request $request)
+// {
 
-    $payload = $request->input('payload', false);
+//     $payload = $request->input('payload', false);
     
-    $status = Braintree_Transaction::sale([
-        'amount' => '10.00',
-        'options' => [
-        'submitForSettlement' => True
-        ]
-    ]);
+//     $status = Braintree_Transaction::sale([
+//         'amount' => '10.00',
+//         'options' => [
+//         'submitForSettlement' => True
+//         ]
+//     ]);
 
-    return response()->json($status);
-}
+//     return response()->json($status);
+// }
 
     public function payed()
     {
@@ -43,7 +43,7 @@ class PayedController extends Controller
             array_push($restaurant_ids, $restaurant['id']);
         }
 
-        $orders = Order::whereIn('restaurant_id', $restaurant_ids)->where('status', '=', 1)->paginate(6);
+        $orders = Order::whereIn('restaurant_id', $restaurant_ids)->where('status', '=', 1)->orderBy('created_at', 'DESC')->paginate(6);
 
         if (!$orders) {
             return view('admin.errors.404error');
