@@ -60,7 +60,9 @@
 
               <Cart @click="forceRerender()" :key="componentKey" />
 
-              <button @click="modalCheckoutOpen()">test checkout</button>
+              <button class="cassa" @click="modalCheckoutOpen()">
+                Vai alla Cassa
+              </button>
             </div>
           </div>
         </div>
@@ -120,21 +122,14 @@
         @click="modalCheckoutClose()"
       >
         <div class="modal-db cart-2" @click.stop v-show="modalCheckout">
-          <div class="title-2 margin">Carrello</div>
-          <div class="amount">
-            <div>Totale</div>
-            <div>10€</div>
-          </div>
-          <div class="title-2 margin">I tuoi dati</div>
+          <div class="title-2 margin">Il tuo ordine:</div>
 
-          <Checkout />
-
+          <Checkout :key="componentKey" />
         </div>
       </div>
     </div>
 
     <Loader v-else />
-
   </div>
 </template>
 
@@ -487,6 +482,17 @@ export default {
 
 .margin {
   margin: 1rem 0;
+}
+
+.cassa {
+  padding: 10px;
+  color: #fff;
+  background: #00ccbc;
+  border: transparent;
+  transition: background 1s;
+  &:hover {
+    background: #04978b;
+  }
 }
 
 @media screen and (min-width: 768px) {

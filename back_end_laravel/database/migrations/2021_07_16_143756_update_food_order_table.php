@@ -16,10 +16,7 @@ class UpdateFoodOrderTable extends Migration
         //
         Schema::table('food_order', function (Blueprint $table) {
 
-
-            // $table->tinyInteger('quantity');
             $table->timestamps();
-
 
         });
 
@@ -35,12 +32,8 @@ class UpdateFoodOrderTable extends Migration
         //
         Schema::table('food_order', function (Blueprint $table) {
 
-
-            // $table->dropColumn('quantity');
             $table->dropColumn('created_at');
             $table->dropColumn('updated_at');
-
-
 
         });
     }

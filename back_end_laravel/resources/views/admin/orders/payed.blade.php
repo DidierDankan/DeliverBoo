@@ -48,9 +48,7 @@
                 {{$orders->links()}}
             </div>
             <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-            
             <a class="btn btn-success text-white" href=" {{ route('admin.orders.index') }} ">All Orders</a>
-
         </div>
     </div>
 </div>

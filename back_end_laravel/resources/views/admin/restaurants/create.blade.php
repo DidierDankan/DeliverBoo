@@ -3,11 +3,9 @@
 @section('content')
 <div class="container">
 
-
     <div class="row d-flex justify-content-center">
         <div class="col-md-8 col-sm-8">
-        <div class="card shadow bg-white rounded mt-4">
-            
+        <div class="card shadow bg-white rounded mt-4">   
             
                 <h2 class="mb-3 card-header">Create a new Restaurant</h2>
             
@@ -117,16 +115,11 @@
                         <div class="actions d-flex justify-content-center">
                             <button class="btn btn-primary mr-3">Create</button>
                             <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
-                            {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
                         </div>
-
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>    
 @endsection

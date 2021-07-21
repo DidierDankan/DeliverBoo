@@ -1,0 +1,82 @@
+@import "./vars.scss";
+
+.items {
+  margin-bottom: 3rem;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #22d5d54a;
+}
+
+.flex {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 1.2rem;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  color: $text-color;
+  background: $primary-color;
+  border-radius: 50%;
+  text-decoration: none;
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.btn.delete {
+  margin-left: 5px;
+  background: $secondary-color;
+  transition: background 1s;
+  &:hover {
+    background: #95a86e;
+  }
+}
+
+h3 {
+  margin: 2rem 0;
+}
+
+.cash {
+  margin-top: 2rem;
+  color: $text-color;
+  background: $primary-color;
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.refresh {
+  margin-top: 2rem;
+  padding: 10px;
+  color: $text-color;
+  font-size: 1rem;
+  background: $secondary-color;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 1s;
+  &:hover {
+    background: #95a86e;
+  }
+}

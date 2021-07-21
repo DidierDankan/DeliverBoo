@@ -147,11 +147,8 @@ class FoodController extends Controller
 
         
         foreach ($restaurants as $restaurant){
-            
             array_push($restaurants_id, $restaurant->id);
-            
         }
-        
 
         $food = Food::find($id);
 
@@ -159,10 +156,7 @@ class FoodController extends Controller
             return view('admin.errors.404error');
         }
 
-        // $types = ['Food','Drink','Souce'];
-
-        return view('admin.foods.edit', compact('food') );
-        
+        return view('admin.foods.edit', compact('food') ); 
     }
 
     /**
@@ -174,16 +168,13 @@ class FoodController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'title' => ['required', 'max:100'],
             'price' => ['required','numeric'],
             'description' => ['nullable',],
-            // 'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
             'visibility' => ['boolean'],
             'restaurant_id' => ['nullable','exists:restaurants,id'],
-
         ], 
         [
             // custom message 
@@ -191,8 +182,8 @@ class FoodController extends Controller
             'max'=> 'Max :max characters allowed for the :attribute',
         ]);
 
-
         $data = $request->all();
+
         $food = Food::find($id);
 
         $food->update($data); //fillable
@@ -206,8 +197,6 @@ class FoodController extends Controller
         }
         
         return redirect()->route('admin.foods.show', $food->id);
-
-
     }
 
     /**
