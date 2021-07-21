@@ -69,7 +69,7 @@
 
                     <div class="address d-flex justify-content-between">
 
-                        <div class="mb-4 w-50 mr-2">
+                        {{-- <div class="mb-4 w-50 mr-2">
                             <label for="type" class="form-label">Type*: </label>
                         
                             <select 
@@ -90,9 +90,9 @@
                                 {{$message}}
                             </div>
                             @enderror
-                        </div>
+                        </div> --}}
                         
-                        <div class="mb-4 w-50 ml-2">
+                        <div class="mb-4 w-100 ml-2">
                             <label for="price">Price*:</label>
                             <input type="text" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $food->price) }}"
                             name="price"
