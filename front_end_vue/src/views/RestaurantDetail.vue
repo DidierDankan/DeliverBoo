@@ -126,7 +126,7 @@
             <div @click="modalVisibility = false" class="btn btn-cart left">
               Cancella
             </div>
-            <a class="btn btn-cart right" href=""
+            <a class="btn btn-cart right" @click.prevent href=""
               >TOTALE {{ food.price * multipleItemCounts(food.id) }} €</a
             >
           </div>
@@ -259,7 +259,7 @@ export default {
   },
 
   props: {
-    nonce: String,
+    status: Boolean,
   },
 
   data() {
@@ -286,7 +286,7 @@ export default {
     };
   },
   created() {
-    console.log("hello cazzi", this.nonce);
+    // console.log("hello cazzi", this.nonce);
     // this.items;
     this.getRestaurant();
     // console.log(this.items);
@@ -295,8 +295,9 @@ export default {
     // console.log(this.foods);
   },
   updated() {
-    // console.log(this.cart);
-    // console.log(localStorage.getItem("cart"));
+    // console.log("checker status", this.status);
+    // console.log("carrellozzo", localStorage.getItem("cart"));
+    this.renderAfterOrder();
     // this.resetBasket();
     // this.reactiveBtns();
   },
@@ -437,7 +438,18 @@ export default {
       localStorage.setItem("orderdetails", JSON.stringify(this.orderObj));
     },
     testNonce() {
-      console.log(this.nonce);
+      console.log(this.status);
+    },
+
+    renderAfterOrder() {
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      // console.log(cartItems.length);
+      if (cartItems.length == 0) {
+        this.forceRerender();
+      }
     },
   },
 };

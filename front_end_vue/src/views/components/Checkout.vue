@@ -170,6 +170,8 @@ export default {
       // amount: 0,
       orderPassed: false,
 
+      rerender: true,
+
       orderObj: {},
 
       cart: [],
@@ -197,7 +199,12 @@ export default {
       setTimeout(this.getOrderInfo, 1000);
       setTimeout(this.sendOrder, 1500);
 
+      this.sendRerender();
       // this.getOrderInfo();
+    },
+
+    sendRerender() {
+      this.$emit("status", this.rerender);
     },
 
     braintreeSystem() {
@@ -310,7 +317,7 @@ export default {
           console.log(res.data);
           this.orderPassed = res.data;
 
-          if(res.data) {
+          if (res.data) {
             localStorage.setItem("cart", JSON.stringify([]));
             localStorage.setItem("orderdetails", JSON.stringify({}));
           }
