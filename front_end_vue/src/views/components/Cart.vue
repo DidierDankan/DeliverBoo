@@ -15,6 +15,7 @@
             <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
             <span class="btn" @click="addToCart(c)">+</span>
+            <span class="btn delete" @click="removeAll(c.id)">X</span>
           </div>
         </div>
       </div>
@@ -22,9 +23,8 @@
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
 
-    <a class="cash" @click.prevent="resetBasket()" href=""
-      >Vai alla cassa reset</a
-    >
+    <span class="refresh" @click="emptyCart()">Svuota</span>
+    <!-- <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a> -->
   </div>
 </template>
 
@@ -121,6 +121,25 @@ export default {
 
       this.amountR = amount;
     },
+    emptyCart() {
+      localStorage.setItem("cart", JSON.stringify([]));
+    },
+    removeAll(itemid) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      // const pos = itemid;
+      // console.log(itemid);
+      // console.log(cartItems);
+      const arr = [];
+
+      cartItems.forEach((e) => {
+        if (e.id != itemid) {
+          arr.push(e);
+        }
+      });
+      // console.log(arr);
+
+      localStorage.setItem("cart", JSON.stringify(arr));
+    },
   },
   beforeMount() {
     this.getCart();
@@ -137,6 +156,7 @@ export default {
 }
 
 .item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -176,6 +196,11 @@ export default {
   font-size: 1.2rem;
 }
 
+.btn.delete {
+  margin-left: 5px;
+  background: #a80d08;
+}
+
 h3 {
   margin: 2rem 0;
 }
@@ -187,6 +212,17 @@ h3 {
   padding: 10px;
   border-radius: 5px;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.refresh {
+  margin-top: 2rem;
+  padding: 10px;
+  color: #fff;
+  font-size: 1rem;
+  background: #a80d08;
+  text-decoration: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 </style>

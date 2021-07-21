@@ -29,6 +29,7 @@ class OrderController extends Controller
 
         $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
 
+
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
@@ -79,8 +80,11 @@ class OrderController extends Controller
 
         $success = true;
 
-        return response()->json($foods);
+
+        return response()->json($success);
+
     }
+
 
 
     // public function make_payment(OrderRequest $request, Gateway $gateway)
