@@ -80,7 +80,7 @@
                 id="customerCity"
               />
             </div>
-            <div class="form-group">
+            <div v-if="lamianonna" class="form-group">
               <label for="amount">Totale</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -91,6 +91,7 @@
                   id="amount"
                   class="form-control"
                   placeholder="Totale"
+                  :value="amount()"
                 />
               </div>
             </div>

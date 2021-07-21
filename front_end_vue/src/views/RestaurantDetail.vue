@@ -123,10 +123,13 @@
             :food="food"
           />
           <div class="button">
-            <div @click="modalVisibility = false" class="btn btn-cart left">
+            <div @click="removeItem(food.id)" class="btn btn-cart left">
               Cancella
             </div>
-            <a class="btn btn-cart right" @click.prevent href=""
+            <a
+              class="btn btn-cart right"
+              @click.prevent="modalVisibility = false"
+              href=""
               >TOTALE {{ food.price * multipleItemCounts(food.id) }} €</a
             >
           </div>
@@ -450,6 +453,23 @@ export default {
       if (cartItems.length == 0) {
         this.forceRerender();
       }
+    },
+    removeItem(itemid) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      // const pos = itemid;
+      // console.log(itemid);
+      // console.log(cartItems);
+      const arr = [];
+
+      cartItems.forEach((e) => {
+        if (e.id != itemid) {
+          arr.push(e);
+        }
+      });
+      // console.log(arr);
+
+      localStorage.setItem("cart", JSON.stringify(arr));
+      this.forceRerender();
     },
   },
 };
