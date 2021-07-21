@@ -309,6 +309,11 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.orderPassed = res.data;
+
+          if(res.data) {
+            localStorage.setItem("cart", JSON.stringify([]));
+            localStorage.setItem("orderdetails", JSON.stringify({}));
+          }
         });
     },
   },
