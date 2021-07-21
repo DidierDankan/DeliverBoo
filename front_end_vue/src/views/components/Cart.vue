@@ -21,7 +21,9 @@
     </div>
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
-    <span class="refresh" @click="emptyCart()">Svuota</span>
+    <span class="refresh" @click="emptyCart()"
+      >Svuota <i class="fas fa-shopping-cart"></i
+    ></span>
   </div>
 </template>
 

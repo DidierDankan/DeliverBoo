@@ -1,6 +1,5 @@
 <template>
   <div class="restaurants">
-
     <Hero />
 
     <Type :key="reRender" @click="getRestaurants()" />
@@ -66,7 +65,6 @@
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
 
           <Loader />
-
         </div>
       </div>
     </div>
@@ -74,7 +72,6 @@
     <Workers />
 
     <Footer />
-
   </div>
 </template>
 
@@ -180,110 +177,5 @@ export default {
 </script>
 
 <style lang="scss">
-.bg-container {
-  background: #ffeae4;
-}
-.main-container {
-  max-width: 1170px;
-  margin: 0 auto;
-  padding: 40px 0px 40px 0px;
-  h1 {
-    margin-bottom: 2.5rem;
-    text-align: center;
-    color: #2e3333;
-  }
-}
-.cards {
-  display: grid;
-  grid-template-columns: 6fr;
-  row-gap: 15px;
-  .card {
-    width: 100%;
-    position: relative;
-    margin-bottom: 5px;
-    background: #00ccbc;
-    cursor: pointer;
-    transition: transform 0.4s;
-    box-shadow: 0 10px 6px -6px rgba(119, 119, 119, 0.3);
-    &:hover {
-      transform: scale(1.05);
-    }
-    img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      object-position: top;
-    }
-    .restaurant-title {
-      text-align: left;
-      color: #f4ffff;
-      font-weight: 600;
-      margin-left: 5px;
-      padding: 5px;
-    }
-  }
-}
-.link {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.naviga {
-  margin-top: 1.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 15px;
-  .btn-navi {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    margin: 5px;
-    border-radius: 50%;
-    border: 2px solid #00ccbc;
-    cursor: pointer;
-    .active-page {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #00ccbc;
-    }
-  }
-}
-
-.message {
-  text-align: center;
-  font-size: 1.5rem;
-  margin: 2rem 0 1.5rem;
-}
-
-@media screen and (min-width: 768px) {
-  .cards {
-    width: 90%;
-    margin: 0 auto;
-    grid-template-columns: 5fr 5fr;
-    column-gap: 10px;
-    row-gap: 15px;
-  }
-}
-
-@media screen and (min-width: 1170px) {
-  .cards {
-    width: 85%;
-    margin: 0 auto;
-    grid-template-columns: 5fr 5fr 5fr;
-    column-gap: 10px;
-    row-gap: 15px;
-  }
-}
+@import "@/style/restaurants.scss"
 </style>
