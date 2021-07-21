@@ -65,19 +65,21 @@ class OrderController extends Controller
  
         $new_food_order = new FoodOrder();
 
+        
         foreach ($foods as $food){
-
+            
             $new_food_order->order_id = $order_id;
 
-            $new_food_order->food_id = $food;
+            $new_food_order->food_id + $food;
 
         }
 
         $new_food_order->save();
 
+
         $success = true;
 
-        return response()->json($success);
+        return response()->json($foods);
     }
 
 
