@@ -15,7 +15,7 @@
             <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
             <span class="btn" @click="addToCart(c)">+</span>
-            <span class="btn delete" @click="removeAll(c.id)">X</span>
+            <span class="btn delete" @click="removeItem(c.id)">X</span>
           </div>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default {
     emptyCart() {
       localStorage.setItem("cart", JSON.stringify([]));
     },
-    removeAll(itemid) {
+    removeItem(itemid) {
       const cartItems = JSON.parse(localStorage.getItem("cart"));
       // const pos = itemid;
       // console.log(itemid);
@@ -145,7 +145,7 @@ export default {
     this.getCart();
     this.removeDouble();
     this.amount();
-    console.log("maronno", this.uniqueCart);
+    // console.log("maronno", this.uniqueCart);
   },
 };
 </script>

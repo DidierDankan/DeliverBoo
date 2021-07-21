@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <a class="btn" @click="removeFromCart(food.id)">-</a>
+    <input type="text" :value="multipleItemCounts(food.id)" />
     <div class="count">{{ multipleItemCounts(food.id) }}</div>
     <a class="btn" v-show="food.visibility" @click="addToCart(food)">+</a>
   </div>
