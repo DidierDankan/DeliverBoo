@@ -65,7 +65,11 @@
 
               <Cart @click="forceRerender()" :key="componentKey" />
 
-              <button class="cassa" @click="modalCheckoutOpen()">
+              <button
+                v-show="cart.length > 0"
+                class="cassa"
+                @click="modalCheckoutOpen()"
+              >
                 Vai alla Cassa
               </button>
             </div>
@@ -126,7 +130,7 @@
         v-show="modalCheckout"
         @click="modalCheckoutClose()"
       >
-        <div class="modal-db cart-2" @click.stop v-show="modalCheckout">
+        <div class="modal-db-pay cart-2" @click.stop v-show="modalCheckout">
           <div class="title-2 margin">Il tuo ordine:</div>
 
           <Checkout :key="componentKey" />
@@ -182,6 +186,7 @@ export default {
   },
 
   updated() {
+    this.cart = JSON.parse(localStorage.getItem("cart"));
     // this.renderAfterOrder();
   },
 
@@ -417,8 +422,58 @@ export default {
 }
 // MODAL
 .modal-db {
-  width: 375px;
-  height: 420px;
+  width: 370px;
+  height: 480px;
+  background: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
+  overflow: hidden;
+
+  .title {
+    height: 60px;
+    padding-top: 20px;
+  }
+
+  .info-modal {
+    flex-grow: 1;
+    border-top: 1px solid #e8ebeb;
+    border-bottom: 1px solid #e8ebeb;
+    padding: 20px;
+    width: 100%;
+  }
+
+  .button {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+
+    .left {
+      min-width: 80px;
+      border: 1px solid #e8ebeb;
+      background: #fff;
+      color: #00ccbc;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
+      margin-right: 20px;
+    }
+
+    .right {
+      min-width: 230px;
+      display: inline-block;
+      text-align: center;
+      padding: 15px;
+    }
+  }
+}
+
+.modal-db-pay {
+  width: 370px;
+  height: 620px;
   background: #fff;
   border-radius: 5px;
   display: flex;

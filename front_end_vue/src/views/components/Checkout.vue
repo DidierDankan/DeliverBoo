@@ -2,13 +2,12 @@
   <div v-if="clientToken" class="container">
     <div class="col-12 ">
       <div>
-        <div class="mb-2">Informazioni pagamento</div>
         <div>
           <div class="alert alert-success" v-if="nonce">
             Il pagamento è andato a buon fine.
           </div>
           <div class="alert alert-danger" v-if="error">
-            {{ error }}
+            Il pagamento è stato respinto.
           </div>
           <form>
             <div class="row">
