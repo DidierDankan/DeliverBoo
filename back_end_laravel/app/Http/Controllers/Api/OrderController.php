@@ -27,7 +27,9 @@ class OrderController extends Controller
         $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
 
         return response()->json($array);
+
     }
+
 
 
     // public function make_payment(OrderRequest $request, Gateway $gateway)

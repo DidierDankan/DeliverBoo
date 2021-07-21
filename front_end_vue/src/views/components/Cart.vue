@@ -15,13 +15,14 @@
             <span class="btn" @click="removeFromCart(index)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
             <span class="btn" @click="addToCart(c)">+</span>
+            <span class="btn" @click="removeAll(c.id)">X</span>
           </div>
         </div>
       </div>
     </div>
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
-
+    <i class="fas fa-window-close refresh" @click="emptyCart()"></i>
     <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a>
   </div>
 </template>
@@ -119,6 +120,25 @@ export default {
 
       this.amountR = amount;
     },
+    emptyCart() {
+      localStorage.setItem("cart", JSON.stringify([]));
+    },
+    removeAll(itemid) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      // const pos = itemid;
+      // console.log(itemid);
+      // console.log(cartItems);
+      const arr = [];
+
+      cartItems.forEach((e) => {
+        if (e.id != itemid) {
+          arr.push(e);
+        }
+      });
+      // console.log(arr);
+
+      localStorage.setItem("cart", JSON.stringify(arr));
+    },
   },
   beforeMount() {
     this.getCart();
@@ -135,6 +155,7 @@ export default {
 }
 
 .item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -185,6 +206,15 @@ h3 {
   padding: 10px;
   border-radius: 5px;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.refresh {
+  position: absolute;
+  top: 85px;
+  right: 7px;
+  font-size: 1.4rem;
+  color: #a80d08;
   cursor: pointer;
 }
 </style>
