@@ -15,7 +15,7 @@
             <span class="btn" @click="removeFromCart(c.id)">-</span>
             <span class="num">{{ multipleItemCounts(c.id) }}</span>
             <span class="btn" @click="addToCart(c)">+</span>
-            <span class="btn" @click="removeAll(c.id)">X</span>
+            <span class="btn delete" @click="removeAll(c.id)">X</span>
           </div>
         </div>
       </div>
@@ -23,8 +23,8 @@
     <h3 v-else>Il tuo carrello è vuoto!</h3>
     <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
 
-    <i class="fas fa-window-close refresh" @click="emptyCart()"></i>
-    <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a>
+    <span class="refresh" @click="emptyCart()">Svuota</span>
+    <!-- <a class="cash" @click.prevent="resetBasket()" href="">Vai alla cassa</a> -->
   </div>
 </template>
 
@@ -196,6 +196,11 @@ export default {
   font-size: 1.2rem;
 }
 
+.btn.delete {
+  margin-left: 5px;
+  background: #a80d08;
+}
+
 h3 {
   margin: 2rem 0;
 }
@@ -211,11 +216,13 @@ h3 {
 }
 
 .refresh {
-  position: absolute;
-  top: 85px;
-  right: 7px;
-  font-size: 1.4rem;
-  color: #a80d08;
+  margin-top: 2rem;
+  padding: 10px;
+  color: #fff;
+  font-size: 1rem;
+  background: #a80d08;
+  text-decoration: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 </style>
