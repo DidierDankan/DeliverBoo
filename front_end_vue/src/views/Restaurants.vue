@@ -1,6 +1,5 @@
 <template>
   <div class="restaurants">
-
     <Hero />
 
     <Type :key="reRender" @click="getRestaurants()" />
@@ -66,7 +65,6 @@
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
 
           <Loader />
-
         </div>
       </div>
     </div>
@@ -74,7 +72,6 @@
     <Workers />
 
     <Footer />
-
   </div>
 </template>
 
@@ -110,7 +107,7 @@ export default {
   created() {
     this.setFilterCache();
     this.getRestaurants();
-    this.getClientToken();
+    // this.getClientToken();
   },
 
   methods: {
@@ -158,6 +155,7 @@ export default {
     getClientToken() {
       axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
         this.clientToken = res.data.token;
+        console.log();
       });
 
       setTimeout(this.paymentToken, 6000);

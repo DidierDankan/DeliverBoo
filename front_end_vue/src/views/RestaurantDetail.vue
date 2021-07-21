@@ -177,7 +177,7 @@ export default {
   },
 
   updated() {
-    this.renderAfterOrder();
+    // this.renderAfterOrder();
   },
 
   methods: {
@@ -273,9 +273,11 @@ export default {
     },
     modalCheckoutClose() {
       this.modalCheckout = false;
+      this.forceRerender();
     },
     modalCheckoutOpen() {
       this.modalCheckout = true;
+      this.forceRerender();
     },
     getOrderInfo() {
       this.orderObj.push(
