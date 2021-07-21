@@ -32,7 +32,6 @@
                             @enderror
                         </div>
 
-
                         <div class="mb-4 text-center">
                             <h5>Available</h5>
                             <div class="bg-danger rounded w-25 d-inline-block pt-2">
@@ -75,36 +74,9 @@
                                 </div>
                 
                                 @enderror
-                        
                         </div>
 
-
-
-
-                        <div class="address d-flex justify-content-between">
-
-                            {{-- <div class="mb-4 w-50 mr-2">
-                                <label for="type" class="form-label">Type*: </label>
-                                <select 
-                                    name="type" 
-                                    id="type" 
-                                    class="form-control 
-                                    @error('type') is-invalid @enderror" 
-                                    required>
-                                    <option value="">-- Select Type --</option>
-                                    @foreach($types as $type)
-                                        <option value="{{$type}}">{{$type}}</option>
-                                    @endforeach 
-                                </select>
-                                @error('type')
-                                <div class="feedback">
-                                    {{$message}}
-                                </div>
-                            
-                                @enderror
-                                
-                            </div> --}}
-                            
+                        <div class="address d-flex justify-content-between">    
                             <div class="mb-4 w-100 ml-2">
                                 <label for="price">Price*:</label>
                                 <input type="text" class="form-control @error('price') is-invalid @enderror"
@@ -141,15 +113,10 @@
                             <button class="btn btn-primary mr-3">Create</button>
                             <a class="btn btn-success text-white" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
                         </div>
-
-                        {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>    
 @endsection

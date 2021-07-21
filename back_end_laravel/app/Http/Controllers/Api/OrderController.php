@@ -10,7 +10,6 @@ use Braintree\Gateway;
 use App\Models\Order;
 use App\Models\FoodOrder;
 
-
 class OrderController extends Controller
 {
     public function generate(Gateway $gateway)
@@ -29,7 +28,6 @@ class OrderController extends Controller
 
         $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
 
-
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
@@ -39,23 +37,14 @@ class OrderController extends Controller
         $new_order = new Order();
 
         $new_order->customer_name = $array['name'];
-
         $new_order->customer_surname = $array['surname'];
-
         $new_order->customer_mail = $array['email'];
-
         $new_order->customer_address = $array['address'];
-
         $new_order->customer_phone = $array['phone'];
-
         $new_order->customer_city = $array['city'];
-
         $new_order->customer_zip_code = $array['zip_code'];
-
         $new_order->status = $array['status'];
-
         $new_order->amount = $array['amount'];
-
         $new_order->restaurant_id = $restaurant;
 
         $new_order->save();
@@ -63,8 +52,6 @@ class OrderController extends Controller
         $order_id = $new_order->id;
 
         // popolazione tabella pivot
- 
-        
         
         foreach ($foods as $food){
             
@@ -76,41 +63,8 @@ class OrderController extends Controller
             $new_food_order->save();
         }
 
-
-
         $success = true;
 
-
         return response()->json($success);
-
     }
-
-
-
-    // public function make_payment(OrderRequest $request, Gateway $gateway)
-    // {
-    //     $food = Food::find($request->food);
-    //     $result = $gateway->transaction()->sale([
-    //         'amount' => $food->price,
-    //         'paymentMethodNonce' => $request->token,
-    //         'options' => [
-    //             'submitForSettlement' => true,
-    //         ],
-    //     ]);
-
-    //     if($result->success) {
-    //         $data = [
-    //             'success' => true,
-    //             'message' => 'Transaction was successful',
-    //         ];
-    //         return response()->json($data, 200);
-    //     } else{
-    //         $data = [
-    //             'success' => false,
-    //             'message' => 'Transaction failed',
-    //         ];
-    //         return response()->json($data, 401);
-    //     }
-    //     // return ;
-    // }
 }

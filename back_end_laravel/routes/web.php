@@ -29,11 +29,6 @@ Route::get('/payment', function () {
     return view('payment_test');
 });
 
-
-
-
-
-
 Auth::routes();
 
 Route::prefix('admin')
@@ -41,26 +36,15 @@ Route::prefix('admin')
 ->middleware('auth')
 ->name('admin.')
 ->group(function () {
-    
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
     Route::get('/orders/payed', 'PayedController@payed')->name('payed');
-
     Route::get('/foods/create/{id}', 'CreateFoodController@create')->name('foods.create');
-
     Route::get('/payment/make', 'PayedController@make')->name('payment.make');
-
-
-        //rotta resource food
-
-        Route::resource('/foods', 'FoodController', ['except' => 'create']);
-
-
         
-        Route::resource('/restaurants', 'RestaurantController');
-
-        Route::resource('/orders', 'OrderController');
-
+    //rotta resource food
+    Route::resource('/foods', 'FoodController', ['except' => 'create']);   
+    Route::resource('/restaurants', 'RestaurantController');
+    Route::resource('/orders', 'OrderController');
     });
 
     Route::get('{any?}', function () {
