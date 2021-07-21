@@ -4,8 +4,8 @@
       <div v-for="c of uniqueCart" :key="c.id">
         <div class="item">
           <div class="flex">
-            <span>{{ c.title }} </span>
-            <span>
+            <span class="cart-text">{{ c.title }} </span>
+            <span class="cart-text">
               {{ `: ${(c.price * multipleItemCounts(c.id)).toFixed(2)} ` }}
               €</span
             >
@@ -19,9 +19,11 @@
         </div>
       </div>
     </div>
-    <h3 v-else>Il tuo carrello è vuoto!</h3>
-    <h3>Totale: {{ amountR.toFixed(2) }} €</h3>
-    <span class="refresh" @click="emptyCart()">Svuota</span>
+    <h3 class="cart-text" v-else>Il tuo carrello è vuoto!</h3>
+    <h3 class="cart-text">Totale: {{ amountR.toFixed(2) }} €</h3>
+    <span class="refresh" @click="emptyCart()"
+      >Svuota <i class="fas fa-shopping-cart"></i
+    ></span>
   </div>
 </template>
 

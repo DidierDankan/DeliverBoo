@@ -1,0 +1,28 @@
+@import "./vars.scss";
+
+.bg-container {
+  background-color: $primary-color;
+  .container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1053px;
+    margin: 0 auto;
+    padding: 10px 0px;
+    .links {
+      text-decoration: none;
+      color: $text-color;
+      transition: color 0.3s;
+      &:hover {
+        color: $tertiary-color;
+      }
+    }
+    .brand {
+      margin-left: 1rem;
+      font-size: 2rem;
+    }
+    #nav {
+      margin-right: 1rem;
+    }
+  }
+}
