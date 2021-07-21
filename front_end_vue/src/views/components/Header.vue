@@ -19,30 +19,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.bg-container {
-  background-color: #00ccbc;
-  .container-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1170px;
-    margin: 0 auto;
-    padding: 10px 0px;
-    .links {
-      text-decoration: none;
-      color: #fff;
-      transition: color 0.3s;
-      &:hover {
-        color: rgb(27, 27, 27);
-      }
-    }
-    .brand {
-      margin-left: 1rem;
-      font-size: 2rem;
-    }
-    #nav {
-      margin-right: 1rem;
-    }
-  }
-}
+@import "@/style/header.scss";
 </style>

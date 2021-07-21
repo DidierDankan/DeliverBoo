@@ -1,0 +1,214 @@
+@import "./vars.scss";
+
+.container-cards {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 40px 10px 40px 10px;
+  .container-special {
+    max-width: 1053px;
+    margin: 0 auto;
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: $tertiary-color;
+      font-size: 35px;
+    }
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: 6fr;
+
+    .card-1 {
+      display: flex;
+      background-color: #ff483b;
+      .img {
+        display: flex;
+        flex-direction: column;
+        img {
+          width: 100%;
+        }
+      }
+      .card-txt {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        flex-grow: 1;
+        color: $text-color;
+        h4 {
+          font-size: 40px;
+        }
+        p {
+          margin-bottom: 5px;
+        }
+        .btn {
+          button {
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: not-allowed;
+            font-size: 16px;
+            min-height: 48px;
+            padding: 12px 24px;
+            color: $text-color;
+            background: $primary-color;
+          }
+        }
+      }
+    }
+    .card-2 {
+      display: flex;
+      background-color: #ff8100;
+      .img {
+        display: flex;
+        flex-direction: column;
+        img {
+          width: 100%;
+        }
+      }
+      .card-txt {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+        flex-grow: 1;
+        color: $text-color;
+        h4 {
+          font-size: 40px;
+        }
+        p {
+          margin-bottom: 5px;
+        }
+        .btn {
+          button {
+            a {
+              text-decoration: none;
+              font-size: 16px;
+              color: $text-color;
+              font-weight: 600;
+            }
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            min-height: 48px;
+            padding: 12px 24px;
+            background: $primary-color;
+            transition: background 1s;
+            &:hover {
+              background: #04978b;
+            }
+          }
+        }
+      }
+    }
+
+    .card-3 {
+      display: flex;
+      background-color: #bac3c3;
+      .img {
+        display: flex;
+        flex-direction: column;
+        img {
+          width: 100%;
+        }
+      }
+      .card-txt {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        padding: 10px;
+        color: $text-color;
+        h4 {
+          font-size: 40px;
+        }
+        p {
+          margin-bottom: 5px;
+        }
+        .btn {
+          button {
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: not-allowed;
+            font-size: 16px;
+            min-height: 48px;
+            padding: 12px 24px;
+            color: $text-color;
+            background: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .container-cards {
+      padding: 40px 0px 40px 0px;
+      //   .container-special {
+      //     padding: 0 10px 0 10px !important;
+      //     #break {
+      //       margin: 0 0 30px 16px !important;
+      //     }
+      //   }
+    }
+    .cards {
+      grid-template-columns: 5fr 5fr 5fr;
+      .card-2 {
+        .card-txt {
+          .btn {
+            button {
+              padding: 5px 24px;
+            }
+          }
+        }
+      }
+      .card-1,
+      .card-2,
+      .card-3 {
+        .card-txt {
+          h4 {
+            font-size: 30px;
+          }
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1170px) {
+    .container-cards {
+      padding: 40px 0px 40px 0px;
+      //   .container-special {
+      //     padding: 0 10px 0 10px !important;
+      //     #break {
+      //       margin: 0 0 30px 16px !important;
+      //     }
+      //   }
+    }
+    .cards {
+      grid-template-columns: 5fr 5fr 5fr;
+      .card-1,
+      .card-2,
+      .card-3 {
+        .card-txt {
+          h4 {
+            font-size: 25px;
+          }
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+      .card-2 {
+        .btn {
+          button {
+            padding: 5px 24px;
+          }
+        }
+      }
+    }
+  }
+}
