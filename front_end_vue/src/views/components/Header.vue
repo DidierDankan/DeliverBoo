@@ -3,11 +3,7 @@
     <div class="container-header">
       <router-link class="links brand" to="/">DeliveBoo</router-link>
       <div id="nav">
-        <router-link class="links brand" to="/demo">Demo</router-link>
-
         <router-link class="links" to="/">Home</router-link> |
-        <!-- <router-link class="links" to="/about">About</router-link> | -->
-        <!-- <router-link class="links" to="/restaurants">Restaurants</router-link> | -->
         <router-link class="links" to="/cart"
           ><i class="fas fa-shopping-cart"></i
         ></router-link>

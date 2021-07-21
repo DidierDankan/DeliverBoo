@@ -28,6 +28,7 @@
 <script>
 export default {
   name: "Cart",
+
   data() {
     return {
       cart: [],
@@ -35,6 +36,7 @@ export default {
       amountR: 0,
     };
   },
+
   methods: {
     addToCart(item) {
       if (!localStorage.getItem("cart")) {

@@ -55,6 +55,14 @@ class AppServiceProvider extends ServiceProvider
         // Braintree_Configuration::publicKey('my9pn2q5wf2pbvvw');
         // Braintree_Configuration::privateKey('b8bd5680d6691f8489f1c9020bbfd1b1');
 
+        // [
+        //     'environment' => env('BRAINTREE_ENV'),
+        //      'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+        //      'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+        //      'privateKey' => env('BRAINTREE_PRIVATE_KEY'),
+
+        //    ]
+
         
     }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="restaurants">
+
     <Hero />
 
     <Type :key="reRender" @click="getRestaurants()" />
@@ -45,40 +46,35 @@
               </router-link>
             </div>
           </div>
+
           <Loader v-else />
+
           <section v-show="sectionNexPrevVisibility()" class="naviga">
-            <!-- <button
-            v-show="pages.current > 1"
-            @click="getRestaurants(pages.current - 1)"
-          >
-            prev
-          </button> -->
             <div
               class="btn-navi"
               v-for="i in pages.last"
               :key="`page${i}`"
               @click="getRestaurants(i)"
             >
-              <!-- {{ i }} -->
               <div :class="{ 'active-page': i == pages.current }"></div>
             </div>
-            <!-- <button
-            v-show="pages.current < pages.last"
-            @click="getRestaurants(pages.current + 1)"
-          >
-            next
-          </button> -->
           </section>
+
           <!-- Loading... -->
         </div>
         <div v-else class="message">
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
+
           <Loader />
+
         </div>
       </div>
     </div>
+
     <Workers />
+
     <Footer />
+
   </div>
 </template>
 
@@ -92,6 +88,7 @@ import Footer from "./components/Footer.vue";
 
 export default {
   name: "Restaurants",
+
   components: {
     Hero,
     Loader,
@@ -109,16 +106,11 @@ export default {
       clientToken: "",
     };
   },
+
   created() {
-    // this.reRenderTypes();
     this.setFilterCache();
     this.getRestaurants();
     this.getClientToken();
-    console.log(localStorage.getItem("checkedTypes"));
-    console.log("vfchjasdxvfcjh", this.filterLocal);
-  },
-  mounted() {
-    // this.reRenderTypes();
   },
 
   methods: {
@@ -128,7 +120,6 @@ export default {
           .get(`http://127.0.0.1:8000/api/restaurants?page=${page}`)
           .then((res) => {
             this.restaurants = res.data.data;
-            console.log(res.data.data);
             this.pages = {
               current: res.data.current_page,
               last: res.data.last_page,
@@ -146,11 +137,6 @@ export default {
           })
           .then((res) => {
             this.restaurants = res.data;
-            console.log(res.data);
-            // this.pages = {
-            //   current: res.data.current_page,
-            //   last: res.data.last_page,
-            // };
           })
           .catch((err) => {
             console.log(err);
@@ -171,13 +157,10 @@ export default {
     },
     getClientToken() {
       axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
-        console.log(res.data.token);
         this.clientToken = res.data.token;
       });
 
       setTimeout(this.paymentToken, 6000);
-
-      // this.paymentToken();
     },
 
     paymentToken() {
@@ -191,8 +174,6 @@ export default {
       }
 
       localStorage.setItem("clienttoken", JSON.stringify(clientToken));
-      // this.cart = JSON.parse(localStorage.getItem("cart"));
-      console.log(localStorage.getItem("clienttoken"));
     },
   },
 };
@@ -286,7 +267,6 @@ export default {
   margin: 2rem 0 1.5rem;
 }
 
-//break points
 @media screen and (min-width: 768px) {
   .cards {
     width: 90%;
@@ -296,6 +276,7 @@ export default {
     row-gap: 15px;
   }
 }
+
 @media screen and (min-width: 1170px) {
   .cards {
     width: 85%;

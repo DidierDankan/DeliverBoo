@@ -60,7 +60,7 @@ class FoodController extends Controller
             'title' => ['required', 'max:100'],
             'price' => ['required','numeric','between:0,999'],
             'description' => ['nullable'],
-            'type' => ['required', 'max:50'],
+            // 'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
             'visibility' => ['boolean'],
             'restaurant_id' => ['nullable','exists:restaurants,id'],
@@ -159,9 +159,9 @@ class FoodController extends Controller
             return view('admin.errors.404error');
         }
 
-        $types = ['Food','Drink','Souce'];
+        // $types = ['Food','Drink','Souce'];
 
-        return view('admin.foods.edit', compact('food', 'types') );
+        return view('admin.foods.edit', compact('food') );
         
     }
 
@@ -179,7 +179,7 @@ class FoodController extends Controller
             'title' => ['required', 'max:100'],
             'price' => ['required','numeric'],
             'description' => ['nullable',],
-            'type' => ['required', 'max:50'],
+            // 'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
             'visibility' => ['boolean'],
             'restaurant_id' => ['nullable','exists:restaurants,id'],
