@@ -86,7 +86,9 @@
               > -->
               <Cart @click="forceRerender()" :key="componentKey" />
               <!-- <div>Il tuo carrello è vuoto</div> -->
-              <button @click="modalCheckoutOpen()">test checkout</button>
+              <button class="cassa" @click="modalCheckoutOpen()">
+                Vai alla Cassa
+              </button>
             </div>
           </div>
         </div>
@@ -640,6 +642,17 @@ export default {
 
 .margin {
   margin: 1rem 0;
+}
+
+.cassa {
+  padding: 10px;
+  color: #fff;
+  background: #00ccbc;
+  border: transparent;
+  transition: background 1s;
+  &:hover {
+    background: #04978b;
+  }
 }
 
 @media screen and (min-width: 768px) {
