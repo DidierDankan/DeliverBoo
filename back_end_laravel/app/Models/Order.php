@@ -11,9 +11,9 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    protected $fillable = [
-        'amount','status','customer_name','customer_surname','customer_address','customer_mail','customer_phone','customer_city','customer_zip_code'
-    ];
+    // protected $fillable = [
+    //     'amount','status','customer_name','customer_surname','customer_address','customer_mail','customer_phone','customer_city','customer_zip_code'
+    // ];
 
     public function restaurant(){
         return $this->belongsTo(Restaurant::class);
