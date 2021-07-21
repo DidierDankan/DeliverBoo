@@ -417,8 +417,8 @@ export default {
 }
 // MODAL
 .modal-db {
-  width: 50%;
-  height: 90vh;
+  width: 375px;
+  height: 420px;
   background: #fff;
   border-radius: 5px;
   display: flex;

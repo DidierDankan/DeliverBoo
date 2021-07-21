@@ -5,6 +5,9 @@
     <div class="card w-50">
         <h1 class="card-header">Order details</h1>
         <div class="card-body">
+            <div>Order no: {{$order->id}} of: {{$order->created_at}}</div>
+         
+            <hr>
             <div>Name: {{ $order->customer_name }}</div>
             <div>Surname: {{ $order->customer_surname }}</div>
             <hr>
@@ -22,8 +25,20 @@
                     @endif
                 @endforeach
             </div>
+            <hr>
+            <div>
+                Details:
+                <ul>
+                    @foreach ($vals as $key => $food)
+                        <li>
+                            {{$key . ' ' . $food . ' pz'}}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <hr>
             
-            <div>Amount: {{ $order->amount }}€</div>
+            <div>Amount: {{ number_format($order->amount, 2) }}€</div>
             <div>
                Status: {{ ($order->status == 1) ? 'Pagato' : 'Non Pagato' }}
             </div>

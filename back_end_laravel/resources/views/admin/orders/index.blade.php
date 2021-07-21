@@ -33,7 +33,7 @@
                             @endforeach
                         </td>
                         <td>{{$order->status ? 'Payed' : 'Not Payed'}}</td>
-                        <td>{{$order->amount}}</td>
+                        <td>{{ number_format($order->amount, 2) }}€</td>
 
                         <td><a class="btn btn-primary" href="{{ route('admin.orders.show', $order->id) }}">SHOW</a></td>
                     </tr>
