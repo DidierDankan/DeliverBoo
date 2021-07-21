@@ -80,25 +80,30 @@
                 id="customerCity"
               />
             </div>
-            <div v-if="lamianonna" class="form-group">
+            <div class="form-group">
               <label for="amount">Totale</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">€</span>
                 </div>
-                <input
-                  type="number"
+                <div
                   id="amount"
                   class="form-control"
                   placeholder="Totale"
                   :value="amount()"
-                />
+                >
+                  {{ amount() }} €
+                </div>
               </div>
             </div>
             <hr />
             <div class="form-group">
-              <label>Numero carta di credito</label>
-              <div id="creditCardNumber" class="form-control"></div>
+              <label for="creditCardNumber">Numero carta di credito</label>
+              <div
+                id="creditCardNumber"
+                name="creditCardNumber"
+                class="form-control"
+              ></div>
             </div>
             <div class="form-group">
               <div class="row">
@@ -220,7 +225,7 @@ export default {
               styles: {
                 input: {
                   "font-size": "14px",
-                  "font-family": "Open Sans",
+                  "font-family": "sans-serif",
                 },
               },
               fields: {
@@ -331,7 +336,7 @@ export default {
 <style scoped lang="scss">
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 
-// body {
-//   padding: 20px;
-// }
+.form-control {
+  height: 35px;
+}
 </style>
