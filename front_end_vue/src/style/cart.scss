@@ -49,10 +49,10 @@
 
 .btn.delete {
   margin-left: 5px;
-  background: $secondary-color;
+  background: $btn-color;
   transition: background 1s;
   &:hover {
-    background: #95a86e;
+    background: #03626b;
   }
 }
 
@@ -75,12 +75,12 @@ h3 {
   padding: 10px;
   color: $text-color;
   font-size: 1rem;
-  background: $secondary-color;
+  background: $btn-color;
   text-decoration: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background 1s;
   &:hover {
-    background: #95a86e;
+    background: #03626b;
   }
 }
