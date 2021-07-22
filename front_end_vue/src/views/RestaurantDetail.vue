@@ -17,23 +17,23 @@
           />
         </div>
         <div class="info">
-          <h1>{{ restaurant.name }}</h1>
+          <h1 class="text-color-primary">{{ restaurant.name }}</h1>
           <div>
             <span v-for="(type, index) in restaurant.types" :key="index"
               >{{ type.type }} °
             </span>
           </div>
           <div>
-            <span>{{ restaurant.address }}, </span>
-            <span>{{ restaurant.city }}, </span>
-            <span>{{ restaurant.zip_code }}</span>
+            <span class="text-color-primary">{{ restaurant.address }}, </span>
+            <span class="text-color-primary">{{ restaurant.city }}, </span>
+            <span class="text-color-primary">{{ restaurant.zip_code }}</span>
           </div>
         </div>
       </div>
 
       <div class="foods">
         <div class="container-db">
-          <h1>Cibi</h1>
+          <h1 class="text-color-primary">Cibi</h1>
           <div class="flex">
             <div class="cards">
               <div class="card-container cards" @click.stop>
@@ -47,7 +47,7 @@
                   :key="index"
                   @click="modalVisibilityShow(food.id)"
                 >
-                  <div class="mb">{{ food.title }}</div>
+                  <div class="mb text-color-primary">{{ food.title }}</div>
                   <div class="text-color mb" v-if="food.visibility === 0">
                     Non Disponibile
                   </div>
@@ -118,7 +118,8 @@
               class="btn btn-cart right"
               @click.prevent="modalVisibility = false"
               href=""
-              >TOTALE {{ food.price * multipleItemCounts(food.id) }} €</a
+              >TOTALE
+              {{ (food.price * multipleItemCounts(food.id)).toFixed(2) }} €</a
             >
           </div>
         </div>
@@ -288,6 +289,7 @@ export default {
     modalCheckoutOpen() {
       this.modalCheckout = true;
       this.forceRerender();
+      // this.resetBasket();
     },
     getOrderInfo() {
       this.orderObj.push(
@@ -335,9 +337,14 @@ export default {
 
 <style lang="scss" scoped>
 @import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "@/style/vars.scss";
 
 .detail-container {
   scroll-snap-type: y mandatory;
+}
+
+.text-color-primary {
+  color: $tertiary-color;
 }
 
 .image img {

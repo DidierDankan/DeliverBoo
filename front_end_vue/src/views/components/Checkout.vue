@@ -3,12 +3,6 @@
     <div class="col-12 ">
       <div>
         <div>
-          <div class="alert alert-success" v-if="nonce">
-            Il pagamento è andato a buon fine.
-          </div>
-          <div class="alert alert-danger" v-if="error">
-            Il pagamento è stato respinto.
-          </div>
           <form>
             <div class="row">
               <div class="mb-3 col-md-6 col-sm-12">
@@ -92,7 +86,7 @@
                   placeholder="Totale"
                   :value="amount()"
                 >
-                  {{ amount() }} €
+                  {{ amount().toFixed(2) }} €
                 </div>
               </div>
             </div>
@@ -123,6 +117,14 @@
               <img src="../../assets/img/americanexpress.png" alt="amex" />
             </div>
 
+            <div v-if="nonce || error" class="advises mb-2 mt-2">
+              <div class="alert alert-success" v-if="nonce">
+                Il pagamento è andato a buon fine.
+              </div>
+              <div class="alert alert-danger" v-if="error">
+                Il pagamento è stato respinto.
+              </div>
+            </div>
             <button
               class="btn btn-block text-white mt-3"
               @click.prevent="payWithCreditCard"
@@ -216,8 +218,6 @@ export default {
         braintree.client
           .create({
             authorization: JSON.parse(localStorage.getItem("clienttoken")),
-            // authorization:
-            //   "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUyTWpZNU56STFORGtzSW1wMGFTSTZJalJrWldVNVptSTNMVE5qWVdRdE5HSmxNaTA1WWpsakxXUXpORFE0TnpJNU9EQTFZeUlzSW5OMVlpSTZJamwyYm5GeE9XYzBjM0pyZDNSeWQzUWlMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pT1hadWNYRTVaelJ6Y210M2RISjNkQ0lzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPbVpoYkhObGZTd2ljbWxuYUhSeklqcGJJbTFoYm1GblpWOTJZWFZzZENKZExDSnpZMjl3WlNJNld5SkNjbUZwYm5SeVpXVTZWbUYxYkhRaVhTd2liM0IwYVc5dWN5STZlMzE5LjB1NVloYzJnYThwc19rNURpYS1BYV8xQmlSN1poSktsZm1VdFdOdE00ajh0WTZ5QTdDUm1CTWo0eFFzLS1SeTB3YXR4LXJ2T1I5aGlobzNMWV9GTWt3IiwiY29uZmlnVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzLzl2bnFxOWc0c3Jrd3Ryd3QvY2xpZW50X2FwaS92MS9jb25maWd1cmF0aW9uIiwiZ3JhcGhRTCI6eyJ1cmwiOiJodHRwczovL3BheW1lbnRzLnNhbmRib3guYnJhaW50cmVlLWFwaS5jb20vZ3JhcGhxbCIsImRhdGUiOiIyMDE4LTA1LTA4IiwiZmVhdHVyZXMiOlsidG9rZW5pemVfY3JlZGl0X2NhcmRzIl19LCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvOXZucXE5ZzRzcmt3dHJ3dC9jbGllbnRfYXBpIiwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwibWVyY2hhbnRJZCI6Ijl2bnFxOWc0c3Jrd3Ryd3QiLCJhc3NldHNVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImF1dGhVcmwiOiJodHRwczovL2F1dGgudmVubW8uc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbSIsInZlbm1vIjoib2ZmIiwiY2hhbGxlbmdlcyI6W10sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL29yaWdpbi1hbmFseXRpY3Mtc2FuZC5zYW5kYm94LmJyYWludHJlZS1hcGkuY29tLzl2bnFxOWc0c3Jrd3Ryd3QifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJhbGxvd0h0dHAiOnRydWUsImRpc3BsYXlOYW1lIjoiaHVidXJ0ZGV2IiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImVudmlyb25tZW50Ijoib2ZmbGluZSIsImJyYWludHJlZUNsaWVudElkIjoibWFzdGVyY2xpZW50MyIsIm1lcmNoYW50QWNjb3VudElkIjoiaHVidXJ0ZGV2IiwiY3VycmVuY3lJc29Db2RlIjoiRVVSIn19",
           })
           .then((clientInstance) => {
             let options = {
@@ -317,6 +317,8 @@ export default {
         })
         .then((res) => {
           this.orderPassed = res.data;
+          console.log(this.nonce);
+          console.log(localStorage.getItem("orderdetails"));
 
           if (res.data) {
             localStorage.setItem("cart", JSON.stringify([]));

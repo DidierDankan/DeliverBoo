@@ -8,7 +8,7 @@
             </h2>
             <div class="card-body d-flex flex-column align-items-center">
                Hey {{Auth::user()->name}} please dont play with the url!!
-               <a class="mt-4 btn btn-primary text-white" href=" {{ route('admin.restaurants.index') }} ">return to restaurants</a>
+               <a class="mt-4 btn btn-primary text-white" href=" {{ route('admin.home') }} ">Return to dashboard</a>
             </div>
         </div>
     </div>

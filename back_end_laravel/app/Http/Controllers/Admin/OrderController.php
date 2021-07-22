@@ -78,10 +78,14 @@ class OrderController extends Controller
             array_push($restaurant_ids, $restaurant['id']);
         }
 
-        $order = Order::with('foods')->whereIn('restaurant_id', $restaurant_ids)->find($id);
+        $order = Order::whereIn('restaurant_id', $restaurant_ids)->find($id);
 
         $food_ids = [];
 
+        if (!$order) {
+            return view('admin.errors.404error');
+        }
+        
         foreach ($order->foods as $food){
             array_push($food_ids, $food['title']);
         }
@@ -93,9 +97,6 @@ class OrderController extends Controller
         // dd($vals);
 
 
-        if (!$order) {
-            return view('admin.errors.404error');
-        }
 
         return view('admin.orders.show', compact('order', 'restaurants', 'vals'));
     }

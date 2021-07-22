@@ -35,7 +35,7 @@
                 </span>
               </div>
               <router-link
-                @click="cleanLocalTypes()"
+                @click="cleanLocalTypes(restaurant.id)"
                 class="link"
                 :to="{
                   name: 'restaurant-detail',
@@ -64,7 +64,7 @@
         <div v-else class="message">
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
 
-          <Loader />
+          <!-- <Loader /> -->
         </div>
       </div>
     </div>
@@ -143,8 +143,9 @@ export default {
     reRenderTypes() {
       this.reRender += 1;
     },
-    cleanLocalTypes() {
+    cleanLocalTypes(restaurant_id) {
       localStorage.setItem("checkedTypes", JSON.stringify([]));
+      this.resetBasket(restaurant_id);
     },
     setFilterCache() {
       this.filterLocal = localStorage.getItem("checkedTypes");
@@ -158,7 +159,7 @@ export default {
         console.log(res.data.token);
       });
 
-      setTimeout(this.paymentToken, 6000);
+      setTimeout(this.paymentToken, 10000);
     },
 
     paymentToken() {
@@ -173,6 +174,19 @@ export default {
 
       localStorage.setItem("clienttoken", JSON.stringify(clientToken));
       console.log(localStorage.getItem("clienttoken"));
+    },
+
+    resetBasket(restaurant_id) {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+
+      if (cart[0] && cart[0].restaurant_id != restaurant_id) {
+        let reset = confirm(
+          "attenzione non puoi ordinare da 2 ristoranti diversi.\nVuoi svuotare il carrello?"
+        );
+        reset === true
+          ? localStorage.setItem("cart", JSON.stringify([]))
+          : (location.href = "http://localhost:8080/#/");
+      }
     },
   },
 };

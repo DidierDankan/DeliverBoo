@@ -49,7 +49,7 @@ class PayedController extends Controller
             return view('admin.errors.404error');
         }
 
-        return view('admin.orders.index', compact('orders', 'restaurants'));
+        return view('admin/orders/payed', compact('orders', 'restaurants'));
 
         // $user_id = Auth::user()->id;
 
