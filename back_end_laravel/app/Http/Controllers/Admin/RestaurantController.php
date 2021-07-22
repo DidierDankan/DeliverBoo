@@ -25,7 +25,7 @@ class RestaurantController extends Controller
 
         $types = Type::all();
 
-        $restaurants = Restaurant::where('user_id', '=', $user_id)->paginate(6);
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->orderBy('name', 'asc')->paginate(6);
 
         return view('admin.restaurants.index', compact('restaurants', 'types'));
     }
@@ -110,7 +110,7 @@ class RestaurantController extends Controller
 
         $restaurant = Restaurant::where('user_id', '=', $user_id)->find($id);
 
-        $foods = Food::where('restaurant_id', '=', $id)->paginate(4);
+        $foods = Food::where('restaurant_id', '=', $id)->orderBy('title', 'asc')->paginate(4);
 
         $types = Type::all();
 
@@ -156,7 +156,7 @@ class RestaurantController extends Controller
             'name' => ['required', Rule::unique('restaurants')->ignore($id), 'max:255'],
             'address' => ['required','max:255'],
             'city' => ['required','max:50'],
-            'zip_code' => ['required', 'max:10', 'string', 'size:5'],
+            'zip_code' => ['required', 'string', 'size:5', 'regex:/^(?:\d+|all)$/'],
             'cover' => ['nullable','image','mimes:jpeg,bmp,png'],
             'user_id' => ['numeric'],
         ], 
