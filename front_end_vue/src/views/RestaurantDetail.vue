@@ -17,26 +17,26 @@
           />
         </div>
         <div class="info">
-          <h1 class="text-color-primary">{{ restaurant.name }}</h1>
+          <h1 class="text-color-tertiary">{{ restaurant.name }}</h1>
           <div class="margin-bottom">
             <span
-              class="badge-type text-color-primary"
+              class="badge-type text-color-tertiary"
               v-for="(type, index) in restaurant.types"
               :key="index"
               >{{ type.type }} °
             </span>
           </div>
-          <div>
-            <span class="text-color-primary">{{ restaurant.address }}, </span>
-            <span class="text-color-primary">{{ restaurant.city }}, </span>
-            <span class="text-color-primary">{{ restaurant.zip_code }}</span>
+          <div class="margin-top">
+            <span class="text-color-tertiary">{{ restaurant.address }}, </span>
+            <span class="text-color-tertiary">{{ restaurant.city }}, </span>
+            <span class="text-color-tertiary">{{ restaurant.zip_code }}</span>
           </div>
         </div>
       </div>
 
       <div class="foods">
         <div class="container-db">
-          <h1 class="text-color-primary">Cibi</h1>
+          <h1 class="text-color-tertiary">Cibi</h1>
           <div class="flex">
             <div class="cards">
               <div class="card-container cards" @click.stop>
@@ -50,7 +50,7 @@
                   :key="index"
                   @click="modalVisibilityShow(food.id)"
                 >
-                  <div class="mb text-color-primary">{{ food.title }}</div>
+                  <div class="mb text-color-tertiary">{{ food.title }}</div>
                   <div class="text-color mb" v-if="food.visibility === 0">
                     Non Disponibile
                   </div>
@@ -94,14 +94,22 @@
           @click.stop
         >
           <div class="title">
-            <h3>{{ food.title }}</h3>
+            <h3 class="text-color-tertiary">{{ food.title }}</h3>
           </div>
           <div class="info-modal">
             <div class="mb-2">
-              <span><strong>Descrizione: </strong></span>{{ food.description }}
+              <span class="text-color-tertiary"
+                ><strong>Descrizione: </strong>
+                {{ food.description }}
+              </span>
+              <!-- {{ food.description }} -->
             </div>
             <div>
-              <span><strong>Ingredienti: </strong></span>{{ food.ingredients }}
+              <span class="text-color-tertiary"
+                ><strong>Ingredienti: </strong>
+
+                {{ food.ingredients }}
+              </span>
             </div>
           </div>
 
@@ -346,7 +354,7 @@ export default {
   scroll-snap-type: y mandatory;
 }
 
-.text-color-primary {
+.text-color-tertiary {
   color: $tertiary-color;
 }
 
@@ -361,8 +369,17 @@ export default {
   }
 }
 
+.text-color-modal {
+  color: #adafaf;
+}
+
 .margin-bottom {
   margin-bottom: 5px;
+}
+
+.margin-top {
+  margin-top: 15px;
+  text-transform: capitalize;
 }
 
 .image img {
@@ -668,6 +685,9 @@ export default {
     .container-db {
       max-width: 1170px;
       margin: 0 auto;
+      h1 {
+        margin-left: 3px;
+      }
     }
   }
 }
