@@ -18,8 +18,11 @@
         </div>
         <div class="info">
           <h1 class="text-color-primary">{{ restaurant.name }}</h1>
-          <div>
-            <span v-for="(type, index) in restaurant.types" :key="index"
+          <div class="margin-bottom">
+            <span
+              class="badge-type text-color-primary"
+              v-for="(type, index) in restaurant.types"
+              :key="index"
               >{{ type.type }} °
             </span>
           </div>
@@ -34,7 +37,7 @@
       <div class="foods">
         <div class="container-db">
           <h1 class="text-color-primary">Cibi</h1>
-          <div class="flex">
+          <div class="flex p2rem">
             <div class="cards">
               <div class="card-container cards" @click.stop>
                 <div
@@ -347,6 +350,21 @@ export default {
   color: $tertiary-color;
 }
 
+.badge-type {
+  padding: 3px 7px;
+  margin: 0 3px;
+  font-size: 13px;
+  background: $secondary-color;
+  border-radius: 5px;
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 5px;
+}
+
 .image img {
   width: 100%;
   margin-top: 20px;
@@ -398,6 +416,16 @@ export default {
   .cart {
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.137) 0px 3px 8px;
+    display: block;
+    width: 300px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #e8ebeb;
+    height: max-content;
+    margin: 2rem auto 0;
   }
 
   .notAvailable {
@@ -564,6 +592,10 @@ export default {
   }
 }
 
+.p2rem {
+  padding-bottom: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   .detail {
     display: flex;
@@ -611,18 +643,10 @@ export default {
     }
 
     .cart {
-      display: block;
-      width: 300px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
       position: absolute;
       right: 0;
       top: -100px;
-      border-radius: 5px;
-      border: 1px solid #e8ebeb;
-      height: max-content;
+      margin: 0;
 
       .btn-cart {
         margin: 10px;
