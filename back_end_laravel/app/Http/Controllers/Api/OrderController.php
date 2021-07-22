@@ -10,6 +10,9 @@ use Braintree\Gateway;
 use App\Models\Order;
 use App\Models\FoodOrder;
 
+use Illuminate\Validation\Rule;
+
+
 class OrderController extends Controller
 {
     public function generate(Gateway $gateway)
@@ -28,6 +31,18 @@ class OrderController extends Controller
 
         $array = json_decode($all, true, JSON_UNESCAPED_SLASHES);
 
+        // $array->validate([
+        //     'name' => ['required', 'max:50'],
+        //     'surname' => ['required', 'max:50'],
+        //     'email' => ['required','max:255'],
+        //     'address' => ['required','max:255'],
+        //     'phone' => ['required','max:20'],
+        //     'city' => ['required','max:50'],
+        //     'zip_code' => ['required', 'string', 'size:10', 'regex:/^(?:\d+|all)$/'],
+        //     'status' => ['required'],
+        //     'amount' => ['required', 'numeric'],
+        // ]);
+        
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
