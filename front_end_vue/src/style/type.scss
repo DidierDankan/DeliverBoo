@@ -1,0 +1,63 @@
+@import "./vars.scss";
+
+h1 {
+  margin: 30px 0;
+  text-align: center;
+  color: $tertiary-color;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  width: 355px;
+  margin: 0 auto 30px;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+.card {
+  margin: 8px;
+  color: $tertiary-color;
+}
+
+.tipologia:hover {
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+.tipologia:active {
+  background-color: #1b7e8a;
+  color: $text-color;
+}
+
+.tipologia {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #d2d8df;
+  padding: 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 400ms;
+}
+
+.selected {
+  background-color: #1b7e8a;
+  color: $text-color;
+}
+
+/* Media Queries */
+@media (min-width: 768px) and (max-width: 1170px) {
+  .container {
+    width: 768px;
+  }
+}
+@media (min-width: 1171px) {
+  .container {
+    width: 1000px;
+  }
+}

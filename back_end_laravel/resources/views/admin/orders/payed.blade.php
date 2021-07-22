@@ -5,6 +5,8 @@
     <div class="card">
 
         <h1 class="card-header">Payed Orders</h1>
+
+        <div class="table-container" style="overflow-x: scroll">
         
         <table class="table">
             <thead class="thead-light">
@@ -34,7 +36,7 @@
                             @endforeach
                         </td>
                         <td>{{$order->status ? 'Payed' : 'Not Payed'}}</td>
-                        <td>{{$order->amount}}</td>
+                        <td>{{ number_format($order->amount, 2) }}€</td>
 
                         <td><a class="btn btn-primary" href="{{ route('admin.orders.show', $order->id) }}">SHOW</a></td>
                     </tr>
@@ -47,10 +49,12 @@
             <div class="paginate mt-3 mr-3">
                 {{$orders->links()}}
             </div>
-            <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-            
-            <a class="btn btn-success text-white" href=" {{ route('admin.orders.index') }} ">All Orders</a>
-
+            <div>
+            <a class="btn btn-info text-white mr-3 mt-3 mt-md-0 mt-lg-0" href=" {{ route('admin.home') }} ">Dashboard</a>
+        </div>
+        <div>
+            <a class="btn btn-success text-white mt-1 mt-md-0 mt-lg-0" href=" {{ route('admin.orders.index') }} ">All Orders</a>
+        </div>
         </div>
     </div>
 </div>

@@ -3,8 +3,9 @@
 @section('content')
 <div class="container">
     <div class="card">
-
         <h1 class="card-header">All Orders</h1>
+
+        <div class="table-container" style="overflow-x: scroll">
         
         <table class="table">
             <thead class="thead-light">
@@ -34,24 +35,27 @@
                             @endforeach
                         </td>
                         <td>{{$order->status ? 'Payed' : 'Not Payed'}}</td>
-                        <td>{{$order->amount}}</td>
+                        <td>{{ number_format($order->amount, 2) }}€</td>
 
                         <td><a class="btn btn-primary" href="{{ route('admin.orders.show', $order->id) }}">SHOW</a></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        
     </div>
+</div>
     <div class="card">
         <div class="card-body d-flex justify-content-center align-items-md-center">
             <div class="paginate mt-3 mr-3">
                 {{$orders->links()}}
             </div>
-            <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-
+            <div class="mt-3 mt-md-0 mt-lg-0 ">
+            <a class="btn btn-info text-white mr-3" href="{{route('admin.home')}}">Dashboard</a>
+        </div>
+        <div class="mt-3  mt-md-0 mt-lg-0">
             <a class="btn btn-success text-white" href="{{route('admin.payed')}} ">Payed</a>
-            
-
+            <div>
         </div>
     </div>
 </div>

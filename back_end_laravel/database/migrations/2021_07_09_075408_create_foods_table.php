@@ -18,7 +18,6 @@ class CreateFoodsTable extends Migration
             $table->string('title', 100);
             $table->float('price', 5, 2)->unsigned();
             $table->text('description')->nullable();
-            $table->string('type', 50);
             $table->string('ingredients');
             $table->boolean('visibility')->default(true);
             $table->unsignedBigInteger('restaurant_id')->nullable();

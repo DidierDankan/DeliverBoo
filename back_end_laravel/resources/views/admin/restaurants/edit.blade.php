@@ -3,15 +3,12 @@
 @section('content')
 <div class="container">
 
-
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
         <div class="card shadow bg-white rounded mt-4">
-            
-            
+             
                 <h2 class="mb-3 card-header ">Edit Restaurant</h2>
                 
-            
                 <div class="card-body">
                     <form action=" {{ route('admin.restaurants.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data" class="update-form">
                         @csrf
@@ -37,6 +34,7 @@
                             name="address"
                             id="address"
                             value="{{ old('address') }}"
+                            maxlength="255"
                             required
                             >
                             @error('address')
@@ -52,6 +50,7 @@
                                 name="city"
                                 id="city"
                                 value="{{ old('city', $restaurant->city) }}"
+                                maxlength="50"
                                 required
                                 >
                                 @error('city')
@@ -66,6 +65,7 @@
                                 name="zip_code"
                                 id="zip_code"
                                 value="{{ old('zip_code') }}"
+                                maxlength="10"
                                 required
                                 >
                                 @error('zip_code')
@@ -121,13 +121,10 @@
                             <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3">Restaurants</a>
                             <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white">Menu</a>
                         </div>
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>    
 @endsection

@@ -2,14 +2,11 @@
 
 @section('content')
 <div class="container">
-
-
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card shadow bg-white rounded mt-4">
-            
                 <h2 class="mb-3 card-header">Edit: {{$food->title}}</h2>
-            
+
                 <div class="card-body">
                     <form action=" {{ route('admin.foods.update', $food->id) }}" method="POST" enctype="multipart/form-data" class="update-form">
                         @csrf
@@ -21,6 +18,7 @@
                             name="title"
                             id="title"
                             value="{{ old('title') }}"
+                            maxlength="100"
                             required
                             >
                             @error('title')
@@ -29,8 +27,6 @@
                                 </div>
                             @enderror
                         </div>
-
-
 
                         <div class="mb-4 text-center">
                             <h4>Available</h4>
@@ -67,32 +63,8 @@
                         <div class="feedback">{{$message}}</div>
                         @enderror
 
-                    <div class="address d-flex justify-content-between">
-
-                        <div class="mb-4 w-50 mr-2">
-                            <label for="type" class="form-label">Type*: </label>
-                        
-                            <select 
-                                name="type" 
-                                id="type" 
-                                class="form-control @error('type') is-invalid @enderror"
-                                required
-                                >
-                                <option value="{{$food->type}}">{{$food->type}}</option>
-                                @foreach($types as $type)
-                                    @if($food->type != $type)
-                                        <option value="{{$type}}">{{$type}}</option>
-                                    @endif
-                                @endforeach 
-                            </select>
-                            @error('type')
-                            <div class="feedback">
-                                {{$message}}
-                            </div>
-                            @enderror
-                        </div>
-                        
-                        <div class="mb-4 w-50 ml-2">
+                    <div class="address d-flex justify-content-between">   
+                        <div class="mb-4 w-100 ml-2">
                             <label for="price">Price*:</label>
                             <input type="text" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $food->price) }}"
                             name="price"
@@ -123,11 +95,8 @@
             
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary mr-3">Update</button>
-                            {{-- <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a> --}}
                             <a class="btn btn-success text-white mr-3" href="{{ route('admin.restaurants.show' , $food->restaurant_id) }}">Menu</a>
-                            {{-- <a class="btn btn-info text-white " href=" {{ route('admin.home') }} ">Dashboard</a> --}}
                         </div>
-
                     </form>
                 </div>
             </div>

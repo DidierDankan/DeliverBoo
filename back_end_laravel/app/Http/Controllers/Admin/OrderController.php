@@ -21,39 +21,21 @@ class OrderController extends Controller
      */
     public function index()
     {
-
         $user_id = Auth::user()->id;
+
+        $restaurant_ids = [];
 
         $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
+        foreach ($restaurants as $restaurant){
+            array_push($restaurant_ids, $restaurant['id']);
+        }
 
-        // $restaurant_ids = [];
+        $orders = Order::whereIn('restaurant_id', $restaurant_ids)->orderBy('created_at', 'DESC')->paginate(6);
 
-
-        // foreach ($restaurants as $restaurant){
-        //     array_push($restaurant_ids, $restaurant->id);
-        // }
-
-        // dd($restaurant_ids);
-
-        // $orders = Order::where('restaurant_id', '=', $user_id)->paginate(6);
-
-        // foreach ($restaurant_ids as $restaurant_id){
-
-        //     $orders = Order::where('restaurant_id', '=', $restaurant_id)->paginate(6);
-        // }
-
-        $orders = Order::join('restaurants', 'orders.restaurant_id', '=', 'restaurants.id')->where('restaurants.user_id', '=', $user_id)->paginate(6);
-
-        // $orders = Order::select('restaurant_id', $restaurants['id'])
         
-        // ->where('restaurant_id', '=', $restaurants)->paginate(6);
-
-        // dd($orders);
-
 
         return view('admin.orders.index', compact('orders', 'restaurants'));
-
     }
 
     /**
@@ -84,15 +66,39 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
 
-        $restaurants = Restaurant::all();
-        $order = Order::find($id);
+        $user_id = Auth::user()->id;
 
-        //dd($order);
+        $restaurant_ids = [];
 
-        return view('admin.orders.show', compact('order', 'restaurants'));
+        $restaurants = Restaurant::where('user_id', '=', $user_id)->get();
 
+        foreach ($restaurants as $restaurant){
+            array_push($restaurant_ids, $restaurant['id']);
+        }
+
+        $order = Order::whereIn('restaurant_id', $restaurant_ids)->find($id);
+
+        $food_ids = [];
+
+        if (!$order) {
+            return view('admin.errors.404error');
+        }
+        
+        foreach ($order->foods as $food){
+            array_push($food_ids, $food['title']);
+        }
+        
+        $vals = array_count_values($food_ids);
+
+
+
+        // dd($vals);
+
+
+
+        return view('admin.orders.show', compact('order', 'restaurants', 'vals'));
     }
 
     /**
