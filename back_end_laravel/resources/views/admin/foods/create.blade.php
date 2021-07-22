@@ -22,6 +22,7 @@
                             name="title"
                             id="title"
                             value="{{ old('title') }}"
+                            maxlength="100"
                             placeholder="Name here.."
                             required
                             >

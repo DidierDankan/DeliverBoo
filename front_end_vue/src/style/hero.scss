@@ -93,5 +93,12 @@ section.hero {
     .container {
       grid-template-columns: 6fr 6fr;
     }
+    .hero-text {
+      justify-content: center;
+      margin-left: 25px;
+    }
+    .workers {
+      transform: translate(17%);
+    }
   }
 }

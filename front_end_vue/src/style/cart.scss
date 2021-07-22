@@ -1,5 +1,10 @@
 @import "./vars.scss";
 
+// NOW
+.cart-items {
+  margin: 50px 0;
+}
+
 .items {
   margin-bottom: 3rem;
 }
@@ -82,5 +87,11 @@ h3 {
   transition: background 1s;
   &:hover {
     background: #03626b;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cart-items {
+    margin: 0;
   }
 }

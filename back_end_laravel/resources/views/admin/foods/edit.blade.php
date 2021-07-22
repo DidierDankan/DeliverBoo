@@ -18,6 +18,7 @@
                             name="title"
                             id="title"
                             value="{{ old('title') }}"
+                            maxlength="100"
                             required
                             >
                             @error('title')

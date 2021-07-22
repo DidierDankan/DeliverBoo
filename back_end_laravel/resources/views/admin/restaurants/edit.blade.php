@@ -34,6 +34,7 @@
                             name="address"
                             id="address"
                             value="{{ old('address') }}"
+                            maxlength="255"
                             required
                             >
                             @error('address')
@@ -49,6 +50,7 @@
                                 name="city"
                                 id="city"
                                 value="{{ old('city', $restaurant->city) }}"
+                                maxlength="50"
                                 required
                                 >
                                 @error('city')
@@ -63,6 +65,7 @@
                                 name="zip_code"
                                 id="zip_code"
                                 value="{{ old('zip_code') }}"
+                                maxlength="10"
                                 required
                                 >
                                 @error('zip_code')
