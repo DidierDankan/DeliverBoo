@@ -81,6 +81,13 @@ section.hero {
       & > div:last-of-type {
         height: 100%;
       }
+      .hero-text {
+        justify-content: center;
+        margin-left: 25px;
+      }
+      .workers {
+        transform: translate(27%);
+      }
     }
     .spot {
       width: 60%;
