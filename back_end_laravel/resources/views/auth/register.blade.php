@@ -65,7 +65,7 @@
                             <label for="cf" class="col-md-4 col-form-label text-md-right">{{ __('C.F.') }}</label>
 
                             <div class="col-md-6">
-                                <input id="cf" type="text" class="form-control @error('cf') is-invalid @enderror" name="cf" autocomplete="new-cf">
+                                <input id="cf" type="text" class="form-control @error('cf') is-invalid @enderror" name="cf" autocomplete="new-cf" maxlength="16">
 
                                 @error('cf')
                                     <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
                             <label for="vat" class="col-md-4 col-form-label text-md-right">{{ __('P. IVA*') }}</label>
 
                             <div class="col-md-6">
-                                <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" name="vat" required autocomplete="new-vat">
+                                <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" name="vat" required autocomplete="new-vat" maxlength="11">
 
                                 @error('vat')
                                     <span class="invalid-feedback" role="alert">

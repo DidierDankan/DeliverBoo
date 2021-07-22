@@ -21,6 +21,7 @@
                             name="name"
                             id="name"
                             value="{{ old('name') }}"
+                            maxlength="255"
                             required
                             placeholder="Name here..">
                             @error('name')
@@ -37,6 +38,7 @@
                             id="address"
                             value="{{ old('address') }}"
                             required
+                            maxlength="255"
                             placeholder="Address here.."
                             >
                             @error('address')
@@ -52,6 +54,7 @@
                                 name="city"
                                 id="city"
                                 value="{{ old('city') }}"
+                                maxlength="50"
                                 required
                                 placeholder="City here.."
                                 >
@@ -68,6 +71,7 @@
                                 id="zip_code"
                                 value="{{ old('zip_code') }}"
                                 required
+                                maxlength="10"
                                 placeholder="ZipCode here.."
                                 >
                                 @error('zip_code')

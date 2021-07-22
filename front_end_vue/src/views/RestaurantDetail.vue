@@ -18,8 +18,11 @@
         </div>
         <div class="info">
           <h1 class="text-color-primary">{{ restaurant.name }}</h1>
-          <div>
-            <span v-for="(type, index) in restaurant.types" :key="index"
+          <div class="margin-bottom">
+            <span
+              class="badge-type text-color-primary"
+              v-for="(type, index) in restaurant.types"
+              :key="index"
               >{{ type.type }} °
             </span>
           </div>
@@ -345,6 +348,21 @@ export default {
 
 .text-color-primary {
   color: $tertiary-color;
+}
+
+.badge-type {
+  padding: 3px 7px;
+  margin: 0 3px;
+  font-size: 13px;
+  background: $secondary-color;
+  border-radius: 5px;
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 5px;
 }
 
 .image img {
