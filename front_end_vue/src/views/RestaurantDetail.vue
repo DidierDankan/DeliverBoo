@@ -118,7 +118,8 @@
               class="btn btn-cart right"
               @click.prevent="modalVisibility = false"
               href=""
-              >TOTALE {{ food.price * multipleItemCounts(food.id) }} €</a
+              >TOTALE
+              {{ (food.price * multipleItemCounts(food.id)).toFixed(2) }} €</a
             >
           </div>
         </div>
@@ -288,6 +289,7 @@ export default {
     modalCheckoutOpen() {
       this.modalCheckout = true;
       this.forceRerender();
+      // this.resetBasket();
     },
     getOrderInfo() {
       this.orderObj.push(

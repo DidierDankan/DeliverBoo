@@ -3,12 +3,6 @@
     <div class="col-12 ">
       <div>
         <div>
-          <div class="alert alert-success" v-if="nonce">
-            Il pagamento è andato a buon fine.
-          </div>
-          <div class="alert alert-danger" v-if="error">
-            Il pagamento è stato respinto.
-          </div>
           <form>
             <div class="row">
               <div class="mb-3 col-md-6 col-sm-12">
@@ -92,7 +86,7 @@
                   placeholder="Totale"
                   :value="amount()"
                 >
-                  {{ amount() }} €
+                  {{ amount().toFixed(2) }} €
                 </div>
               </div>
             </div>
@@ -123,6 +117,14 @@
               <img src="../../assets/img/americanexpress.png" alt="amex" />
             </div>
 
+            <div v-if="nonce || error" class="advises mb-2 mt-2">
+              <div class="alert alert-success" v-if="nonce">
+                Il pagamento è andato a buon fine.
+              </div>
+              <div class="alert alert-danger" v-if="error">
+                Il pagamento è stato respinto.
+              </div>
+            </div>
             <button
               class="btn btn-block text-white mt-3"
               @click.prevent="payWithCreditCard"
@@ -317,6 +319,8 @@ export default {
         })
         .then((res) => {
           this.orderPassed = res.data;
+          console.log(this.nonce);
+          console.log(localStorage.getItem("orderdetails"));
 
           if (res.data) {
             localStorage.setItem("cart", JSON.stringify([]));
