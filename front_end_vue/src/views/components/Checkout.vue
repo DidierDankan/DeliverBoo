@@ -3,7 +3,8 @@
     <div class="col-12 ">
       <div>
         <div>
-          <form>
+              
+          <form @submit.prevent="payWithCreditCard" >
             <div class="row">
               <div class="mb-3 col-md-6 col-sm-12">
                 <label for="customerName" class="form-label">Nome</label>
@@ -12,6 +13,9 @@
                   v-model="name"
                   class="form-control"
                   id="customerName"
+                  required="required"
+                  maxlength="20"
+                  
                 />
               </div>
               <div class="mb-3 col-md-6 col-sm-12">
@@ -21,6 +25,8 @@
                   v-model="surname"
                   class="form-control"
                   id="customerSurname"
+                  required="required"
+                  maxlength="20"
                 />
               </div>
             </div>
@@ -33,15 +39,17 @@
                   v-model="email"
                   class="form-control"
                   id="customerMail"
+                  required="required"
                 />
               </div>
               <div class="mb-3 col-md-6 col-sm-12">
                 <label for="customerPhone" class="form-label">Telefono</label>
                 <input
-                  type="text"
+                  type="tel"
                   v-model="phone"
                   class="form-control"
                   id="customerPhone"
+                  required="required"
                 />
               </div>
             </div>
@@ -53,6 +61,10 @@
                 v-model="address"
                 class="form-control"
                 id="customerAddress"
+                minlength="5"
+                maxlength="255"
+                required="required"
+
               />
             </div>
 
@@ -64,6 +76,10 @@
                   v-model="zip_code"
                   class="form-control"
                   id="customerZipCode"
+                  minlength="5"
+                  maxlength="5"
+                  required="required"
+
                 />
               </div>
               <div class="mb-3 col-md-6 col-sm-12">
@@ -73,6 +89,8 @@
                   v-model="city"
                   class="form-control"
                   id="customerCity"
+                  required="required"
+                  
                 />
               </div>
             </div>
@@ -125,9 +143,10 @@
                 Il pagamento è stato respinto.
               </div>
             </div>
-            <button
+            <button v-if="nonce == ''" 
               class="btn btn-block text-white mt-3"
-              @click.prevent="payWithCreditCard"
+              type="submit"
+            
             >
               Paga
             </button>
@@ -178,6 +197,7 @@ export default {
       orderPassed: false,
 
       rerender: true,
+      render: 0,
 
       orderObj: {},
 
@@ -326,6 +346,10 @@ export default {
           }
         });
     },
+
+    forceRerender2() {
+      this.render += 1;
+    }
   },
 };
 </script>
@@ -338,12 +362,14 @@ export default {
 #cvv {
   margin: 10px 0px;
 
-  .price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: $btn-color;
-  }
 }
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $btn-color;
+}
+
 .form-control {
   height: 35px;
 }
@@ -357,4 +383,5 @@ export default {
   justify-content: center;
   margin-top: 20px;
 }
+
 </style>
