@@ -35,12 +35,23 @@ class AppServiceProvider extends ServiceProvider
             return new Gateway(
               [
                'environment' => ('sandbox'),
-                'merchantId' => ('9vnqq9g4srkwtrwt'),
-                'publicKey' => ('my9pn2q5wf2pbvvw'),
-                'privateKey' => ('b8bd5680d6691f8489f1c9020bbfd1b1'),
+                'merchantId' => ('rqjzxjqgv2jsmccw'),
+                'publicKey' => ('xsyvfbfq2nnnx9dh'),
+                'privateKey' => ('b51e7e6bf87d55cd88fc769840edd25d'),
               ]
             );
         });
+
+        // $this->app->singleton(Gateway::class, function () {
+        //     return new Gateway(
+        //       [
+        //        'environment' => ('sandbox'),
+        //         'merchantId' => ('rqjzxjqgv2jsmccw'),
+        //         'publicKey' => ('xsyvfbfq2nnnx9dh'),
+        //         'privateKey' => ('b51e7e6bf87d55cd88fc769840edd25d'),
+        //       ]
+        //     );
+        // });
 
 
         // \Braintree_Configuration::

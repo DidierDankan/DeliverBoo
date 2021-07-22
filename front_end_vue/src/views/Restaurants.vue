@@ -158,7 +158,7 @@ export default {
         console.log(res.data.token);
       });
 
-      setTimeout(this.paymentToken, 6000);
+      setTimeout(this.paymentToken, 10000);
     },
 
     paymentToken() {
