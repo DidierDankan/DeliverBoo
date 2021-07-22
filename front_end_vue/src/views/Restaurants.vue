@@ -107,7 +107,7 @@ export default {
   created() {
     this.setFilterCache();
     this.getRestaurants();
-    // this.getClientToken();
+    this.getClientToken();
   },
 
   methods: {
@@ -159,7 +159,7 @@ export default {
         console.log(res.data.token);
       });
 
-      setTimeout(this.paymentToken, 10000);
+      setTimeout(this.paymentToken, 15000);
     },
 
     paymentToken() {
