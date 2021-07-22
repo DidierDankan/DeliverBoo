@@ -37,7 +37,8 @@
       <div class="foods">
         <div class="container-db">
           <h1 class="text-color-tertiary">Cibi</h1>
-          <div class="flex">
+
+          <div class="flex p2rem">
             <div class="cards">
               <div class="card-container cards" @click.stop>
                 <div
@@ -433,6 +434,16 @@ export default {
   .cart {
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.137) 0px 3px 8px;
+    display: block;
+    width: 300px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #e8ebeb;
+    height: max-content;
+    margin: 2rem auto 0;
   }
 
   .notAvailable {
@@ -599,6 +610,10 @@ export default {
   }
 }
 
+.p2rem {
+  padding-bottom: 2rem;
+}
+
 @media screen and (min-width: 768px) {
   .detail {
     display: flex;
@@ -646,18 +661,10 @@ export default {
     }
 
     .cart {
-      display: block;
-      width: 300px;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      text-align: center;
       position: absolute;
       right: 0;
       top: -100px;
-      border-radius: 5px;
-      border: 1px solid #e8ebeb;
-      height: max-content;
+      margin: 0;
 
       .btn-cart {
         margin: 10px;
