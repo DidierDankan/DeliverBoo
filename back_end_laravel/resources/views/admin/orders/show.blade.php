@@ -44,8 +44,13 @@
             </div>
 
             <div class="actions mt-4">
+                <div>
+                
                 <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-                <a class="btn btn-primary" href="{{ route('admin.orders.index') }}">Orders</a>
+            </div>
+            <div>
+                <a class="btn btn-primary mt-3 mt-md-0 mt-lg-0" href="{{ route('admin.orders.index') }}">Orders</a>
+            </div>
             </div>
         </div>
     </div>
