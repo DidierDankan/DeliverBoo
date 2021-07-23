@@ -689,6 +689,7 @@ export default {
   color: #fff;
   background: #00ccbc;
   border: transparent;
+  cursor: pointer;
   transition: background 1s;
   &:hover {
     background: #04978b;

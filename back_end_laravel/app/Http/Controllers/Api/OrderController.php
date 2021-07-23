@@ -12,6 +12,10 @@ use App\Models\FoodOrder;
 
 use Illuminate\Validation\Rule;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
+use App\Mail\EmailDemo;
+
 
 
 
@@ -89,6 +93,9 @@ class OrderController extends Controller
             $new_food_order->save();
         }
 
+
+        
+
         // $success = true;
 
         // return response()->json($success);
@@ -115,13 +122,26 @@ class OrderController extends Controller
             ],
         ]);
 
+        
         if($result->success) {
             $data = [
                 'success' => true,
                 'message' => 'Transaction was successful',
             ];
             
+            $email = $order->customer_mail;
+       
+            $mailData = [
+                'title' => 'Ordine n° ' . $order->id,
+                'name' => $order->customer_name,
+                'amount' => $order->amount,
+                'url' => 'http://localhost:8080/#/'
+            ];
+      
+            Mail::to($email)->send(new EmailDemo($mailData));
+
             return response()->json($data, 200);
+           
         } else{
             $data = [
                 'success' => false,
@@ -129,6 +149,7 @@ class OrderController extends Controller
             ];
             return response()->json($data, 401);
         }
+
     }
 
 }
