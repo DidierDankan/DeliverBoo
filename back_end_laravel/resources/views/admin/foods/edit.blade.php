@@ -92,10 +92,29 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="mb-3">
+                            <div>
+                                <label for="cover" class="form-label">Food cover:</label>
+                            </div>
+                            @if ($food->cover)      
+                                <img width="200" class="mb-2" src=" {{ asset('storage/foods-covers/' . $food->cover) }} " alt=" {{ $food->title }} ">
+                            @endif
+            
+                            <input type="file"  
+                            name="cover" 
+                            id="cover"
+                            class="@error('cover') is-invalid @enderror" >
+                            @error('cover')
+                                <div class="mt-2 feedback alert-danger">
+                                    {{$message}}
+                                </div>
+                            @enderror
+                        </div>
             
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary mr-3">Update</button>
-                            <a class="btn btn-success text-white mr-3" href="{{ route('admin.restaurants.show' , $food->restaurant_id) }}">Menu</a>
+                            <a class="btn btn-success text-white mr-3" href="{{ route('admin.foods.show' , $food->id) }}">Menu</a>
                         </div>
                     </form>
                 </div>

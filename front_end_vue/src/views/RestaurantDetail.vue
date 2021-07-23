@@ -51,14 +51,19 @@
                   :key="index"
                   @click="modalVisibilityShow(food.id, restaurant.id)"
                 >
-                  <div class="mb text-color-tertiary">{{ food.title }}</div>
-                  <div class="text-color mb" v-if="food.visibility === 0">
-                    Non Disponibile
+                  <div class="info-food">
+                    <div class="mb text-color-tertiary">{{ food.title }}</div>
+                    <div class="text-color mb" v-if="food.visibility === 0">
+                      Non Disponibile
+                    </div>
+                    <div class="text-color mb overflow" v-else>
+                      {{ food.description }}
+                    </div>
+                    <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
                   </div>
-                  <div class="text-color mb overflow" v-else>
-                    {{ food.description }}
+                  <div class="cover" v-if="food.cover">
+                    <img :src="`http://127.0.0.1:8000/storage/foods-covers/${food.cover}`" :alt="food.title">
                   </div>
-                  <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
                 </div>
               </div>
             </div>
@@ -96,6 +101,9 @@
         >
           <div class="title">
             <h3 class="text-color-tertiary">{{ food.title }}</h3>
+          </div>
+          <div class="cover-modal">
+            <img :src="`http://127.0.0.1:8000/storage/foods-covers/${food.cover}`" :alt="food.title">
           </div>
           <div class="info-modal">
             <div class="mb-2">
@@ -380,7 +388,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "node_modules/bootstrap/scss/bootstrap.scss";
+// @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "@/style/vars.scss";
 
 .detail-container {
@@ -442,6 +450,23 @@ export default {
     background-color: #fff;
     border: 1px solid #e8ebeb;
     cursor: pointer;
+    display: flex;
+
+    .info-food {
+      flex-basis: 60%;
+    }
+
+    .cover {
+      flex-basis: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 75%;
+        height: 75%
+      }
+    }
 
     .text-color {
       color: #adafaf;
@@ -507,8 +532,8 @@ export default {
 }
 // MODAL
 .modal-db {
-  width: 370px;
-  height: 480px;
+  width: 480px;
+  height: 600px;
   background: #fff;
   border-radius: 5px;
   display: flex;
@@ -516,6 +541,15 @@ export default {
   align-items: center;
   box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
   overflow: hidden;
+  margin: 10px;
+
+  .cover-modal {
+    margin: 1rem 2rem;
+
+    img {
+      width: 100%
+    }
+  }
 
   .title {
     height: 60px;
@@ -535,6 +569,7 @@ export default {
     display: flex;
     align-items: center;
     margin: 0 20px;
+    margin-top: 1rem;
 
     .left {
       min-width: 80px;
@@ -675,14 +710,26 @@ export default {
     .cards {
       display: flex;
       flex-wrap: wrap;
-      flex-basis: 80%;
+      flex-basis: 85%;
       margin: 0;
 
       .card {
-        flex-basis: calc(100% / 2 - 60px);
+        flex-basis: calc(100% / 2 - 33px);
         margin: 10px;
         border-radius: 5px;
         position: relative;
+        flex-direction: row;
+
+        .info-food {
+          flex-basis: 60%;
+        }
+
+        .cover {
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
 
         .btn {
           position: absolute;
