@@ -21,6 +21,14 @@
                             <li>{{$food->ingredients}}</li>
                         </ul>
                     </div>
+                    @if ($food->cover)
+                        <hr>
+                        Cover:
+                        <div class="w-50 m-auto mb-3">
+                            <img class="img-fluid" src="{{ asset('storage/foods-covers/' . $food->cover)}}" alt="{{$food->title}}">
+                        </div>
+                        <hr>
+                    @endif
                     <div class="mb-4">Price: <span class="ml-2 d-inline-block rounded p-1 bg-success text-white fw-bold">{{number_format($food->price, 2)}} €</span></div>
                     <hr>
                     <div class="actions d-flex justify-content-center">

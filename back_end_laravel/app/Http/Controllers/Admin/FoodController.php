@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -62,6 +63,7 @@ class FoodController extends Controller
             'description' => ['nullable'],
             // 'type' => ['required', 'max:50'],
             'ingredients' => ['required', 'max:255'],
+            'cover' => ['nullable','image','mimes:jpeg,bmp,png'],
             'visibility' => ['boolean'],
             'restaurant_id' => ['nullable','exists:restaurants,id'],
 
@@ -70,9 +72,13 @@ class FoodController extends Controller
             // custom message 
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
+            'mimes'=> ':attribute is of unsupported format'
         ]);
         
         // dd($request->price);
+        if ($request->hasFile('cover')) { // depends on your FormRequest validation if `file` field is required or not
+            $path = $request->cover->storePublicly('');
+        }
         
         
 
@@ -87,7 +93,19 @@ class FoodController extends Controller
         
 
         $new_food->fill($data); // FILLABLE
+
+        if ($request->hasFile('cover')){
+
+            $new_food->cover = $path;
+        }
+
         $new_food->save();
+
+        if(array_key_exists('cover', $data)) {
+            $img_path = Storage::put('public/foods-covers/', $data['cover']);
+
+            $data['cover'] = $img_path;
+        }
 
         //salva relazione con tags in poivot 
         // if (array_key_exists('orders', $data)) {
@@ -173,6 +191,7 @@ class FoodController extends Controller
             'price' => ['required','numeric'],
             'description' => ['nullable',],
             'ingredients' => ['required', 'max:255'],
+            'cover' => ['nullable','image','mimes:jpeg,bmp,png'],
             'visibility' => ['boolean'],
             'restaurant_id' => ['nullable','exists:restaurants,id'],
         ], 
@@ -180,11 +199,27 @@ class FoodController extends Controller
             // custom message 
             'required'=>'The :attribute is required',
             'max'=> 'Max :max characters allowed for the :attribute',
+            'mimes'=> ':attribute is of unsupported format'
         ]);
+
+        if ($request->hasFile('cover')) { 
+            $path = $request->cover->storePublicly('');
+        }
 
         $data = $request->all();
 
         $food = Food::find($id);
+
+        if(array_key_exists('cover', $data)){
+                
+            if($food->cover){
+                Storage::delete($food->cover);
+            }
+
+            $food->cover = $path;
+
+            $data['cover'] = Storage::put('public/foods-covers/', $data['cover']); 
+        }
 
         $food->update($data); //fillable
 

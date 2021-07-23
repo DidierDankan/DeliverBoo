@@ -109,6 +109,18 @@
                                 </div>
                             @enderror
                         </div>
+
+                        <div class="mb-4">
+                            <label for="cover" class="form-label">Image: </label>
+                            <input type="file" name="cover" id="cover" class="@error('cover') is-invalid @enderror">
+                            @error('cover')
+                            <div class="mt-2 feedback alert-danger">
+                                {{$message}}
+                            </div>
+            
+                            @enderror
+                            <hr>
+                        </div>
             
                         <div class="d-flex justify-content-center">
                             <button class="btn btn-primary mr-3">Create</button>
