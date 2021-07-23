@@ -13,6 +13,8 @@ use App\Models\FoodOrder;
 use Illuminate\Validation\Rule;
 
 
+
+
 class OrderController extends Controller
 {
     public function generate(Gateway $gateway)
@@ -42,7 +44,10 @@ class OrderController extends Controller
         //     'status' => ['required'],
         //     'amount' => ['required', 'numeric'],
         // ]);
+            
         
+
+
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
@@ -51,13 +56,10 @@ class OrderController extends Controller
         
         $new_order = new Order();
 
-        if(strlen($array['transation']) > 2){
+        
 
-            $new_order->transation_id = $array['transation'];
-        } else {
-            $new_order->transation_id = null;
-
-        }
+        $new_order->transation_id = $array['transation'];
+        
 
 
         $new_order->customer_name = $array['name'];
@@ -118,6 +120,7 @@ class OrderController extends Controller
                 'success' => true,
                 'message' => 'Transaction was successful',
             ];
+            
             return response()->json($data, 200);
         } else{
             $data = [

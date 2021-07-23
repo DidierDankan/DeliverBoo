@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Type;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class RestaurantController extends Controller
 {
@@ -28,6 +30,8 @@ class RestaurantController extends Controller
         $restaurants = Restaurant::where('user_id', '=', $user_id)->orderBy('name', 'asc')->paginate(6);
 
         return view('admin.restaurants.index', compact('restaurants', 'types'));
+
+        // Mail::to('test@test.it')->send(new SendMail());
     }
 
     /**
