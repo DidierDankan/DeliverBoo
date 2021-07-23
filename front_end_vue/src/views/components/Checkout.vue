@@ -3,8 +3,7 @@
     <div class="col-12">
       <div>
         <div>
-              
-          <form @submit.prevent="payWithCreditCard" >
+          <form @submit.prevent="payWithCreditCard">
             <div class="row">
               <div class="mb-3 col-md-6 col-sm-12">
                 <label for="customerName" class="form-label">Nome</label>
@@ -15,7 +14,6 @@
                   id="customerName"
                   required="required"
                   maxlength="20"
-                  
                 />
               </div>
               <div class="mb-3 col-md-6 col-sm-12">
@@ -64,7 +62,6 @@
                 minlength="5"
                 maxlength="255"
                 required="required"
-
               />
             </div>
 
@@ -79,7 +76,6 @@
                   minlength="5"
                   maxlength="5"
                   required="required"
-
                 />
               </div>
               <div class="mb-3 col-md-6 col-sm-12">
@@ -90,7 +86,6 @@
                   class="form-control"
                   id="customerCity"
                   required="required"
-                  
                 />
               </div>
             </div>
@@ -143,10 +138,10 @@
                 Il pagamento è stato respinto.
               </div>
             </div>
-            <button v-if="nonce == ''" 
+            <button
+              v-if="nonce == ''"
               class="btn btn-block text-white mt-3"
               type="submit"
-            
             >
               Paga
             </button>
@@ -155,15 +150,31 @@
       </div>
     </div>
   </div>
+  <div v-else class="loader-container">
+    <Loader />
+  </div>
 </template>
 
 <script>
 import braintree from "braintree-web";
 import axios from "axios";
 
+import Loader from "./Loader.vue";
+
 export default {
   created() {
-    this.clientToken = JSON.parse(localStorage.getItem("clienttoken"));
+    this.getClientToken();
+    // this.clientToken = JSON.parse(localStorage.getItem("clienttoken"));
+  },
+
+  beforeUpdate() {
+    if (this.nonce != "" || this.error != "") {
+      this.getOrderInfo();
+    }
+
+    if (this.clientToken != "") {
+      this.braintreeSystem();
+    }
   },
 
   updated() {
@@ -171,10 +182,15 @@ export default {
       localStorage.setItem("orderdetails", JSON.stringify({}));
       localStorage.setItem("cart", JSON.stringify([]));
     }
+    if (this.orderObj != {}) {
+      this.sendOrder();
+    }
   },
 
-  mounted() {
-    this.braintreeSystem();
+  mounted() {},
+
+  components: {
+    Loader,
   },
 
   data() {
@@ -211,71 +227,53 @@ export default {
         this.hostedFieldInstance
           .tokenize()
           .then((payload) => {
-            console.log(payload);
+            // console.log(payload);
             this.nonce = payload.nonce;
           })
           .catch((err) => {
-            console.error(err);
+            // console.error(err);
             this.error = err.message;
           });
       }
       if (this.nonce) {
         this.status = true;
       }
-
-      setTimeout(this.getOrderInfo, 1000);
-      setTimeout(this.sendOrder, 1500);
-
-      this.sendRerender();
-    },
-
-    sendRerender() {
-      this.$emit("status", this.rerender);
     },
 
     braintreeSystem() {
-      if (this.clientToken) {
-        braintree.client
-          .create({
-
-            // authorization: JSON.parse(localStorage.getItem("clienttoken")),
-
-
-            authorization:
-               "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUyTWpjd01qUXdOeklzSW1wMGFTSTZJbVJtWkdNeU1EaGpMVEpoWlRJdE5ERXdNQzA0TXpnNExUTTFabUZsWVdZeE5HVTNPU0lzSW5OMVlpSTZJamwyYm5GeE9XYzBjM0pyZDNSeWQzUWlMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pT1hadWNYRTVaelJ6Y210M2RISjNkQ0lzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPbVpoYkhObGZTd2ljbWxuYUhSeklqcGJJbTFoYm1GblpWOTJZWFZzZENKZExDSnpZMjl3WlNJNld5SkNjbUZwYm5SeVpXVTZWbUYxYkhRaVhTd2liM0IwYVc5dWN5STZlMzE5Lm93Vk5rcDZLMmV0ZmdaTUphRXNFSHY5MmMzVERwM0pwaHIyWmVzWG1Wd0laNHhBYlpvMDJac1lReTNxa2Jub0pHSUthd05rbVdOMFVYZjlfV0JqNmF3IiwiY29uZmlnVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzLzl2bnFxOWc0c3Jrd3Ryd3QvY2xpZW50X2FwaS92MS9jb25maWd1cmF0aW9uIiwiZ3JhcGhRTCI6eyJ1cmwiOiJodHRwczovL3BheW1lbnRzLnNhbmRib3guYnJhaW50cmVlLWFwaS5jb20vZ3JhcGhxbCIsImRhdGUiOiIyMDE4LTA1LTA4IiwiZmVhdHVyZXMiOlsidG9rZW5pemVfY3JlZGl0X2NhcmRzIl19LCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvOXZucXE5ZzRzcmt3dHJ3dC9jbGllbnRfYXBpIiwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwibWVyY2hhbnRJZCI6Ijl2bnFxOWc0c3Jrd3Ryd3QiLCJhc3NldHNVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImF1dGhVcmwiOiJodHRwczovL2F1dGgudmVubW8uc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbSIsInZlbm1vIjoib2ZmIiwiY2hhbGxlbmdlcyI6W10sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL29yaWdpbi1hbmFseXRpY3Mtc2FuZC5zYW5kYm94LmJyYWludHJlZS1hcGkuY29tLzl2bnFxOWc0c3Jrd3Ryd3QifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJhbGxvd0h0dHAiOnRydWUsImRpc3BsYXlOYW1lIjoiaHVidXJ0ZGV2IiwiY2xpZW50SWQiOm51bGwsInByaXZhY3lVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vcHAiLCJ1c2VyQWdyZWVtZW50VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3RvcyIsImJhc2VVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImFzc2V0c1VybCI6Imh0dHBzOi8vY2hlY2tvdXQucGF5cGFsLmNvbSIsImRpcmVjdEJhc2VVcmwiOm51bGwsImVudmlyb25tZW50Ijoib2ZmbGluZSIsImJyYWludHJlZUNsaWVudElkIjoibWFzdGVyY2xpZW50MyIsIm1lcmNoYW50QWNjb3VudElkIjoiaHVidXJ0ZGV2IiwiY3VycmVuY3lJc29Db2RlIjoiRVVSIn19",
-
-
-          })
-          .then((clientInstance) => {
-            let options = {
-              client: clientInstance,
-              styles: {
-                input: {
-                  "font-size": "16px",
-                  "font-family": "sans-serif",
-                },
+      braintree.client
+        .create({
+          authorization: this.clientToken,
+        })
+        .then((clientInstance) => {
+          let options = {
+            client: clientInstance,
+            styles: {
+              input: {
+                "font-size": "16px",
+                "font-family": "sans-serif",
               },
-              fields: {
-                number: {
-                  selector: "#creditCardNumber",
-                  placeholder: "Inserisci la carta di credito",
-                },
-                cvv: {
-                  selector: "#cvv",
-                  placeholder: "Inserisci il CVV",
-                },
-                expirationDate: {
-                  selector: "#expireDate",
-                  placeholder: "00 / 0000",
-                },
+            },
+            fields: {
+              number: {
+                selector: "#creditCardNumber",
+                placeholder: "Inserisci la carta di credito",
               },
-            };
-            return braintree.hostedFields.create(options);
-          })
-          .then((hostedFieldInstance) => {
-            this.hostedFieldInstance = hostedFieldInstance;
-          });
-      }
+              cvv: {
+                selector: "#cvv",
+                placeholder: "Inserisci il CVV",
+              },
+              expirationDate: {
+                selector: "#expireDate",
+                placeholder: "00 / 0000",
+              },
+            },
+          };
+          return braintree.hostedFields.create(options);
+        })
+        .then((hostedFieldInstance) => {
+          this.hostedFieldInstance = hostedFieldInstance;
+        });
     },
     getOrderInfo() {
       if (this.nonce) {
@@ -344,8 +342,8 @@ export default {
         })
         .then((res) => {
           this.orderPassed = res.data;
-          console.log(this.nonce);
-          console.log(localStorage.getItem("orderdetails"));
+          // console.log(this.nonce);
+          // console.log(localStorage.getItem("orderdetails"));
 
           if (res.data) {
             localStorage.setItem("cart", JSON.stringify([]));
@@ -354,9 +352,13 @@ export default {
         });
     },
 
-    forceRerender2() {
-      this.render += 1;
-    }
+    getClientToken() {
+      axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
+        this.clientToken = res.data.token;
+        // console.log(res.data.token);
+        // console.log(typeof this.clientToken);
+      });
+    },
   },
 };
 </script>
@@ -368,7 +370,6 @@ export default {
 #expireDate,
 #cvv {
   margin: 10px 0px;
-
 }
 
 .price {
@@ -391,4 +392,11 @@ export default {
   margin-top: 20px;
 }
 
+.loader-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

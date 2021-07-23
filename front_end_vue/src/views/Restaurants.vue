@@ -35,7 +35,7 @@
                 </span>
               </div>
               <router-link
-                @click="cleanLocalTypes(restaurant.id)"
+                @click="cleanLocalTypes()"
                 class="link"
                 :to="{
                   name: 'restaurant-detail',
@@ -107,7 +107,7 @@ export default {
   created() {
     this.setFilterCache();
     this.getRestaurants();
-    this.getClientToken();
+    // this.getClientToken();
   },
 
   methods: {
@@ -143,9 +143,9 @@ export default {
     reRenderTypes() {
       this.reRender += 1;
     },
-    cleanLocalTypes(restaurant_id) {
+    cleanLocalTypes() {
       localStorage.setItem("checkedTypes", JSON.stringify([]));
-      this.resetBasket(restaurant_id);
+      // this.resetBasket(restaurant_id);
     },
     setFilterCache() {
       this.filterLocal = localStorage.getItem("checkedTypes");
@@ -159,7 +159,7 @@ export default {
         console.log(res.data.token);
       });
 
-      setTimeout(this.paymentToken, 15000);
+      setTimeout(this.paymentToken, 6000);
     },
 
     paymentToken() {

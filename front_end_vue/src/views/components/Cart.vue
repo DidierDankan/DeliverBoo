@@ -23,7 +23,7 @@
     <h3 class="cart-text">Totale: {{ amountR.toFixed(2) }} €</h3>
     <div class="center">
       <span v-show="cart.length > 0" class="refresh" @click="emptyCart()"
-      >Svuota <i class="fas fa-shopping-cart"></i
+        >Svuota <i class="fas fa-shopping-cart"></i
       ></span>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
     removeDouble() {
-      const items = JSON.parse(localStorage.getItem("cart")); // Some array I got from async call
+      const items = JSON.parse(localStorage.getItem("cart"));
 
       const uniqueitems = Array.from(new Set(items.map((a) => a.id))).map(
         (id) => {

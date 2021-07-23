@@ -49,7 +49,7 @@
                   }"
                   v-for="(food, index) in items"
                   :key="index"
-                  @click="modalVisibilityShow(food.id)"
+                  @click="modalVisibilityShow(food.id, restaurant.id)"
                 >
                   <div class="mb text-color-tertiary">{{ food.title }}</div>
                   <div class="text-color mb" v-if="food.visibility === 0">
@@ -190,6 +190,7 @@ export default {
       email: "",
       phone: "",
       orderObj: [],
+      clientToken: "",
     };
   },
 
@@ -247,15 +248,15 @@ export default {
       }
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
-    resetBasket() {
-      if (this.cart[0]) {
-        this.cart.forEach((element) => {
-          if (this.cart[0].restaurant_id != element.restaurant_id) {
-            alert("attenzione non puoi ordinare da 2 ristoranti");
-          }
-        });
-      }
-    },
+    // resetBasket() {
+    //   if (this.cart[0]) {
+    //     this.cart.forEach((element) => {
+    //       if (this.cart[0].restaurant_id != element.restaurant_id) {
+    //         alert("attenzione non puoi ordinare da 2 ristoranti");
+    //       }
+    //     });
+    //   }
+    // },
     multipleItemCounts(value) {
       const array = [];
 
@@ -276,9 +277,10 @@ export default {
         return true;
       }
     },
-    modalVisibilityShow(id) {
+    modalVisibilityShow(id, restaurant_id) {
       this.foodId = id;
       this.modalVisibility = true;
+      this.resetBasket(restaurant_id);
     },
     changeFoodId() {
       this.foodId = 10000000;
@@ -342,6 +344,36 @@ export default {
 
       localStorage.setItem("cart", JSON.stringify(arr));
       this.forceRerender();
+    },
+    resetBasket(restaurant_id) {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+
+      let oldRestaurant = cart[0].restaurant_id;
+
+      if (cart[0] && cart[0].restaurant_id != restaurant_id) {
+        let reset = confirm(
+          "attenzione non puoi ordinare da 2 ristoranti diversi.\nSe non svuoti il carrello verrai reindirizzato al precedente ristorante per il checkout.\nVuoi svuotare il carrello?"
+        );
+
+        if (reset === true) {
+          localStorage.setItem("cart", JSON.stringify([]));
+          this.forceRerender();
+        } else {
+          location.href = `http://localhost:8080/#/restaurants/${oldRestaurant}`;
+          this.modalVisibility = false;
+          location.reload();
+        }
+
+        // reset === true
+        //   ? localStorage.setItem("cart", JSON.stringify([]))
+        //   : (location.href = `http://localhost:8080/#/restaurants/${oldRestaurant}`);
+
+        // console.log(oldRestaurant);
+        // location.reload();
+
+        // this.modalVisibility = false;
+        // this.forceRerender();
+      }
     },
   },
 };
@@ -525,7 +557,7 @@ export default {
 }
 
 .modal-db-pay {
-  width: 370px;
+  width: 360px;
   height: 620px;
   background: #fff;
   border-radius: 5px;
@@ -680,6 +712,11 @@ export default {
     height: 60px;
     overflow: hidden;
   }
+}
+
+.modal-db-pay {
+  width: 480px;
+  height: 760px;
 }
 
 @media screen and (min-width: 1170px) {
