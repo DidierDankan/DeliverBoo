@@ -28,21 +28,24 @@
                             @enderror
                         </div>
 
+
+                        
+
                         <div class="mb-4 text-center">
                             <h4>Available</h4>
-                            <div class="form-label mb-3 {{$food->visibility ? 'alert-success' : 'alert-danger'}}">{{ $food->visibility ? 'This Food is currently available. Is it still available?' : 'This Food is currently unavailable. Is it available now?'}}</div>
+                            <div  class="form-label mb-3 {{$food->visibility ? 'alert-success' : 'alert-danger'}}">{{ $food->visibility ? 'This Food is currently available. Is it still available?' : 'This Food is currently unavailable. Is it available now?'}}</div>
                             
-                            <div class="bg-danger rounded w-25 d-inline-block pt-2">
+                            <div class=" bg-danger rounded w-25 d-inline-block pt-2">
                                 <label for="visibility" class="form-label"><strong>NO </strong></label>
-                                <input style="vertical-align: middle;" type="radio" class=" ml-2 @error('visibility') is-invalid @enderror"
+                                <input style="vertical-align: middle;" type="radio" class="radius ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
                                 value ="0">
                             </div>
 
-                            <div class="bg-success rounded w-25 d-inline-block pt-2">
+                            <div class=" bg-success rounded w-25 d-inline-block pt-2">
                                 <label for="visibility" class="form-label ml-3"><strong>YES </strong></label>
-                                <input style="vertical-align: middle;" type="radio" class="ml-2 @error('visibility') is-invalid @enderror"
+                                <input style="vertical-align: middle;" type="radio" class="radius ml-2 @error('visibility') is-invalid @enderror"
                                 name="visibility"
                                 id="visibility"
                                 value ="1">

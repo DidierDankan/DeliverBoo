@@ -59,10 +59,19 @@
                     <div class="text-color mb overflow" v-else>
                       {{ food.description }}
                     </div>
-                    <div class="text-color mb">{{ food.price.toFixed(2) }} €</div>
+                    <div class="text-color mb">
+                      {{ food.price.toFixed(2) }} €
+                    </div>
                   </div>
                   <div class="cover" v-if="food.cover">
-                    <img :src="`http://127.0.0.1:8000/storage/foods-covers/${food.cover}`" :alt="food.title">
+                    <div class="cropper">
+                      <img
+                        :src="
+                          `http://127.0.0.1:8000/storage/foods-covers/${food.cover}`
+                        "
+                        :alt="food.title"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -103,7 +112,10 @@
             <h3 class="text-color-tertiary">{{ food.title }}</h3>
           </div>
           <div class="cover-modal">
-            <img :src="`http://127.0.0.1:8000/storage/foods-covers/${food.cover}`" :alt="food.title">
+            <img
+              :src="`http://127.0.0.1:8000/storage/foods-covers/${food.cover}`"
+              :alt="food.title"
+            />
           </div>
           <div class="info-modal">
             <div class="mb-2">
@@ -130,11 +142,12 @@
             :food="food"
           />
 
-          <div class="button">
+          <div class="button" v-show="food.visibility">
             <div @click="removeItem(food.id)" class="btn btn-cart left">
               Cancella
             </div>
             <a
+              v-show="food.visibility"
               class="btn btn-cart right"
               @click.prevent="modalVisibility = false"
               href=""
@@ -461,10 +474,13 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-
-      img {
-        width: 75%;
-        height: 75%
+      .cropper {
+        overflow: hidden;
+        height: 90px;
+        width: 90px;
+        img {
+          height: 100% !important;
+        }
       }
     }
 
@@ -544,10 +560,12 @@ export default {
   margin: 10px;
 
   .cover-modal {
-    margin: 1rem 2rem;
+    width: 280px;
+    height: 280px;
+    overflow: hidden;
 
     img {
-      width: 100%
+      height: 100% !important;
     }
   }
 
