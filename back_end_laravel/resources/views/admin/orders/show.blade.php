@@ -6,7 +6,7 @@
         <h1 class="card-header">Order details</h1>
         <div class="card-body">
             <div>Order no: {{$order->id}} of: {{$order->created_at}}</div>
-         
+            <div>Transaction id: {{$order->transation_id}}</div>
             <hr>
             <div>Name: {{ $order->customer_name }}</div>
             <div>Surname: {{ $order->customer_surname }}</div>

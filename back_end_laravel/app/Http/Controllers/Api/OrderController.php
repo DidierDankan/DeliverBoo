@@ -25,7 +25,7 @@ class OrderController extends Controller
         return response()->json($data,200);
     }
 
-    public function store_order(Request $request){
+    public function store_order(Request $request, Gateway $gateway){
 
         $all = $request->get('order');
 
@@ -50,6 +50,15 @@ class OrderController extends Controller
         $foods = $food['items'];
         
         $new_order = new Order();
+
+        if(strlen($array['transation']) > 2){
+
+            $new_order->transation_id = $array['transation'];
+        } else {
+            $new_order->transation_id = null;
+
+        }
+
 
         $new_order->customer_name = $array['name'];
         $new_order->customer_surname = $array['surname'];
@@ -78,8 +87,45 @@ class OrderController extends Controller
             $new_food_order->save();
         }
 
-        $success = true;
+        // $success = true;
 
-        return response()->json($success);
+        // return response()->json($success);
+
+        //transation to the sandbox account
+
+        $order = Order::find($order_id);
+
+        $result = $gateway->customer()->create([
+            'firstName' => $order->customer_name,
+            'lastName' => $order->customer_surname,
+            'email' => $order->customer_mail,
+            'phone' => $order->customer_phone,
+        ]);
+        
+        $customer_id = $result->customer->id;
+
+        $result = $gateway->transaction()->sale([
+            'customerId' => $customer_id,
+            'amount' => $order->amount,
+            'paymentMethodNonce' => $order->transation_id,
+            'options' => [
+                'submitForSettlement' => true,
+            ],
+        ]);
+
+        if($result->success) {
+            $data = [
+                'success' => true,
+                'message' => 'Transaction was successful',
+            ];
+            return response()->json($data, 200);
+        } else{
+            $data = [
+                'success' => false,
+                'message' => 'Transaction failed',
+            ];
+            return response()->json($data, 401);
+        }
     }
+
 }

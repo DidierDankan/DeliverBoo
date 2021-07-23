@@ -134,8 +134,8 @@
               <div class="alert alert-success" v-if="nonce">
                 Il pagamento è andato a buon fine.
               </div>
-              <div class="alert alert-danger" v-if="error">
-                Il pagamento è stato respinto.
+              <div class="alert alert-danger" v-if="error" v-show="!nonce">
+                Il pagamento è stato respinto. Riprova.
               </div>
             </div>
             <button
@@ -291,6 +291,7 @@ export default {
         status: this.status,
         food: this.itemQnt(),
         amount: this.amount(),
+        transation: this.nonce,
       };
 
       if (!localStorage.getItem("orderdetails")) {
@@ -342,7 +343,7 @@ export default {
         })
         .then((res) => {
           this.orderPassed = res.data;
-          // console.log(this.nonce);
+          console.log(this.nonce);
           // console.log(localStorage.getItem("orderdetails"));
 
           if (res.data) {
