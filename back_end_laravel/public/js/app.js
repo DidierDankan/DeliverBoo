@@ -1907,8 +1907,8 @@ var app = new Vue({
 var deleteButtons = document.querySelectorAll(".delete-post-form");
 
 for (var i = 0; i < deleteButtons.length; i++) {
-  var iteration = deleteButtons[i];
-  console.log("iterazione", iteration);
+  var iteration = deleteButtons[i]; // console.log("iterazione", iteration);
+
   iteration.addEventListener("submit", function (event) {
     var confirm = window.confirm("Are you sure to delete?");
 
@@ -1922,8 +1922,7 @@ for (var i = 0; i < deleteButtons.length; i++) {
 var confirmCreate = document.querySelectorAll(".create-new");
 
 for (var _i = 0; _i < confirmCreate.length; _i++) {
-  var _iteration = confirmCreate[_i];
-  console.log("iterazione", _iteration);
+  var _iteration = confirmCreate[_i]; // console.log("iterazione", iteration);
 
   _iteration.addEventListener("submit", function (event) {
     var confirm = window.confirm("Are you sure to save?");
@@ -1938,8 +1937,7 @@ for (var _i = 0; _i < confirmCreate.length; _i++) {
 var confirmUpdate = document.querySelectorAll(".update-form");
 
 for (var _i2 = 0; _i2 < confirmUpdate.length; _i2++) {
-  var _iteration2 = confirmUpdate[_i2];
-  console.log("iterazione", _iteration2);
+  var _iteration2 = confirmUpdate[_i2]; // console.log("iterazione", iteration);
 
   _iteration2.addEventListener("submit", function (event) {
     var confirm = window.confirm("Are you sure to update?");
@@ -1948,7 +1946,63 @@ for (var _i2 = 0; _i2 < confirmUpdate.length; _i2++) {
       event.preventDefault();
     }
   });
-}
+} // hide food edit message
+
+
+var hideMessage = document.querySelectorAll(".radius");
+var message = document.getElementById("message-visibility"); // console.log(message);
+
+for (var _i3 = 0; _i3 < hideMessage.length; _i3++) {
+  var _iteration3 = hideMessage[_i3]; // console.log("iterazione", iteration);
+
+  _iteration3.addEventListener("click", function (event) {
+    message.style.display = "none";
+  });
+} // montly stats graph
+
+
+var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+
+var incassi = [// { months: "July 2021", sums: 67.2 },
+  // { months: "August 2021", sums: 18 }
+];
+axios.get("http://127.0.0.1:8000/admin/orders/stats").then(function (res) {
+  // console.log(res.data);
+  incassi = res.data;
+});
+var mesi = [];
+var fatturato = [];
+setTimeout(function () {
+  incassi.forEach(function (element) {
+    mesi.push(element.months);
+  });
+  incassi.forEach(function (element) {
+    fatturato.push(element.sums);
+  }); // console.log(mesi);
+  // console.log(fatturato);
+
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: mesi,
+      datasets: [{
+        label: "€ Fatturato mensile",
+        data: fatturato,
+        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
+        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}, 1000);
 
 /***/ }),
 

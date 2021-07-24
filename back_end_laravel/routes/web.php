@@ -8,7 +8,7 @@ use App\Http\Controllers\OrderController;
 
 
 use App\Http\Controllers\Admin\FoodController;
-
+use App\Http\Controllers\Admin\OrderStat;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +38,9 @@ Route::prefix('admin')
 ->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
     Route::get('/orders/payed', 'PayedController@payed')->name('payed');
+    Route::get('/orders/stats', [OrderStat::class, 'stats'])->name('stats');
+
+
     Route::get('/foods/create/{id}', 'CreateFoodController@create')->name('foods.create');
     Route::get('/payment/make', 'PayedController@make')->name('payment.make');
         

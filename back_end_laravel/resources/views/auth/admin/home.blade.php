@@ -67,6 +67,21 @@
 
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+
+                <canvas id="myChart" width="768" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 768px;"></canvas>
+
+            </div>
+
+        </div>
+    </div>
+
 
 </div>
+
+
+
+
 @endsection

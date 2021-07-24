@@ -14,9 +14,8 @@ use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailDemo;
-
-
-
+use App\Models\Restaurant;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -146,5 +145,7 @@ class OrderController extends Controller
         }
 
     }
+
+    
 
 }

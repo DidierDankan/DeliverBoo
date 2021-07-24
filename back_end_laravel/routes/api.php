@@ -24,6 +24,8 @@ Route::namespace('Api')->group(function() {
     Route::get('orders/generate', [OrderController::class, 'generate']);
     Route::post('orders/payment', [OrderController::class, 'make_payment']);
     Route::get('orders/get', [OrderController::class, 'store_order']);
+    
+
 
     Route::get('/types', 'TypeController@index');
 });

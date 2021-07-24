@@ -41,7 +41,7 @@ const deleteButtons = document.querySelectorAll(".delete-post-form");
 for (let i = 0; i < deleteButtons.length; i++) {
     let iteration = deleteButtons[i];
 
-    console.log("iterazione", iteration);
+    // console.log("iterazione", iteration);
 
     iteration.addEventListener("submit", function(event) {
         const confirm = window.confirm("Are you sure to delete?");
@@ -59,7 +59,7 @@ const confirmCreate = document.querySelectorAll(".create-new");
 for (let i = 0; i < confirmCreate.length; i++) {
     let iteration = confirmCreate[i];
 
-    console.log("iterazione", iteration);
+    // console.log("iterazione", iteration);
 
     iteration.addEventListener("submit", function(event) {
         const confirm = window.confirm("Are you sure to save?");
@@ -77,7 +77,7 @@ const confirmUpdate = document.querySelectorAll(".update-form");
 for (let i = 0; i < confirmUpdate.length; i++) {
     let iteration = confirmUpdate[i];
 
-    console.log("iterazione", iteration);
+    // console.log("iterazione", iteration);
 
     iteration.addEventListener("submit", function(event) {
         const confirm = window.confirm("Are you sure to update?");
@@ -87,3 +87,85 @@ for (let i = 0; i < confirmUpdate.length; i++) {
         }
     });
 }
+
+// hide food edit message
+
+const hideMessage = document.querySelectorAll(".radius");
+
+const message = document.getElementById("message-visibility");
+
+// console.log(message);
+
+for (let i = 0; i < hideMessage.length; i++) {
+    let iteration = hideMessage[i];
+
+    // console.log("iterazione", iteration);
+
+    iteration.addEventListener("click", function(event) {
+        message.style.display = "none";
+    });
+}
+
+// montly stats graph
+
+const axios = require("axios");
+let incassi = [
+    // { months: "July 2021", sums: 67.2 },
+    // { months: "August 2021", sums: 18 }
+];
+axios.get("http://127.0.0.1:8000/admin/orders/stats").then(res => {
+    // console.log(res.data);
+    incassi = res.data;
+});
+
+let mesi = [];
+let fatturato = [];
+
+setTimeout(() => {
+    incassi.forEach(element => {
+        mesi.push(element.months);
+    });
+    incassi.forEach(element => {
+        fatturato.push(element.sums);
+    });
+    // console.log(mesi);
+    // console.log(fatturato);
+    var ctx = document.getElementById("myChart").getContext("2d");
+
+    var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: mesi,
+            datasets: [
+                {
+                    label: "€ Fatturato mensile",
+                    data: fatturato,
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.2)",
+                        "rgba(54, 162, 235, 0.2)",
+                        "rgba(255, 206, 86, 0.2)",
+                        "rgba(75, 192, 192, 0.2)",
+                        "rgba(153, 102, 255, 0.2)",
+                        "rgba(255, 159, 64, 0.2)"
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 1)",
+                        "rgba(54, 162, 235, 1)",
+                        "rgba(255, 206, 86, 1)",
+                        "rgba(75, 192, 192, 1)",
+                        "rgba(153, 102, 255, 1)",
+                        "rgba(255, 159, 64, 1)"
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}, 1000);
