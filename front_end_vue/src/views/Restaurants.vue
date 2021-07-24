@@ -30,9 +30,11 @@
                 <h3 class="restaurant-title">
                   {{ restaurant.name }}
                 </h3>
-                <span>
-                  {{ restaurant.types }}
-                </span>
+                <div class="margin-badge">
+                  <span class="badge-type" v-for="type in restaurant.types" :key="type.id">
+                    {{ type.type }}
+                  </span>
+                </div>
               </div>
               <router-link
                 @click="cleanLocalTypes()"

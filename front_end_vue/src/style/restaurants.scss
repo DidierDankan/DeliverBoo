@@ -1,5 +1,18 @@
 @import "./vars.scss";
 
+.badge-type {
+  padding: 3px 7px;
+  margin: 0 3px;
+  font-size: 13px;
+  background: #007e8a;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.margin-badge {
+  margin: 3px 5px 10px;
+}
+
 .bg-container {
   background: #ffeae4;
 }

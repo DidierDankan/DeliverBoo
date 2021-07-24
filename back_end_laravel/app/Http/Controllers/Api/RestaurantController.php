@@ -16,7 +16,7 @@ class RestaurantController extends Controller
     //
     public function index() {
 
-        $restaurants = Restaurant::paginate(6);
+        $restaurants = Restaurant::with('types')->paginate(6);
 
         return response()->json($restaurants);
     }
@@ -51,7 +51,7 @@ class RestaurantController extends Controller
                 }
             }
 
-            $latest = Restaurant::whereIn('id', $filtered_restaurants)->get();
+            $latest = Restaurant::with('types')->whereIn('id', $filtered_restaurants)->get();
             
             return response()->json($latest);
     }
