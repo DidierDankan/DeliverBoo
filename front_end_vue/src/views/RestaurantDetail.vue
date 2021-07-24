@@ -17,13 +17,13 @@
           />
         </div>
         <div class="info">
-          <h1 class="text-color-tertiary">{{ restaurant.name }}</h1>
-          <div class="margin-bottom">
+          <h1 class="text-color-tertiary margin-bottom">{{ restaurant.name }}</h1>
+          <div>
             <span
-              class="badge-type text-color-tertiary"
+              class="badge-type"
               v-for="(type, index) in restaurant.types"
               :key="index"
-              >{{ type.type }} °
+              >{{ type.type }}
             </span>
           </div>
           <div class="margin-top">
@@ -170,6 +170,33 @@
           <Checkout @orderPassed="renderIf" :key="componentKey" />
         </div>
       </div>
+
+      <!-- Modal Switch Restaurant -->
+      <div 
+        class="modal-container-db"
+        v-if="resetBasketModal"
+      >
+        <div class="modal-db switch">
+          <div class="header-switch">
+            <h2>Attenzione:</h2>
+          </div>
+          <div class="text-switch">
+            Non puoi ordinare da 2 ristoranti diversi.<br>
+            Se non svuoti il carrello verrai reindirizzato al precedente ristorante per il checkout.<br><br>
+            Vuoi svuotare il carrello?
+          </div>
+          <div class="button-switch">
+            <button 
+              class="yes" 
+              @click.prevent="resetBasketTrue()"
+            >Si</button>
+            <button 
+              class="no" 
+              @click.prevent="resetBasketFalse()"
+            >No</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <Loader v-else />
@@ -214,6 +241,8 @@ export default {
       phone: "",
       orderObj: [],
       clientToken: "",
+      resetBasketModal: false,
+      resetBasketOption: undefined,
     };
   },
 
@@ -317,7 +346,12 @@ export default {
     },
     modalVisibilityShow(id, restaurant_id) {
       this.foodId = id;
-      this.modalVisibility = true;
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      if (cart[0] && cart[0].restaurant_id != restaurant_id) {
+        this.modalVisibility = false;
+      } else {
+        this.modalVisibility = true;
+      }
       this.resetBasket(restaurant_id);
     },
     changeFoodId() {
@@ -386,427 +420,28 @@ export default {
     resetBasket(restaurant_id) {
       const cart = JSON.parse(localStorage.getItem("cart"));
 
-      let oldRestaurant = cart[0].restaurant_id;
-
       if (cart[0] && cart[0].restaurant_id != restaurant_id) {
-        let reset = confirm(
-          "attenzione non puoi ordinare da 2 ristoranti diversi.\nSe non svuoti il carrello verrai reindirizzato al precedente ristorante per il checkout.\nVuoi svuotare il carrello?"
-        );
-
-        if (reset === true) {
-          localStorage.setItem("cart", JSON.stringify([]));
-          this.forceRerender();
-        } else {
-          location.href = `http://localhost:8080/#/restaurants/${oldRestaurant}`;
-          this.modalVisibility = false;
-          location.reload();
-        }
+        this.resetBasketModal = true;
       }
     },
+    resetBasketTrue() {
+      localStorage.setItem("cart", JSON.stringify([]));
+      this.forceRerender();
+      this.resetBasketModal = false;
+      this.modalVisibility = true;
+    },
+    resetBasketFalse() {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      let oldRestaurant = cart[0].restaurant_id;
+      location.href = `http://localhost:8080/#/restaurants/${oldRestaurant}`;
+      this.modalVisibility = false;
+      location.reload();
+      this.resetBasketModal = false;
+    }
   },
 };
 </script>
 
 <style lang="scss" scoped>
-// @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import "@/style/vars.scss";
-
-.detail-container {
-  scroll-snap-type: y mandatory;
-}
-
-.text-color-tertiary {
-  color: $tertiary-color;
-}
-
-.badge-type {
-  padding: 3px 7px;
-  margin: 0 3px;
-  font-size: 13px;
-  background: $secondary-color;
-  border-radius: 5px;
-  &:first-child {
-    margin-left: 0;
-  }
-}
-
-.text-color-modal {
-  color: #adafaf;
-}
-
-.margin-bottom {
-  margin-bottom: 5px;
-}
-
-.margin-top {
-  margin-top: 15px;
-  text-transform: capitalize;
-}
-
-.image img {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.info {
-  margin-left: 1rem;
-  margin-top: 20px;
-}
-
-.foods {
-  background: #f4f5f5;
-  margin-top: 100px;
-
-  h1 {
-    padding: 1rem;
-  }
-
-  .selectedFood {
-    border-left: 5px solid #00ccbc !important;
-  }
-
-  .card {
-    padding: 1rem;
-    background-color: #fff;
-    border: 1px solid #e8ebeb;
-    cursor: pointer;
-    display: flex;
-
-    .info-food {
-      flex-basis: 60%;
-    }
-
-    .cover {
-      flex-basis: 40%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .cropper {
-        overflow: hidden;
-        height: 90px;
-        width: 90px;
-        img {
-          height: 100% !important;
-        }
-      }
-    }
-
-    .text-color {
-      color: #adafaf;
-    }
-
-    .mb {
-      margin-bottom: 10px;
-    }
-
-    .btn {
-      font-size: 10px;
-    }
-  }
-
-  .header {
-    color: #fff;
-    background: #00ccbc;
-    margin-top: -2px !important;
-    padding: 1rem 0;
-    margin-bottom: -50px !important;
-  }
-  .cart {
-    overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.137) 0px 3px 8px;
-    display: block;
-    width: 300px;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #e8ebeb;
-    height: max-content;
-    margin: 2rem auto 0;
-  }
-
-  .notAvailable {
-    background-color: #f8f9f9;
-    cursor: not-allowed;
-  }
-}
-
-.btn {
-  color: #fff;
-  background: #00ccbc;
-  padding: 10px;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-container-db {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.146);
-  height: 100vh;
-  width: 100vw;
-  scroll-snap-align: start;
-}
-// MODAL
-.modal-db {
-  width: 480px;
-  height: 600px;
-  background: #fff;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
-  overflow: hidden;
-  margin: 15px;
-
-  .cover-modal {
-    width: 280px;
-    height: 280px;
-    overflow: hidden;
-
-    img {
-      height: 100% !important;
-    }
-  }
-
-  .title {
-    height: 60px;
-    padding-top: 20px;
-  }
-
-  .info-modal {
-    flex-grow: 1;
-    border-top: 1px solid #e8ebeb;
-    border-bottom: 1px solid #e8ebeb;
-    padding: 20px;
-    width: 100%;
-  }
-
-  .button {
-    height: 90px;
-    display: flex;
-    align-items: center;
-    margin: 0 20px;
-    margin-top: 1rem;
-
-    .left {
-      min-width: 80px;
-      border: 1px solid #e8ebeb;
-      background: #fff;
-      color: #00ccbc;
-      display: inline-block;
-      text-align: center;
-      padding: 15px;
-      margin-right: 20px;
-    }
-
-    .right {
-      min-width: 230px;
-      display: inline-block;
-      text-align: center;
-      padding: 15px;
-    }
-  }
-}
-
-.modal-db-pay {
-  margin: 15px;
-  width: 360px;
-  height: 640px;
-  background: #fff;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
-  overflow-y: auto;
-
-  .title {
-    height: 60px;
-    padding-top: 20px;
-  }
-
-  .info-modal {
-    flex-grow: 1;
-    border-top: 1px solid #e8ebeb;
-    border-bottom: 1px solid #e8ebeb;
-    padding: 20px;
-    width: 100%;
-  }
-
-  .button {
-    height: 90px;
-    display: flex;
-    align-items: center;
-    margin: 0 20px;
-
-    .left {
-      min-width: 80px;
-      border: 1px solid #e8ebeb;
-      background: #fff;
-      color: #00ccbc;
-      display: inline-block;
-      text-align: center;
-      padding: 15px;
-      margin-right: 20px;
-    }
-
-    .right {
-      min-width: 230px;
-      display: inline-block;
-      text-align: center;
-      padding: 15px;
-    }
-  }
-}
-
-.mb-2 {
-  margin-bottom: 20px;
-}
-
-// MODAL CART
-.cart-2 {
-  padding: 1rem;
-  align-items: start;
-
-  .title-2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  .amount {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-}
-
-.margin {
-  margin: 1rem 0;
-}
-
-.cassa {
-  padding: 10px;
-  color: #fff;
-  background: #00ccbc;
-  border: transparent;
-  cursor: pointer;
-  transition: background 1s;
-  &:hover {
-    background: #04978b;
-  }
-}
-
-.p2rem {
-  padding-bottom: 2rem;
-}
-
-@media screen and (min-width: 768px) {
-  .detail {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    flex-direction: row-reverse;
-    .image {
-      width: 480px;
-      height: 260px;
-      overflow: hidden;
-
-      margin-right: 1rem;
-
-      img {
-        object-fit: cover;
-        object-position: center;
-      }
-    }
-  }
-
-  .flex {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 1rem;
-    position: relative;
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      flex-basis: 85%;
-      margin: 0;
-
-      .card {
-        flex-basis: calc(100% / 2 - 33px);
-        margin: 10px;
-        border-radius: 5px;
-        position: relative;
-        flex-direction: row;
-
-        .info-food {
-          flex-basis: 60%;
-        }
-
-        .cover {
-          img {
-            width: 100%;
-            height: auto;
-          }
-        }
-
-        .btn {
-          position: absolute;
-          right: 10px;
-          bottom: 10px;
-        }
-      }
-    }
-
-    .cart {
-      position: absolute;
-      right: 0;
-      top: -100px;
-      margin: 0;
-
-      .btn-cart {
-        margin: 10px;
-      }
-
-      div {
-        margin: 50px 0;
-      }
-    }
-  }
-
-  .overflow {
-    height: 60px;
-    overflow: hidden;
-  }
-}
-
-.modal-db-pay {
-  width: 480px;
-  height: 760px;
-}
-
-@media screen and (min-width: 1170px) {
-  .detail.container {
-    max-width: 1170px;
-    margin: 0 auto 100px;
-  }
-
-  .foods {
-    .container-db {
-      max-width: 1170px;
-      margin: 0 auto;
-      h1 {
-        margin-left: 3px;
-      }
-    }
-  }
-}
+@import "@/style/restaurantDetails.scss";
 </style>
