@@ -17,7 +17,9 @@
           />
         </div>
         <div class="info">
-          <h1 class="text-color-tertiary margin-bottom">{{ restaurant.name }}</h1>
+          <h1 class="text-color-tertiary margin-bottom">
+            {{ restaurant.name }}
+          </h1>
           <div>
             <span
               class="badge-type"
@@ -110,6 +112,9 @@
         >
           <div class="title">
             <h3 class="text-color-tertiary">{{ food.title }}</h3>
+            <div @click="modalVisibility = false" class="close">
+              <i class="fas fa-times"></i>
+            </div>
           </div>
           <div class="cover-modal">
             <img
@@ -143,15 +148,20 @@
           />
 
           <div class="button" v-show="food.visibility">
-            <div @click="removeItem(food.id)" class="btn btn-cart left">
+            <div
+              v-if="multipleItemCounts(food.id) > 0"
+              @click="removeItem(food.id)"
+              class="btn btn-cart left"
+            >
               Cancella
             </div>
             <a
+              v-if="multipleItemCounts(food.id) > 0"
               v-show="food.visibility"
               class="btn btn-cart right"
               @click.prevent="modalVisibility = false"
               href=""
-              >TOTALE
+              >Parziale
               {{ (food.price * multipleItemCounts(food.id)).toFixed(2) }} €</a
             >
           </div>
@@ -165,35 +175,56 @@
         @click="modalCheckoutClose()"
       >
         <div class="modal-db-pay cart-2" @click.stop v-show="modalCheckout">
-          <div class="title-2 margin">Il tuo ordine:</div>
+          <div class="title-2 margin">
+            Il tuo ordine:
+            <div @click="modalCheckoutClose()" class="close">
+              <i class="fas fa-times"></i>
+            </div>
+          </div>
 
           <Checkout @orderPassed="renderIf" :key="componentKey" />
         </div>
       </div>
 
       <!-- Modal Switch Restaurant -->
-      <div 
-        class="modal-container-db"
-        v-if="resetBasketModal"
-      >
+      <div class="modal-container-db" v-if="resetBasketModal">
         <div class="modal-db switch">
           <div class="header-switch">
             <h2>Attenzione:</h2>
           </div>
           <div class="text-switch">
-            Non puoi ordinare da 2 ristoranti diversi.<br>
-            Se non svuoti il carrello verrai reindirizzato al precedente ristorante per il checkout.<br><br>
+            Non puoi ordinare da 2 ristoranti diversi.<br />
+            Se non svuoti il carrello verrai reindirizzato al precedente
+            ristorante per il checkout.<br /><br />
             Vuoi svuotare il carrello?
           </div>
           <div class="button-switch">
-            <button 
-              class="yes" 
-              @click.prevent="resetBasketTrue()"
-            >Si</button>
-            <button 
-              class="no" 
-              @click.prevent="resetBasketFalse()"
-            >No</button>
+            <button class="yes" @click.prevent="resetBasketTrue()">Si</button>
+            <button class="no" @click.prevent="resetBasketFalse()">No</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal order successfully submitted -->
+
+      <div
+        class="modal-container-db"
+        v-if="modalSuccess"
+        @click="modalSuccessClose()"
+      >
+        <div @click.stop class="modal-db switch">
+          <div class="header-switch">
+            <h2>Conferma d'ordine</h2>
+          </div>
+          <div class="text-switch">
+            Il tuo ordine è stato ricevuto.<br />
+            A breve riceverai una mail di conferma.<br /><br />
+            Grazie per aver scelto DeliveBoo!
+          </div>
+          <div class="button-switch">
+            <button class="no" @click.prevent="modalSuccessClose()">
+              Esci
+            </button>
           </div>
         </div>
       </div>
@@ -243,6 +274,7 @@ export default {
       clientToken: "",
       resetBasketModal: false,
       resetBasketOption: undefined,
+      modalSuccess: false,
     };
   },
 
@@ -263,9 +295,19 @@ export default {
     renderIf(value) {
       console.log("cjsdcjsd", value);
       if (value) {
-        setTimeout(this.forceRerender, 3000);
-        // this.forceRerender2();
+        setTimeout(this.modalSuccessOpen, 2000);
+        setTimeout(this.forceRerender, 4000);
       }
+    },
+    modalSuccessOpen() {
+      this.modalSuccess = true;
+      this.modalCheckoutClose();
+      this.forceRerender();
+    },
+    modalSuccessClose() {
+      this.modalSuccess = false;
+      this.forceRerender();
+      location.href = "http://localhost:8080/#/";
     },
     getRestaurant() {
       axios
@@ -437,7 +479,7 @@ export default {
       this.modalVisibility = false;
       location.reload();
       this.resetBasketModal = false;
-    }
+    },
   },
 };
 </script>

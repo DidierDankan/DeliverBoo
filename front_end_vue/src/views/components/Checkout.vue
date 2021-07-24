@@ -169,6 +169,8 @@ export default {
   beforeUpdate() {
     if (this.nonce != "" || this.error != "") {
       this.getOrderInfo();
+    }
+    if (this.nonce != "") {
       this.$emit("orderPassed", true);
     }
 

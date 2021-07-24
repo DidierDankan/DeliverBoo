@@ -61,6 +61,7 @@
     border: 1px solid #e8ebeb;
     cursor: pointer;
     display: flex;
+    border-left: 5px solid transparent;
 
     .info-food {
       flex-basis: 60%;
@@ -169,7 +170,17 @@
 
   .title {
     height: 60px;
+    width: 100%;
+    text-align: center;
     padding-top: 20px;
+    position: relative;
+    .close {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      padding: 10px;
+    }
   }
 
   .info-modal {
@@ -270,6 +281,16 @@
   .title-2 {
     font-size: 1.5rem;
     font-weight: 700;
+    width: 100%;
+    position: relative;
+    .close {
+      position: absolute;
+      top: -25px;
+      right: -10px;
+      cursor: pointer;
+      padding: 10px;
+      font-size: 1rem;
+    }
   }
 
   .amount {
@@ -302,53 +323,51 @@
 
 // MODAL SWICH RESTAURANT
 .switch {
-    width: 400px;
-    height: 260px;
+  width: 400px;
+  height: 260px;
 
-    .header-switch {
-        color: #fff;
-        background: #00ccbc;
-        margin-top: -2px !important;
-        padding: 1rem 0;
-        width: 100%;
-        text-align: center;
+  .header-switch {
+    color: #fff;
+    background: #00ccbc;
+    margin-top: -2px !important;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .text-switch {
+    padding: 20px;
+  }
+
+  .button-switch {
+    .yes {
+      background: #00ccbc;
+      padding: 10px;
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 1s;
+      width: 60px;
+      border: 0;
+      margin-right: 20px;
     }
 
-    .text-switch {
-        padding: 20px;
+    .no {
+      background: $btn-color;
+      padding: 10px;
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 1s;
+      width: 60px;
+      border: 0;
     }
-
-    .button-switch{
-        .yes {   
-            background: #00ccbc;
-            padding: 10px;
-            color: #fff;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 1s;
-            width: 60px;
-            border: 0;
-            margin-right: 20px;
-        }
-
-        .no {
-            background: $btn-color;
-            padding: 10px;
-            color: #fff;
-            font-size: 1rem;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 1s;
-            width: 60px;
-            border: 0;
-        }
-    }
+  }
 }
-
-
 
 @media screen and (min-width: 768px) {
   .detail {
