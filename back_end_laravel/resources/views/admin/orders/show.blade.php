@@ -31,7 +31,7 @@
                 <ul>
                     @foreach ($vals as $key => $food)
                         <li>
-                            {{$key . ' ' . $food . ' pz'}}
+                            <span>{{$key . ' ' . 'x'}}</span>  <span>{{' ' . $food . 'pz'}}</span>
                         </li>
                     @endforeach
                 </ul>
@@ -43,14 +43,13 @@
                Status: {{ ($order->status == 1) ? 'Pagato' : 'Non Pagato' }}
             </div>
 
-            <div class="actions mt-4">
+            <div class="actions justify-content-center d-flex mt-4">
                 <div>
-                
-                <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-            </div>
-            <div>
-                <a class="btn btn-primary mt-3 mt-md-0 mt-lg-0" href="{{ route('admin.orders.index') }}">Orders</a>
-            </div>
+                    <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
+                </div>
+                <div>
+                    <a class="btn btn-primary mt-3 mt-md-0 mt-lg-0" href="{{ route('admin.orders.index') }}">Orders</a>
+                </div>
             </div>
         </div>
     </div>

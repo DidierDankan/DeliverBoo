@@ -177,15 +177,15 @@ export default {
     if (this.clientToken != "") {
       this.braintreeSystem();
     }
+    if (this.orderObj.name) {
+      this.sendOrder();
+    }
   },
 
   updated() {
     if (this.orderPassed) {
       localStorage.setItem("orderdetails", JSON.stringify({}));
       localStorage.setItem("cart", JSON.stringify([]));
-    }
-    if (this.orderObj != {}) {
-      this.sendOrder();
     }
   },
 
