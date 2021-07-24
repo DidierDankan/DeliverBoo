@@ -167,7 +167,7 @@
         <div class="modal-db-pay cart-2" @click.stop v-show="modalCheckout">
           <div class="title-2 margin">Il tuo ordine:</div>
 
-          <Checkout :key="componentKey" />
+          <Checkout @orderPassed="renderIf" :key="componentKey" />
         </div>
       </div>
     </div>
@@ -200,6 +200,8 @@ export default {
       cart: [],
       items: [],
       componentKey: 0,
+      componentKey2: 0,
+
       foodId: 0,
       modalCheckout: false,
       modalVisibility: false,
@@ -215,6 +217,8 @@ export default {
     };
   },
 
+  props: {},
+
   created() {
     this.getRestaurant();
     this.reactiveBtns();
@@ -223,9 +227,17 @@ export default {
   updated() {
     this.cart = JSON.parse(localStorage.getItem("cart"));
     // this.renderAfterOrder();
+    // this.renderIf();
   },
 
   methods: {
+    renderIf(value) {
+      console.log("cjsdcjsd", value);
+      if (value) {
+        setTimeout(this.forceRerender, 3000);
+        // this.forceRerender2();
+      }
+    },
     getRestaurant() {
       axios
         .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
@@ -263,6 +275,11 @@ export default {
     forceRerender() {
       this.componentKey += 1;
     },
+
+    forceRerender2() {
+      this.componentKey2 += 1;
+    },
+
     reactiveBtns() {
       if (!localStorage.getItem("cart")) {
         localStorage.setItem("cart", JSON.stringify([]));
