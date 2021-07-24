@@ -296,7 +296,7 @@ export default {
       console.log("cjsdcjsd", value);
       if (value) {
         setTimeout(this.modalSuccessOpen, 2000);
-        setTimeout(this.forceRerender, 4000);
+        setTimeout(this.forceRerender, 5000);
       }
     },
     modalSuccessOpen() {
