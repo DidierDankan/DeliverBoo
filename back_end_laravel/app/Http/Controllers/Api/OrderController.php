@@ -13,7 +13,6 @@ use App\Models\FoodOrder;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendMail;
 use App\Mail\EmailDemo;
 
 
@@ -50,8 +49,6 @@ class OrderController extends Controller
         // ]);
             
         
-
-
         $food = $array['food'];
         
         $restaurant = $food['restaurant_id'];
@@ -61,10 +58,8 @@ class OrderController extends Controller
         $new_order = new Order();
 
         
-
         $new_order->transation_id = $array['transation'];
         
-
 
         $new_order->customer_name = $array['name'];
         $new_order->customer_surname = $array['surname'];

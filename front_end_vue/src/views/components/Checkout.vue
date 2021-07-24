@@ -164,7 +164,6 @@ import Loader from "./Loader.vue";
 export default {
   created() {
     this.getClientToken();
-    // this.clientToken = JSON.parse(localStorage.getItem("clienttoken"));
   },
 
   beforeUpdate() {

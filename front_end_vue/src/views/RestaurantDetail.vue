@@ -384,16 +384,6 @@ export default {
           this.modalVisibility = false;
           location.reload();
         }
-
-        // reset === true
-        //   ? localStorage.setItem("cart", JSON.stringify([]))
-        //   : (location.href = `http://localhost:8080/#/restaurants/${oldRestaurant}`);
-
-        // console.log(oldRestaurant);
-        // location.reload();
-
-        // this.modalVisibility = false;
-        // this.forceRerender();
       }
     },
   },
@@ -557,7 +547,7 @@ export default {
   align-items: center;
   box-shadow: 15px 15px 25px rgba(0, 0, 0, 0.112);
   overflow: hidden;
-  margin: 10px;
+  margin: 15px;
 
   .cover-modal {
     width: 280px;
@@ -610,8 +600,9 @@ export default {
 }
 
 .modal-db-pay {
+  margin: 15px;
   width: 360px;
-  height: 620px;
+  height: 640px;
   background: #fff;
   border-radius: 5px;
   display: flex;
