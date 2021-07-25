@@ -117,9 +117,9 @@
                         </div>
             
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary mr-3">Update</button>
-                            <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3">Restaurants</a>
-                            <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white">Menu</a>
+                            <button class="btn btn-primary mr-3"><i class="fas fa-pen-alt"></i> Update</button>
+                            <a href="{{route('admin.restaurants.index')}}" class="btn btn-success text-white mr-3"><i class="fas fa-utensils"></i> Restaurants</a>
+                            <a href="{{route('admin.restaurants.show', $restaurant->id)}}" class="btn btn-info text-white"><i class="fas fa-bars"></i> Menu</a>
                         </div>
                     </form>
                 </div>

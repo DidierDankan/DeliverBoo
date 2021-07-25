@@ -63,8 +63,8 @@
                     <h3>Menu</h3>
 
                     <div class="actions">
-                        <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-                        <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create', $restaurant->id) }} ">New Food</a>
+                        <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} "><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                        <a class="btn btn-primary text-white" href=" {{ route('admin.foods.create', $restaurant->id) }} "><i class="far fa-plus-square"></i> New Food</a>
                     </div>
                 </div>
                 @if (session('deleted'))
@@ -77,7 +77,6 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Food</th>
-                                <th>Type</th>
                                 <th>Available</th>
                                 <th>Price</th>
                                 <th colspan="3">Actions</th>
@@ -87,21 +86,20 @@
                             @foreach($foods as $food)
                             <tr>
                                     <td>{{$food->title}}</td>
-                                    <td>{{$food->type}}</td>
                                     <td>{{($food->visibility) ? 'yes' : 'no'; }}</td>
                                     <td>{{number_format($food->price,2)}} €</td>
                                     <td>
-                                        <a class="btn btn-success text-white" href="{{route('admin.foods.show', $food->id)}}">Details</a>
+                                        <a class="btn btn-success text-white" href="{{route('admin.foods.show', $food->id)}}"><i class="far fa-eye"></i> Details</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning" href="{{route('admin.foods.edit', $food->id)}}">Edit</a>
+                                        <a class="btn btn-warning" href="{{route('admin.foods.edit', $food->id)}}"><i class="far fa-edit"></i> Edit</a>
                                     </td>
                                     <td>
                                         <form class="delete-post-form" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                     
-                                        <input class="btn btn-danger" type="submit" value="Delete">
+                                        <button class="btn btn-danger" type="submit" value="DELETE"><i class="far fa-trash-alt"></i> DELETE</button>
                                     </form>
                                     </td>
                                 </tr>
@@ -119,12 +117,12 @@
                     <hr>
                     <h4 class="text-center">Restaurants controls:</h4>
                     <div class="actions d-flex justify-content-center mt-3">
-                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} ">All</a>
-                        <a class="btn btn-warning mr-3" href=" {{ route('admin.restaurants.edit', $restaurant->id) }} ">Edit</a>
+                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} "><i class="fas fa-utensils"></i> All</a>
+                        <a class="btn btn-warning mr-3" href=" {{ route('admin.restaurants.edit', $restaurant->id) }} "><i class="far fa-edit"></i> Edit</a>
                         <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input class="btn btn-danger" type="submit" value="Delete">
+                            <button class="btn btn-danger" type="submit" value="DELETE"><i class="far fa-trash-alt"></i> DELETE</button>
                         </form>
                     </div>
                 </div>

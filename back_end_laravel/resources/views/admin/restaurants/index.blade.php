@@ -41,8 +41,8 @@
                                <div> {{ $restaurant->created_at->diffForHumans() }}</div>
                             </td>
                 
-                                <td><a class="btn btn-success" href="{{ route('admin.restaurants.show' , $restaurant->id) }}">SHOW</a></td>
-                                <td><a class="btn btn-warning" href="{{ route('admin.restaurants.edit' , $restaurant->id) }}">EDIT</a></td>
+                                <td><a class="btn btn-success" href="{{ route('admin.restaurants.show' , $restaurant->id) }}"><i class="far fa-eye"></i> SHOW</a></td>
+                                <td><a class="btn btn-warning" href="{{ route('admin.restaurants.edit' , $restaurant->id) }}"><i class="far fa-edit"></i> EDIT</a></td>
                 
                                 <td>
                                     <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
@@ -50,7 +50,7 @@
                                     @csrf
                                     @method('DELETE')
                 
-                                    <input class="btn btn-danger" type="submit" value="DELETE">
+                                    <button class="btn btn-danger" type="submit" value="DELETE"><i class="far fa-trash-alt"></i> DELETE</button>
                                 </form>
                                 </td>
                             </tr>
@@ -65,8 +65,8 @@
                 <div class="paginate mt-3 mr-3">
                     {{$restaurants->links()}}
                 </div>
-                <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
-                <a class="btn btn-primary text-white" href=" {{ route('admin.restaurants.create') }} ">Create New</a>
+                <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} "><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a class="btn btn-primary text-white" href=" {{ route('admin.restaurants.create') }} "><i class="far fa-plus-square"></i> Create New</a>
             </div>
         </div>
     </div>

@@ -26,6 +26,8 @@
                 background-position-x: center;
             }
         </style>
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==' crossorigin='anonymous'/>
     </head>
     <body>
         <div class="container">
@@ -35,7 +37,7 @@
                         <h1 class="mb-5 d-block text-info text-center">DeliveBoo Management System</h1>
             
                         @auth
-                            <div class="dash d-flex justify-content-center"><a href="{{route('admin.home')}}" class="btn-lg btn bg-primary text-sm text-white">DASHBOARD</a></div>
+                            <div class="dash d-flex justify-content-center"><a href="{{route('admin.home')}}" class="btn-lg btn bg-primary text-sm text-white"><i class="fas fa-tachometer-alt"></i> DASHBOARD</a></div>
                         @else
                             <div class="access-options d-flex justify-content-center">
                                 <a href="{{ route('login') }}" class="btn bg-primary text-sm text-white mr-2 shadow-sm rounded">Log in</a>

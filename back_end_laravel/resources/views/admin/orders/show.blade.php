@@ -47,10 +47,10 @@
 
             <div class="actions justify-content-center d-flex mt-4">
                 <div>
-                    <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} ">Dashboard</a>
+                    <a class="btn btn-info text-white mr-3" href=" {{ route('admin.home') }} "><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </div>
                 <div>
-                    <a class="btn btn-primary mt-3 mt-md-0 mt-lg-0 mr-3" href="{{ route('admin.orders.index') }}">Orders</a>
+                    <a class="btn btn-primary mt-3 mt-md-0 mt-lg-0 mr-3" href="{{ route('admin.orders.index') }}"><i class="fas fa-list-ul"></i> Orders</a>
                 </div>
 
                 <div>
