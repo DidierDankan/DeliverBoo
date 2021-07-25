@@ -1963,16 +1963,15 @@ for (var _i3 = 0; _i3 < hideMessage.length; _i3++) {
 
 var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
-var incassi = [// { months: "July 2021", sums: 67.2 },
+var incassi = [// { months: "June 2021", sums: 100.2 },
+  // { months: "July 2021", sums: 67.2 },
   // { months: "August 2021", sums: 18 }
 ];
+var mesi = [];
+var fatturato = [];
 axios.get("http://127.0.0.1:8000/admin/orders/stats").then(function (res) {
   // console.log(res.data);
   incassi = res.data;
-});
-var mesi = [];
-var fatturato = [];
-setTimeout(function () {
   incassi.forEach(function (element) {
     mesi.push(element.months);
   });
@@ -2002,7 +2001,7 @@ setTimeout(function () {
       }
     }
   });
-}, 1000);
+});
 
 /***/ }),
 

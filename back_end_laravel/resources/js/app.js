@@ -109,19 +109,20 @@ for (let i = 0; i < hideMessage.length; i++) {
 // montly stats graph
 
 const axios = require("axios");
+
 let incassi = [
+    // { months: "June 2021", sums: 100.2 },
     // { months: "July 2021", sums: 67.2 },
     // { months: "August 2021", sums: 18 }
 ];
-axios.get("http://127.0.0.1:8000/admin/orders/stats").then(res => {
-    // console.log(res.data);
-    incassi = res.data;
-});
 
 let mesi = [];
 let fatturato = [];
 
-setTimeout(() => {
+axios.get("http://127.0.0.1:8000/admin/orders/stats").then(res => {
+    // console.log(res.data);
+    incassi = res.data;
+
     incassi.forEach(element => {
         mesi.push(element.months);
     });
@@ -168,4 +169,4 @@ setTimeout(() => {
             }
         }
     });
-}, 1000);
+});

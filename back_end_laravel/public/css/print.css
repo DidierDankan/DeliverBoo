@@ -1,0 +1,18 @@
+body {
+    visibility: hidden;
+}
+.print {
+    visibility: visible;
+    position: absolute;
+    top: 40vh;
+    left: -18vw;
+    width: 100vw;
+
+    transform: scale(1.5);
+    font-size: 1.5rem;
+}
+.title-print {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
