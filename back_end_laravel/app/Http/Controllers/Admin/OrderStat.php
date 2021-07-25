@@ -32,6 +32,7 @@ class OrderStat extends Controller
             DB::raw('sum(amount) as sums'), 
             DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
             )
+            ->orderBy('months', 'DESC')
             ->where('status', '=', 1)
             ->groupBy('months')
             ->get();
