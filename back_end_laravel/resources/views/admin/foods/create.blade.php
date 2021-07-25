@@ -123,8 +123,8 @@
                         </div>
             
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary mr-3">Create</button>
-                            <a class="btn btn-success text-white" href=" {{ route('admin.restaurants.index') }} ">Restaurants</a>
+                            <button class="btn btn-primary mr-3"><i class="far fa-plus-square"></i> Create</button>
+                            <a class="btn btn-success text-white" href=" {{ route('admin.restaurants.index') }} "><i class="fas fa-utensils"></i> Restaurants</a>
                         </div>
                     </form>
                 </div>

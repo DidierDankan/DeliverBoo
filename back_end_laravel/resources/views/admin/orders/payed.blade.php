@@ -38,7 +38,7 @@
                         <td>{{$order->status ? 'Payed' : 'Not Payed'}}</td>
                         <td>{{ number_format($order->amount, 2) }}€</td>
 
-                        <td><a class="btn btn-primary" href="{{ route('admin.orders.show', $order->id) }}">SHOW</a></td>
+                        <td><a class="btn btn-primary" href="{{ route('admin.orders.show', $order->id) }}"><i class="far fa-eye"></i> SHOW</a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -50,10 +50,10 @@
                 {{$orders->links()}}
             </div>
             <div>
-            <a class="btn btn-info text-white mr-3 mt-3 mt-md-0 mt-lg-0" href=" {{ route('admin.home') }} ">Dashboard</a>
+            <a class="btn btn-info text-white mr-3 mt-3 mt-md-0 mt-lg-0" href=" {{ route('admin.home') }} "><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         </div>
         <div>
-            <a class="btn btn-success text-white mt-1 mt-md-0 mt-lg-0" href=" {{ route('admin.orders.index') }} ">All Orders</a>
+            <a class="btn btn-success text-white mt-1 mt-md-0 mt-lg-0" href=" {{ route('admin.orders.index') }} "><i class="fas fa-list-ul"></i> All Orders</a>
         </div>
         </div>
     </div>

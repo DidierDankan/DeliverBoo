@@ -116,8 +116,8 @@
                         </div>
             
                         <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary mr-3">Update</button>
-                            <a class="btn btn-success text-white mr-3" href="{{ route('admin.foods.show' , $food->id) }}">Menu</a>
+                            <button class="btn btn-primary mr-3"><i class="fas fa-pen-alt"></i> Update</button>
+                            <a class="btn btn-success text-white mr-3" href="{{ route('admin.foods.show' , $food->id) }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
                         </div>
                     </form>
                 </div>

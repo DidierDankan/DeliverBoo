@@ -32,12 +32,12 @@
                     <div class="mb-4">Price: <span class="ml-2 d-inline-block rounded p-1 bg-success text-white fw-bold">{{number_format($food->price, 2)}} €</span></div>
                     <hr>
                     <div class="actions d-flex justify-content-center">
-                        <a class="btn btn-primary mr-3" href="{{ route('admin.restaurants.show', $food->restaurant_id) }}">Menu</a>
-                        <a class="btn btn-warning mr-3" href="{{ route('admin.foods.edit', $food->id) }}">Edit</a>
+                        <a class="btn btn-primary mr-3" href="{{ route('admin.restaurants.show', $food->restaurant_id) }}"><i class="fas fa-bars"></i> Menu</a>
+                        <a class="btn btn-warning mr-3" href="{{ route('admin.foods.edit', $food->id) }}"><i class="far fa-edit"></i> Edit</a>
                         <form class="delete-post-form" action="{{ route('admin.foods.destroy', $food->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input class="btn btn-danger" type="submit" value="Delete">
+                            <button class="btn btn-danger" type="submit" value="DELETE"><i class="far fa-trash-alt"></i> DELETE</button>
                         </form>
                     </div>
                 </div>
