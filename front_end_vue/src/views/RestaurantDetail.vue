@@ -128,7 +128,6 @@
                 ><strong>Descrizione: </strong>
                 {{ food.description }}
               </span>
-              <!-- {{ food.description }} -->
             </div>
             <div>
               <span class="text-color-tertiary"
@@ -258,7 +257,6 @@ export default {
       cart: [],
       items: [],
       componentKey: 0,
-      componentKey2: 0,
 
       foodId: 0,
       modalCheckout: false,
@@ -278,8 +276,6 @@ export default {
     };
   },
 
-  props: {},
-
   created() {
     this.getRestaurant();
     this.reactiveBtns();
@@ -287,13 +283,10 @@ export default {
 
   updated() {
     this.cart = JSON.parse(localStorage.getItem("cart"));
-    // this.renderAfterOrder();
-    // this.renderIf();
   },
 
   methods: {
     renderIf(value) {
-      console.log("cjsdcjsd", value);
       if (value) {
         setTimeout(this.modalSuccessOpen, 2000);
         setTimeout(this.forceRerender, 5000);
@@ -309,6 +302,7 @@ export default {
       this.forceRerender();
       location.href = "http://localhost:8080/#/";
     },
+
     getRestaurant() {
       axios
         .get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.id}`)
@@ -317,38 +311,9 @@ export default {
           this.items = res.data[1];
         });
     },
-    isInCart(itemId) {
-      if (!localStorage.getItem("cart")) {
-        localStorage.setItem("cart", JSON.stringify([]));
-      }
-      const cartItem = this.cart.find(({ id }) => id === itemId);
-      return Boolean(cartItem);
-    },
-    addToCart(itemId) {
-      const item = this.items.find(({ id }) => id === itemId);
-      if (!localStorage.getItem("cart")) {
-        localStorage.setItem("cart", JSON.stringify([]));
-      }
-      const cartItems = JSON.parse(localStorage.getItem("cart"));
-      cartItems.push(item);
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-      this.cart = JSON.parse(localStorage.getItem("cart"));
-      this.forceRerender();
-    },
-    removeFromCart(itemId) {
-      const cartItems = JSON.parse(localStorage.getItem("cart"));
-      const index = cartItems.findIndex(({ id }) => id === itemId);
-      cartItems.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-      this.cart = JSON.parse(localStorage.getItem("cart"));
-      this.forceRerender();
-    },
+
     forceRerender() {
       this.componentKey += 1;
-    },
-
-    forceRerender2() {
-      this.componentKey2 += 1;
     },
 
     reactiveBtns() {
@@ -357,15 +322,7 @@ export default {
       }
       this.cart = JSON.parse(localStorage.getItem("cart"));
     },
-    // resetBasket() {
-    //   if (this.cart[0]) {
-    //     this.cart.forEach((element) => {
-    //       if (this.cart[0].restaurant_id != element.restaurant_id) {
-    //         alert("attenzione non puoi ordinare da 2 ristoranti");
-    //       }
-    //     });
-    //   }
-    // },
+
     multipleItemCounts(value) {
       const array = [];
 
@@ -417,7 +374,6 @@ export default {
     modalCheckoutOpen() {
       this.modalCheckout = true;
       this.forceRerender();
-      // this.resetBasket();
     },
     getOrderInfo() {
       this.orderObj.push(

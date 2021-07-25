@@ -9,7 +9,7 @@
             checkedTypes != null ? checkedTypes.includes(tipo.type) : false,
         }"
         v-for="tipo in listTypes"
-        :key="tipo.id + reRender"
+        :key="tipo.id"
         @click.prevent="saveInLocalStorage(tipo.type)"
       >
         {{ tipo.type }}
@@ -59,13 +59,9 @@ export default {
 
       localStorage.setItem("checkedTypes", JSON.stringify(types));
       this.checkedTypes = JSON.parse(localStorage.getItem("checkedTypes"));
-      this.reRenderTypes();
     },
     assignLocal() {
       this.checkedTypes = localStorage.getItem("checkedTypes");
-    },
-    reRenderTypes() {
-      this.reRender += 1;
     },
   },
 };

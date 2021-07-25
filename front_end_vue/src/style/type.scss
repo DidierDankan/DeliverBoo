@@ -25,15 +25,10 @@ a {
   color: $tertiary-color;
 }
 
-.tipologia:hover {
-  background-color: $primary-color;
-  color: $text-color;
-}
-
-.tipologia:active {
-  background-color: #1b7e8a;
-  color: $text-color;
-}
+// .tipologia:active {
+//   background-color: #1b7e8a;
+//   color: $text-color;
+// }
 
 .tipologia {
   font-size: 20px;
@@ -55,9 +50,18 @@ a {
   .container {
     width: 768px;
   }
+
+  // .tipologia:hover {
+  //   background-color: $primary-color;
+  //   color: $text-color;
+  // }
 }
 @media (min-width: 1171px) {
   .container {
     width: 1000px;
+  }
+  .tipologia:hover {
+    background-color: $primary-color;
+    color: $text-color;
   }
 }

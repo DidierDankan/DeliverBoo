@@ -211,7 +211,6 @@ export default {
       phone: "",
       status: false,
       foods: {},
-      // amount: 0,
       orderPassed: false,
 
       rerender: true,
@@ -229,11 +228,9 @@ export default {
         this.hostedFieldInstance
           .tokenize()
           .then((payload) => {
-            // console.log(payload);
             this.nonce = payload.nonce;
           })
           .catch((err) => {
-            // console.error(err);
             this.error = err.message;
           });
       }
@@ -345,8 +342,6 @@ export default {
         })
         .then((res) => {
           this.orderPassed = res.data;
-          console.log(this.nonce);
-          // console.log(localStorage.getItem("orderdetails"));
 
           if (res.data) {
             localStorage.setItem("cart", JSON.stringify([]));
@@ -358,8 +353,6 @@ export default {
     getClientToken() {
       axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
         this.clientToken = res.data.token;
-        // console.log(res.data.token);
-        // console.log(typeof this.clientToken);
       });
     },
   },

@@ -2,7 +2,7 @@
   <div class="restaurants">
     <Hero />
 
-    <Type :key="reRender" @click="getRestaurants()" />
+    <Type @click="getRestaurants()" />
 
     <div class="bg-container">
       <div class="main-container">
@@ -31,7 +31,11 @@
                   {{ restaurant.name }}
                 </h3>
                 <div class="margin-badge">
-                  <span class="badge-type" v-for="type in restaurant.types" :key="type.id">
+                  <span
+                    class="badge-type"
+                    v-for="type in restaurant.types"
+                    :key="type.id"
+                  >
                     {{ type.type }}
                   </span>
                 </div>
@@ -47,10 +51,7 @@
               </router-link>
             </div>
           </div>
-
-          <Loader v-else />
-
-          <section v-show="sectionNexPrevVisibility()" class="naviga">
+          <section v-if="sectionNexPrevVisibility()" class="naviga">
             <div
               class="btn-navi"
               v-for="i in pages.last"
@@ -60,13 +61,9 @@
               <div :class="{ 'active-page': i == pages.current }"></div>
             </div>
           </section>
-
-          <!-- Loading... -->
         </div>
         <div v-else class="message">
           Ci dispiace non ci sono ristoranti corrispondenti alla tua ricerca...
-
-          <!-- <Loader /> -->
         </div>
       </div>
     </div>
@@ -80,7 +77,6 @@
 <script>
 import axios from "axios";
 import Hero from "./components/Hero.vue";
-import Loader from "./components/Loader.vue";
 import Type from "./components/Type.vue";
 import Workers from "./components/Workers.vue";
 import Footer from "./components/Footer.vue";
@@ -90,7 +86,6 @@ export default {
 
   components: {
     Hero,
-    Loader,
     Type,
     Workers,
     Footer,
@@ -100,16 +95,13 @@ export default {
     return {
       restaurants: [],
       pages: [],
-      reRender: 0,
       filterLocal: [],
-      clientToken: "",
     };
   },
 
   created() {
     this.setFilterCache();
     this.getRestaurants();
-    // this.getClientToken();
   },
 
   methods: {
@@ -142,53 +134,14 @@ export default {
           });
       }
     },
-    reRenderTypes() {
-      this.reRender += 1;
-    },
     cleanLocalTypes() {
       localStorage.setItem("checkedTypes", JSON.stringify([]));
-      // this.resetBasket(restaurant_id);
     },
     setFilterCache() {
       this.filterLocal = localStorage.getItem("checkedTypes");
     },
     sectionNexPrevVisibility() {
       return localStorage.getItem("checkedTypes") == "[]" ? true : false;
-    },
-    getClientToken() {
-      axios.get("http://127.0.0.1:8000/api/orders/generate").then((res) => {
-        this.clientToken = res.data.token;
-        console.log(res.data.token);
-      });
-
-      setTimeout(this.paymentToken, 6000);
-    },
-
-    paymentToken() {
-      if (!localStorage.getItem("clienttoken")) {
-        localStorage.setItem("clienttoken", JSON.stringify(""));
-      }
-      let clientToken = JSON.parse(localStorage.getItem("clienttoken"));
-
-      if (clientToken != this.clientToken) {
-        clientToken = this.clientToken;
-      }
-
-      localStorage.setItem("clienttoken", JSON.stringify(clientToken));
-      console.log(localStorage.getItem("clienttoken"));
-    },
-
-    resetBasket(restaurant_id) {
-      const cart = JSON.parse(localStorage.getItem("cart"));
-
-      if (cart[0] && cart[0].restaurant_id != restaurant_id) {
-        let reset = confirm(
-          "attenzione non puoi ordinare da 2 ristoranti diversi.\nVuoi svuotare il carrello?"
-        );
-        reset === true
-          ? localStorage.setItem("cart", JSON.stringify([]))
-          : (location.href = "http://localhost:8080/#/");
-      }
     },
   },
 };
