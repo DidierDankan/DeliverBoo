@@ -403,7 +403,7 @@
       margin: 0;
 
       .card {
-        flex-basis: calc(100% / 2 - 33px);
+        flex-basis: calc(100% / 2 - 28px);
         margin: 10px;
         border-radius: 5px;
         position: relative;
@@ -433,6 +433,7 @@
       right: 0;
       top: -100px;
       margin: 0;
+      width: 220px;
 
       .btn-cart {
         margin: 10px;
@@ -456,6 +457,10 @@
 }
 
 @media screen and (min-width: 1170px) {
+  .cart {
+    width: 310px !important;
+  }
+
   .detail.container {
     max-width: 1170px;
     margin: 0 auto 100px;

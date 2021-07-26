@@ -68,7 +68,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-5 mb-5">
             <div class="card shadow bg-white rounded">
 
                 <canvas id="myChart" width="768" height="200" style="display: block; box-sizing: border-box; height: 200px; width: 768px;"></canvas>
