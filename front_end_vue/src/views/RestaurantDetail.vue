@@ -104,7 +104,7 @@
         @click="modalVisibility = false"
       >
         <div
-          class="modal-db"
+          class="modal-db modal-animation"
           v-show="food.id == foodId && modalVisibility"
           v-for="(food, index) in items"
           :key="index"
@@ -173,7 +173,11 @@
         v-show="modalCheckout"
         @click="modalCheckoutClose()"
       >
-        <div class="modal-db-pay cart-2" @click.stop v-show="modalCheckout">
+        <div
+          class="modal-db-pay cart-2 modal-animation"
+          @click.stop
+          v-show="modalCheckout"
+        >
           <div class="title-2 margin">
             Il tuo ordine:
             <div @click="modalCheckoutClose()" class="close">
@@ -187,7 +191,7 @@
 
       <!-- Modal Switch Restaurant -->
       <div class="modal-container-db" v-if="resetBasketModal">
-        <div class="modal-db switch">
+        <div class="modal-db modal-animation switch">
           <div class="header-switch">
             <h2>Attenzione:</h2>
           </div>
@@ -211,7 +215,7 @@
         v-if="modalSuccess"
         @click="modalSuccessClose()"
       >
-        <div @click.stop class="modal-db switch">
+        <div @click.stop class="modal-db modal-animation switch">
           <div class="header-switch">
             <h2>Conferma d'ordine</h2>
           </div>

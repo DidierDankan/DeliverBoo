@@ -19,7 +19,7 @@
 
     <!-- cart modal -->
     <div class="modal-container-db" @click="closeModal()" v-if="modalStatus">
-      <div @click.stop class="modal-db switch">
+      <div @click.stop class="modal-db modal-animation switch">
         <div class="header-switch">
           <div @click="closeModal()" class="close">
             <i class="fas fa-times"></i>
