@@ -13,7 +13,6 @@
                     <hr>
                     <div class="mb-3">{{$food->description}}</div>
                     <hr>
-                    <div class="mb-3">Type: {{$food->type}}</div>
                     <div class="mb-3">Available: <h4 class="d-inline-block badge p-1 {{$food->visibility ? 'badge-success' : 'badge-danger'}}">{{$food->visibility ? 'YES' : 'NO';}}</h4></div>
                     <div class="mb-3">
                         Ingredients:
