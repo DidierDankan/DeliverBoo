@@ -84,7 +84,7 @@
                                 <img width="200" class="mb-2" src=" {{ asset('storage/restaurants-covers/' . $restaurant->cover) }} " alt=" {{ $restaurant->title }} ">
                             @endif
             
-                            <input type="file"  
+                            <input type="file"
                             name="cover" 
                             id="cover"
                             class="@error('cover') is-invalid @enderror" >
