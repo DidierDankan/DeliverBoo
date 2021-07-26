@@ -117,7 +117,7 @@
                     <hr>
                     <h4 class="text-center">Restaurants controls:</h4>
                     <div class="actions d-flex justify-content-center mt-3">
-                        <a class="btn btn-success text-white mr-3" href=" {{ route('admin.restaurants.index') }} "><i class="fas fa-utensils"></i> All</a>
+                        <a class="btn btn-primary text-white mr-3" href=" {{ route('admin.restaurants.index') }} "><i class="fas fa-utensils"></i> All</a>
                         <a class="btn btn-warning mr-3" href=" {{ route('admin.restaurants.edit', $restaurant->id) }} "><i class="far fa-edit"></i> Edit</a>
                         <form class="delete-post-form" action="{{ route('admin.restaurants.destroy', $restaurant->id) }}" method="POST">
                             @csrf

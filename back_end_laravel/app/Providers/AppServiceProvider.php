@@ -41,7 +41,6 @@ class AppServiceProvider extends ServiceProvider
                 'privateKey' => ('b8bd5680d6691f8489f1c9020bbfd1b1'),
 
                 
-
               ]
             );
         });

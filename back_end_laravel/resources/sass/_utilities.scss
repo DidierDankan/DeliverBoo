@@ -1,8 +1,39 @@
 body {
     height: 100vh;
     background-color: #6c96aa;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 2 1'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(0,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%236c96aa'/%3E%3Cstop offset='1' stop-color='%2336ebff'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23b1f8ff' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23b1f8ff' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='c' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='2' y2='2'%3E%3Cstop offset='0' stop-color='%23b1f8ff' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23b1f8ff' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='2' height='1'/%3E%3Cg fill-opacity='0.93'%3E%3Cpolygon fill='url(%23b)' points='0 1 0 0 2 0'/%3E%3Cpolygon fill='url(%23c)' points='2 1 2 0 0 0'/%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1115%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='rgba(43%2c 204%2c 188%2c 1)'%3e%3c/rect%3e%3cpath d='M 0%2c665 C 384%2c581.8 1536%2c332.2 1920%2c249L1920 1080L0 1080z' fill='rgba(208%2c 235%2c 153%2c 1)'%3e%3c/path%3e%3cpath d='M 0%2c415 C 384%2c519.8 1536%2c834.2 1920%2c939L1920 1080L0 1080z' fill='rgba(27%2c 126%2c 138%2c 1)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1115'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
     background-attachment: fixed;
     background-size: cover;
     background-position-x: center;
+}
+
+.btn-primary {
+    background-color: #1b7e8a !important;
+    border: 1px solid #1b7e8a !important;
+    transition: all 400ms;
+    &:hover {
+        background-color: #135961 !important;
+    }
+}
+
+.btn-warning {
+    background-color: #2bccbc !important;
+    border: 1px solid #2bccbc !important;
+    transition: all 400ms;
+    color: white !important;
+    &:hover {
+        background-color: #11a092 !important;
+        border: 1px solid #11a092 !important;
+    }
+}
+
+.btn-danger {
+    background-color: #9b0e6c !important;
+    border: 1px solid #9b0e6c !important;
+    transition: all 400ms;
+    color: white !important;
+    &:hover {
+        background-color: #7c0c57 !important;
+        border: 1px solid #7c0c57 !important;
+    }
 }
