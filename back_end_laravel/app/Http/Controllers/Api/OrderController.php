@@ -13,9 +13,18 @@ use App\Models\FoodOrder;
 use Illuminate\Validation\Rule;
 
 use Illuminate\Support\Facades\Mail;
+
 use App\Mail\EmailDemo;
+
+
+
+use App\Mail\EmailOrder;
+
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
+
+
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -88,6 +97,12 @@ class OrderController extends Controller
         }
 
 
+        $user_id = Restaurant::find($restaurant)->user_id;
+
+        $restaurant_name = Restaurant::find($restaurant)->name;
+
+        $user_mail = User::find($user_id)->email;
+
         
 
         // $success = true;
@@ -116,6 +131,13 @@ class OrderController extends Controller
             ],
         ]);
 
+        $order_id_send = $order->id;
+        $order_name = $order->customer_name;
+        $order_surname = $order->customer_surname;
+        $order_amount = $order->amount;
+
+
+
         
         if($result->success) {
             $data = [
@@ -125,6 +147,18 @@ class OrderController extends Controller
             
             $email = $order->customer_mail;
        
+            $mailOrder = [
+                'title' => 'Ordine n° ' . $order_id_send,
+                'name' => $order_name,
+                'surname' => $order_surname,
+                'amount' => $order_amount,
+                'restaurant' => $restaurant_name,
+                'url' => 'http://127.0.0.1:8000'
+            ];
+      
+            Mail::to($user_mail)->send(new EmailOrder($mailOrder));
+
+
             $mailData = [
                 'title' => 'Ordine n° ' . $order->id,
                 'name' => $order->customer_name,

@@ -293,7 +293,7 @@ export default {
     renderIf(value) {
       if (value) {
         setTimeout(this.modalSuccessOpen, 2000);
-        setTimeout(this.forceRerender, 5000);
+        setTimeout(this.forceRerender, 6000);
       }
     },
     modalSuccessOpen() {

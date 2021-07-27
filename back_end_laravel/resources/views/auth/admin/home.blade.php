@@ -28,11 +28,7 @@
                 <div class="font-weight-bold card-header">{{ __('Restaurant manager') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    
 
                     <div class="text-center mt-5 mb-5">
                         <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary btn-lg text-white m-2"><i class="fas fa-utensils"></i> My Restaurants</a>
@@ -50,11 +46,7 @@
                 <div class="font-weight-bold card-header">{{ __('Orders Manager') }}</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    
 
                     <div class="text-center mt-5 mb-5">
                         <a href="{{route('admin.orders.index')}}" class="btn btn-primary text-white m-2 btn-lg"><i class="fas fa-list-ul"></i> My Orders</a>
