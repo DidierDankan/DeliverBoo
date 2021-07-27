@@ -16,7 +16,7 @@ class RestaurantController extends Controller
     //
     public function index() {
 
-        $restaurants = Restaurant::with('types')->paginate(6);
+        $restaurants = Restaurant::with('types')->orderBy('created_at', 'DESC')->paginate(6);
 
         return response()->json($restaurants);
     }
